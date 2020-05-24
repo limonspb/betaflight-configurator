@@ -95,10 +95,6 @@
     "language_default_pretty": {
         "message": "Predeterminat del sistema ($t(detectedLanguage))"
     },
-    "language_hu": {
-        "message": "Hongarès",
-        "description": "Don't translate!!!"
-    },
     "language_pl": {
         "message": "Polski",
         "description": "Don't translate!!!"
