@@ -3193,6 +3193,12 @@
     "pidTuningMotorOutputLimit": {
         "message": "Limite output motore"
     },
+    "pidTuningMotorLimit": {
+        "message": "Fattore scala [%]"
+    },
+    "pidTuningMotorLimitHelp": {
+        "message": "Fattore di scala lineare dell'output dei motori (percentuale). Riduce la corrente degli ESC e il calore dei motori quando si utilizzano batterie con più celle, es. quando si utilizza una batteria 6S su un modello che ha motori, pale e tuning progettati per 4S, prova a impostare il valore al 66%; quando si utilizza una batteria 4S su un modello costruito per 3S, prova il 75%.<br>Assicurati sempre che tutti i componenti supportino il voltaggio della batteria in uso."
+    },
     "pidTuningCellCount": {
         "message": "Numero di celle"
     },
