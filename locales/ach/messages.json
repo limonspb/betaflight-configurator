@@ -1526,6 +1526,9 @@
     "portsFunction_RUNCAM_DEVICE_CONTROL": {
         "message": "crwdns9040:0crwdne9040:0"
     },
+    "portsFunction_FRSKY_OSD": {
+        "message": "crwdns10148:0crwdne10148:0"
+    },
     "pidTuningProfileOption": {
         "message": "crwdns6372:0$1crwdne6372:0"
     },
