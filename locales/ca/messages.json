@@ -1440,6 +1440,9 @@
     "portsFunction_RUNCAM_DEVICE_CONTROL": {
         "message": "Càmera (Protocol RunCam)"
     },
+    "portsFunction_FRSKY_OSD": {
+        "message": "OSD (Protocol FrSky)"
+    },
     "pidTuningProfileOption": {
         "message": "Perfil $1"
     },
