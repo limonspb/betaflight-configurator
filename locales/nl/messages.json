@@ -1377,6 +1377,9 @@
     "portsFunction_RUNCAM_DEVICE_CONTROL": {
         "message": "Camera (RunCam Protocol)"
     },
+    "portsFunction_FRSKY_OSD": {
+        "message": "OSD (FrSky Protocol)"
+    },
     "pidTuningProfileOption": {
         "message": "Profile $1"
     },
@@ -1614,6 +1617,13 @@
     },
     "tuningHelp": {
         "message": "<b>Tuning tips</b><br /><span class=\"message-negative\">BELANGRIJK:</span> Het is belangrijk om de motortemperatuur te verifiëren tijdens de eerste vluchten. Hoe hoger de filterwaarde des te beter je quad kan gaat vliegen. Echter krijgen je motoren ook meer ruis te voorduren.<br>De standaardwaarde van 100Hz is optimaal. Maar voor quads die meer ruis hebben kan je proberen om de D-Term filter te verlagen naar 50Hz en dit mogelijk ook toe te passen op de gyro-filter."
+    },
+    "tuningHelpSliders": {
+        "message": "<span class=\"message-negative\">BELANGRIJK:</span> We adviseren u de schuifregelaars te gebruiken om de filterinstellingen te wijzigen. Tevens adviseren wij beide schuifregelaren tegelijk op te laten lopen.<br>Het is het beste om relatief kleine wijzigingen aan te brengen en na elke verandering een testvlucht te doen. Controleer de motortemperatuur nauwkeurig alvorens u verdere wijzigingen doorvoert.<br>Minder filteren (schuifregelaren naar rechts, hogere cutoff waarden) zal de propwash verbeteren, maar er zal dan meer ruis doorkomen in de motoren. Wat resulteert in warmere motoren. Mogelijk warm genoeg om ze uit te laten branden! Minder filteren is mogelijk op nieuwe drones waarbij alles nog in perfecte staat is. Maar bijvoorbeeld ook als rpm filtering is ingeschakeld.<br>Als de schuifregelaars zeer hoog of laag zijn ingesteld kan dit resulteren in flyaways. De standaardinstellingen zijn veilig voor typische 5\" quads.<br><strong>Opmerking:</strong> Het wijzigen van profielen zal alleen de D-term filterinstellingen veranderen. Instellingen voor de Gyro-filter zijn hetzelfde voor alle profielen.",
+        "description": "Filter tuning subtab note"
+    },
+    "filterWarning": {
+        "message": "<span class=\"message-negative\"><b>Waarschuwing:</b></span> De hoeveelheid filtering die u gebruikt is gevaarlijk laag. Uw drone zal hierdoor waarschijnlijk zeer moeilijk te besturen zijn en kan ook leiden tot flyaways. Het wordt ten zeerste aanbevolen dat u <b> ten minste één 'Gyro Dynamic Lowpass' of 'Gyro Lowpass 1' inschakelt. Maar ook tenminste één 'D Term Dynamic Lowpass' of 'D Term Lowpass 1'</b> inschakelt."
     },
     "receiverStickMin": {
         "message": "'Stick Laag' drempel"
@@ -2662,6 +2672,9 @@
     "ledStripWarningsOverlay": {
         "message": "Waarschuwingen"
     },
+    "ledStripIndecatorOverlay": {
+        "message": "Indicator (gebruikt positie op matrix)"
+    },
     "colorBlack": {
         "message": "zwart"
     },
@@ -2752,6 +2765,15 @@
     "controlAxisAux16": {
         "message": "AUX 16"
     },
+    "pidTuningYawJumpPreventionHelp": {
+        "message": "Voorkomt dat de quad aan het einde van een yaw omhoog te springt. Hoger waardes geeft meer demping aan het einde van een yaw bewegingen (werkt als de oude yaw D wat eigenlijk geen echte D waarde was zoals op alle andere assen)"
+    },
+    "pidTuningRcExpoPowerHelp": {
+        "message": "De exponent die wordt gebruikt bij het berekenen van RC Expo. In Betaflight versies vóór 3.0 is de waarde vastgezet op 3."
+    },
+    "pidTuningAltitude": {
+        "message": "Barometer & Sonar/Hoogte"
+    },
     "pidTuningGps": {
         "message": "GPS Navigatie"
     },
@@ -2814,6 +2836,9 @@
         "message": "PD Balans:",
         "description": "PD balance tuning slider label"
     },
+    "pidTuningDynamicNotchFilterDisabledWarning": {
+        "message": "<strong>Let op:</strong> Het dynamische notch filter is uitgeschakeld. Om het in te schakelen en te configureren, schakel de 'DYNAMIC_FILTER' functie in de '$t(configurationFeatures.message)' sectie op het '$t(tabConfiguration.message)' tabblad."
+    },
     "pidTuningRpmFilterGroup": {
         "message": "Gyro RPM Filter",
         "description": "Header text for the RPM Filter group"
@@ -2841,6 +2866,15 @@
     },
     "pidTuningIdleMinRpm": {
         "message": "Dynamische Stationaire Waarde [* 100 RPM]"
+    },
+    "pidTuningAcroTrainerAngleLimit": {
+        "message": "Acro Trainer Hoek Limiet"
+    },
+    "pidTuningAcroTrainerAngleLimitHelp": {
+        "message": "Voegt een nieuwe hoek beperkende modus toe voor piloten die leren vliegen in de acro modus. Het bereik is geldig tussen 10-80 en moet geactiveerd worden met een schakelaar in het tabblad $t(tabAuxiliary.message)."
+    },
+    "pidTuningIntegratedYawCaution": {
+        "message": "<span class=\"message-negative\">WAARSCHUWING</span>: als je deze functie inschakelt, moet je de YAW PID instellingen aanpassen. Meer informatie <a href=\"https://github.com/betaflight/betaflight/wiki/Integrated-Yaw\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a>"
     },
     "failsafeRxMinUsecItem": {
         "message": "Minimale lengte"
