@@ -1439,6 +1439,9 @@
     "portsFunction_RUNCAM_DEVICE_CONTROL": {
         "message": "Kamera (RunCam Protokoloa)"
     },
+    "portsFunction_FRSKY_OSD": {
+        "message": "OSD (FrSky Protokoloa)"
+    },
     "pidTuningProfileOption": {
         "message": "$1 profila"
     },
