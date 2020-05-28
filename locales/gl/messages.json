@@ -134,6 +134,10 @@
         "message": "Hrvatski",
         "description": "Don't translate!!!"
     },
+    "language_hu": {
+        "message": "Magyar",
+        "description": "Don't translate!!!"
+    },
     "language_id": {
         "message": "Bahasa Indonesia",
         "description": "Don't translate!!!"
@@ -937,6 +941,10 @@
         "message": "Non se calibrou o acelerómetro e están habilitadas funcións que dependen del. Calibre o acelerómetro.",
         "description": "Message that pops up to describe the NO_ACC_CAL arming disable flag"
     },
+    "initialSetupArmingDisableFlagsTooltipMOTOR_PROTO": {
+        "message": "Non hai ningún protocolo de saída do motor seleccionado",
+        "description": "Message that pops up to describe the MOTOR_PROTO arming disable flag"
+    },
     "initialSetupArmingDisableFlagsTooltipARM_SWITCH": {
         "message": "Unha das outras sinais de desarmado está activa ao armar",
         "description": "Message that pops up to describe the ARM_SWITCH arming disable flag"
@@ -1515,6 +1523,9 @@
     "portsFunction_RUNCAM_DEVICE_CONTROL": {
         "message": "Cámara (Protocolo RunCam)"
     },
+    "portsFunction_FRSKY_OSD": {
+        "message": "OSD (Protocolo FrSky)"
+    },
     "pidTuningProfileOption": {
         "message": "Perfil $1"
     },
@@ -1589,6 +1600,10 @@
     "pidTuningDMinFeatureHelp": {
         "message": "D Min proporciona un xeito de ter un nivel máis baixo de D no voo normal e un nivel máis alto para as manobras rápidas que poden causar unha sobrecarga, como os flips e os rolls. Tamén mantén a D alta durante o prop wash. A ganancia axusta o rápido que D aumenta ao seu máximo valor e baséase no xiro para determinar os movementos máis fortes e os acontecementos. O avance fai que D aumentase antes empregando punto de referencia en vez de xiro para determinar os movementos máis pronunciados.",
         "description": "D Min feature helpicon message"
+    },
+    "pidTuningDMinHelp": {
+        "message": "Controla a forza de amortiguación (D-term) no voo recto normal.<br>Con D Min activado, o valor de D cambia durante o voo. En voo recto normal usa o valor de D Min. Durante movementos bruscos ou durante prop wash, o D aumenta co valor de D Max especificado á esquerda.<br><br>O valor D máximo obtense con movementos bruscos dos controis, pero có prop wash só se obteñen incrementos parciais.<br>Axuste o valor de Ganancia de D Mine e Avance para controlar a cantidade e sensibilidade do incremento.",
+        "description": "D Min helpicon message on PID table titlebar"
     },
     "pidTuningPidSettings": {
         "message": "Configuración do controlador PID"
@@ -3271,6 +3286,12 @@
     },
     "pidTuningMotorOutputLimit": {
         "message": "Límite saída do motor"
+    },
+    "pidTuningMotorLimit": {
+        "message": "Factor de Escala [%]"
+    },
+    "pidTuningMotorLimitHelp": {
+        "message": "Factor de escala lineal de potencia do motor (en porcentaxe). Reduce a corriente do ESC e o calor do motor cando se usan baterías de caldas máis elevadas, por exemplo. Cando use unha batería 6S nun quad que ten motores, hélices e axustes deseñados para 4S, intente establecer o valor no 66%; cando use unha batería 4S nun quad destinado a 3S, probe o 75%.<br>Asegúrese de que tódolos seus compoñentes soporten a tensión da batería que está a usar."
     },
     "pidTuningCellCount": {
         "message": "Contador de celdas"
