@@ -1432,6 +1432,9 @@
     "portsFunction_RUNCAM_DEVICE_CONTROL": {
         "message": "攝像頭(RunCam協議)"
     },
+    "portsFunction_FRSKY_OSD": {
+        "message": "OSD (FrSky 協議)"
+    },
     "pidTuningProfileOption": {
         "message": "PID 配置文件 $1"
     },
