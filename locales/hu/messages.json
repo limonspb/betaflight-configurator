@@ -1503,6 +1503,10 @@
         "message": "A D Min lehetőséget nyújt alacsonyabb D szint elérésére normál repülésnél és magasabb szintű gyors manőverekhez, amelyek túllépést okozhatnak, mint például a flipeknél. Emellett felveszi a D-t a propwash során. A érzékenység beállítja, hogy a D mennyire gyorsan érje el a maximális értéket, és a giroszkóp alapján meghatározza az éles mozdulatokat és az előmosás eseményeit. Az előrehaladás elősegíti, hogy D korábban feljebb lépjen azáltal, hogy giroszkóp helyett alapjelet használ az éles mozgások meghatározására.",
         "description": "D Min feature helpicon message"
     },
+    "pidTuningDMinHelp": {
+        "message": "Szabályozza a tompítás (D-term) erősségét normál előremenő repülés esetén. <br> Ha a D_min engedélyezve van, az aktív D-erősítés megváltozik repülés közben. Normál előremeneti repülésnél az alábbi D_min nyereségnél van. Éles mozgatás vagy a mosás közben az aktív D-erősítés a balra megadott D_max nyereséghez emelkedik. <br> <br> A teljes D_max nyereséget éles kar bemenetekkel érik el, de csak részlegesen érhetők el a mosáskor. <br> Állítsa be a D_Min erősítést és előrehaladást az erősítés növelésének érzékenységének és időzítésének szabályozásához.",
+        "description": "D Min helpicon message on PID table titlebar"
+    },
     "pidTuningPidSettings": {
         "message": "PID Kontroller Beállítások"
     },
@@ -3185,6 +3189,12 @@
     "pidTuningMotorOutputLimit": {
         "message": "Motor kimeneti limit"
     },
+    "pidTuningMotorLimit": {
+        "message": "Skála tényező [%]"
+    },
+    "pidTuningMotorLimitHelp": {
+        "message": "A motor kimeneti lineáris skála tényezője (százalékban). Csökkenti az ESC áramot és a motor hőjét, ha nagyobb cellaszámú akkumulátorokat használ, pl. Ha 6S akkumulátort használ olyan drónná, amelyek motorjai, propjai és a 4S-hez tervezett tuning beállításai vannak, próbálja meg az értéket 66% -ra beállítani; ha 4S akkumulátort használ a 3S-hez tervezett drónnál, próbálja meg a 75% -ot. <br> Mindig ügyeljen arra, hogy minden alkatrész támogassa a használt akkumulátor feszültségét."
+    },
     "pidTuningCellCount": {
         "message": "Cella számláló"
     },
@@ -4066,11 +4076,29 @@
     "osdSetupCustomLogoInfoTitle": {
         "message": "Egyéni kép:"
     },
+    "osdSetupCustomLogoInfoImageSize": {
+        "message": "A méretnek $t(logoWidthPx)× $t(logoHeightPx) pixelnek kell lennie"
+    },
     "osdSetupCustomLogoInfoColorMap": {
         "message": "Zöld, fekete és fehér pixeleket kell tartalmaznia"
     },
+    "osdSetupCustomLogoInfoUploadHint": {
+        "message": "Kattintson a <b>$t(osdSetupUploadFont.message)</b> elemre az egyéni logó folytatásához"
+    },
+    "osdSetupCustomLogoImageSizeError": {
+        "message": "Érvénytelen képméret:{{width}}×{{height}} (expected $t(logoWidthPx)×$t(logoHeightPx))"
+    },
+    "osdSetupCustomLogoColorMapError": {
+        "message": "A kép érvénytelen pixelt tartalmaz: rgb({{valueR}}, {{valueG}}, {{valueB}}) at coordinates {{posX}}×{{posY}}"
+    },
     "osdSetupUploadFont": {
         "message": "Betűtípus Feltöltése"
+    },
+    "osdSetupUploadingFont": {
+        "message": "Feltöltés..."
+    },
+    "osdSetupUploadingFontEnd": {
+        "message": "Az összes {{length}} karaktert feltöltötte az OSD-be"
     },
     "osdSetupSave": {
         "message": "Mentés"
@@ -4096,11 +4124,23 @@
     "osdSetupButtonReset": {
         "message": "Beállítások Visszaállítása"
     },
+    "osdTextElementMainBattVoltage": {
+        "message": "Akkumulátor feszültség",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementMainBattVoltage": {
         "message": "Pillanatnyi akkumulátor feszültség (riasztási küszöb alatt villog)"
     },
+    "osdTextElementRssiValue": {
+        "message": "RSSI érték",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementRssiValue": {
         "message": "Pillanatnyi RSSI érték (riasztási küszöb alatt villog)"
+    },
+    "osdTextElementTimer": {
+        "message": "Stopper",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementThrottlePosition": {
         "message": "Aktuális gázkar csatorna érték"
