@@ -1,4 +1,11 @@
 {
+    "translation_version": {
+        "message": "0"
+    },
+    "windowTitle": {
+        "message": "Betaflight Konfigurátor",
+        "description": "Title of the application window, usually not translated"
+    },
     "yes": {
         "message": "Igen",
         "description": "General Yes message to be used across the application"
@@ -1431,6 +1438,9 @@
     },
     "portsFunction_RUNCAM_DEVICE_CONTROL": {
         "message": "Kamera (RunCam Protokoll)"
+    },
+    "portsFunction_FRSKY_OSD": {
+        "message": "OSD (FrSky Protocol)"
     },
     "pidTuningProfileOption": {
         "message": "Profil $1"
@@ -4142,6 +4152,13 @@
         "message": "Stopper",
         "description": "One of the elements of the OSD"
     },
+    "osdDescElementTimer": {
+        "message": "Repülési időmérő"
+    },
+    "osdTextElementThrottlePosition": {
+        "message": "Gázkar pozíció",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementThrottlePosition": {
         "message": "Aktuális gázkar csatorna érték"
     },
@@ -4149,128 +4166,561 @@
         "message": "CPU kihasználtság",
         "description": "One of the elements of the OSD"
     },
+    "osdDescElementCpuLoad": {
+        "message": "Aktuális CPU terhelés"
+    },
+    "osdTextElementVtxChannel": {
+        "message": "VTX csatorna",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementVtxChannel": {
+        "message": "Jelenlegi VTX csatorna és teljesítmény"
+    },
+    "osdTextElementVoltageWarning": {
+        "message": "Akku feszültség figyelmeztetés",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementVoltageWarning": {
+        "message": "Figyelmeztetést mutat, ha a feszültség a riasztási érték alatt van"
+    },
+    "osdTextElementArmed": {
+        "message": "Élesítve",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementArmed": {
         "message": "Szöveges élesített üzenet"
+    },
+    "osdTextElementDisarmed": {
+        "message": "Hatástalanítva",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementDisarmed": {
         "message": "Szöveges biztosított üzenet"
     },
+    "osdTextElementCrosshairs": {
+        "message": "Célkereszt",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementCrosshairs": {
         "message": "Célkereszt a képernyő közepén"
+    },
+    "osdTextElementArtificialHorizon": {
+        "message": "Műhorizont",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementArtificialHorizon": {
         "message": "Rajzolt műhorizont"
     },
+    "osdTextElementHorizonSidebars": {
+        "message": "Mesterséges horizont oldalsávok",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementHorizonSidebars": {
         "message": "Műhorizont vertikális oldalvonalai"
+    },
+    "osdTextElementCurrentDraw": {
+        "message": "A drón fogyasztása",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementCurrentDraw": {
         "message": "Pillanatnyi áramfelvétel"
     },
+    "osdTextElementMahDrawn": {
+        "message": "A drón fogyasztása mAh",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementMahDrawn": {
         "message": "Teljes felhasznált ektromos töltés"
+    },
+    "osdTextElementCraftName": {
+        "message": "Eszköz neve",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementCraftName": {
         "message": "Gép neve a Konfiguráció fülről"
     },
+    "osdTextElementAltitude": {
+        "message": "Magasság",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementAltitude": {
         "message": "Pillanatnyi magasság (riasztási küszöb felett villog)"
+    },
+    "osdTextElementOnTime": {
+        "message": "Adott időben",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementOnTime": {
         "message": "Teljes bekapcsolva töltött idő"
     },
+    "osdTextElementFlyTime": {
+        "message": "Repülés ideje",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementFlyTime": {
         "message": "Teljes élesített időtartam az aktuális akkumulátortöltéssel (riasztási küszöb felett villog)"
+    },
+    "osdTextElementFlyMode": {
+        "message": "Repülés mód",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementFlyMode": {
         "message": "Aktuális repülési mód"
     },
+    "osdTextElementGPSSpeed": {
+        "message": "GPS sebesség",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementGPSSpeed": {
         "message": "GPS meghatározott sebesség"
+    },
+    "osdTextElementGPSSats": {
+        "message": "GPS Műhold",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementGPSSats": {
         "message": "GPS bemérést biztosító műholdak száma"
     },
+    "osdTextElementGPSLon": {
+        "message": "GPS hosszúság",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementGPSLon": {
+        "message": "GPS hosszúsági koordináták"
+    },
+    "osdTextElementGPSLat": {
+        "message": "GPS szélesség",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementGPSLat": {
+        "message": "GPS szélességi koordináták"
+    },
+    "osdTextElementDebug": {
+        "message": "Hibakeresés",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementDebug": {
         "message": "Debug változók"
+    },
+    "osdTextElementPIDRoll": {
+        "message": "PID roll",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementPIDRoll": {
         "message": "Roll tengelyi PID érzékenység"
     },
+    "osdTextElementPIDPitch": {
+        "message": "PID pitch",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementPIDPitch": {
         "message": "Pitch tengelyi PID érzékenység"
+    },
+    "osdTextElementPIDYaw": {
+        "message": "PID yaw",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementPIDYaw": {
+        "message": "Yaw tengely PID érzékenység"
+    },
+    "osdTextElementPower": {
+        "message": "Power",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementPower": {
         "message": "Pillanatnyi áramfelvétel"
     },
+    "osdTextElementPIDRateProfile": {
+        "message": "Profil: PID és rate",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementPIDRateProfile": {
+        "message": "Az aktív PID és a sebességprofilok numerikus megjelenítése"
+    },
+    "osdTextElementBatteryWarning": {
+        "message": "Alacsony akkumulátorszint figyelmeztetés",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementBatteryWarning": {
+        "message": "Figyelmeztető szöveg, amely akkor jelenik meg, amikor az akkumulátor feszültsége a figyelmeztetési küszöb alá esik"
+    },
+    "osdTextElementAvgCellVoltage": {
+        "message": "Az akkumulátor átlagos cellánkénti feszültsége",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementAvgCellVoltage": {
         "message": "Átlag cellafeszültség (akkumulátor feszültség / cellaszám)"
+    },
+    "osdTextElementPitchAngle": {
+        "message": "Szög: pitch",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementPitchAngle": {
         "message": "Pitch fokokban"
     },
+    "osdTextElementRollAngle": {
+        "message": "Szög: roll",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementRollAngle": {
         "message": "Roll szög fokokban"
+    },
+    "osdTextElementMainBattUsage": {
+        "message": "Akkumulátorhasználat",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementMainBattUsage": {
         "message": "Fogyasztott ektromos töltés grafikus reprezentációja"
     },
+    "osdTextElementArmedTime": {
+        "message": "Stopper: élesített idő",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementArmedTime": {
         "message": "Legutóbbi élesítés óta eltelt idő"
+    },
+    "osdTextElementHomeDirection": {
+        "message": "Otthon irány",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementHomeDirection": {
+        "message": "Nyíl, amely megmutatja az irányát a kezdő helyzetnek"
+    },
+    "osdTextElementHomeDistance": {
+        "message": "Otthon távolság",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementHomeDistance": {
+        "message": "Távolság az otthoni pozícióig (lábban vagy méterben, az egység rendszerbeállítása alapján)"
+    },
+    "osdTextElementNumericalHeading": {
+        "message": "Numerikus címsor",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementNumericalHeading": {
         "message": "Pillanatnyi irány fokokban"
     },
+    "osdTextElementNumericalVario": {
+        "message": "Numerikus vario",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementNumericalVario": {
         "message": "Vertikális sebesség számokban (lábban,  vagy méterben a mértékegységbeállítások szerint)"
+    },
+    "osdTextElementCompassBar": {
+        "message": "Iránytű",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementCompassBar": {
         "message": "Pillanatnyi irány grafikus reprezentációja"
     },
+    "osdTextElementWarnings": {
+        "message": "Figyelmeztetések",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementWarnings": {
         "message": "Figyelmeztetések (pl. alacsony feszültség, kritikusan alacsony feszültség, élesítésre képtelenség, ...) és vizuális csipogó (4 villogó csillag)."
+    },
+    "osdTextElementEscTemperature": {
+        "message": "ESC hőmérséklet",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementEscTemperature": {
         "message": "ESC telemetria hőmérsékletadata"
     },
+    "osdTextElementEscRpm": {
+        "message": "ESC RPM",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementEscRpm": {
         "message": "ESC telemetria RPM adata"
+    },
+    "osdTextElementRemaningTimeEstimate": {
+        "message": "Stopper: a hátralévő idő becslése",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementRemaningTimeEstimate": {
         "message": "Fennmaradó repülési idő becslés"
     },
+    "osdTextElementRtcDateTime": {
+        "message": "RTC dátum és idő",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementRtcDateTime": {
         "message": "Valós idő és dátum"
+    },
+    "osdTextElementAdjustmentRange": {
+        "message": "Beállítási tartomány",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementAdjustmentRange": {
+        "message": "Jelenleg aktív beállítási tartomány beállítás és érték"
+    },
+    "osdTextElementTimer1": {
+        "message": "Stopper 1",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementTimer1": {
+        "message": "Megmutatja az 1. stopper értékét"
+    },
+    "osdTextElementTimer2": {
+        "message": "Stopper 2",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementTimer2": {
+        "message": "Megmutatja az 2. stopper értékét"
+    },
+    "osdTextElementCoreTemperature": {
+        "message": "Maghőmérséklet",
+        "description": "One of the elements of the OSD"
     },
     "osdDescElementCoreTemperature": {
         "message": "Az STM32 MCU mag hőmérséklete"
     },
+    "osdTextAntiGravity": {
+        "message": "Anti gravitáció",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescAntiGravity": {
+        "message": "Engedélyezi a jelzőt, ha az antigravitáció aktív"
+    },
+    "osdTextGForce": {
+        "message": "G force",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescGForce": {
+        "message": "Megmutatja, hogy mennyi G-Force-ot tapasztal a drón"
+    },
+    "osdTextElementMotorDiag": {
+        "message": "Motordiagnosztika",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementMotorDiag": {
+        "message": "Az egyes motorok teljesítményének grafikonját mutatja"
+    },
+    "osdTextElementLogStatus": {
+        "message": "A Blackbox napló állapota",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementLogStatus": {
+        "message": "Blackbox szám és figyelmeztetések"
+    },
+    "osdTextElementFlipArrow": {
+        "message": "Ütközés utáni visszafordulási nyíl",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementFlipArrow": {
+        "message": "Nyíl, amely azt mutatja, hogy melyik oldalsó motorok vannak teknős üzemmódban"
+    },
+    "osdTextElementLinkQuality": {
+        "message": "Link minőség",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementLinkQuality": {
+        "message": "A „kapcsolatminőség” alternatív mutatója a keret vesztesége alapján - óvatosan használja"
+    },
+    "osdTextElementFlightDist": {
+        "message": "Repülési távolság",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementFlightDist": {
+        "message": "A repülés során megtett távolság."
+    },
+    "osdTextElementDisplayName": {
+        "message": "Megjelenítendő név",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementDisplayName": {
+        "message": "A megjelenítendő név a \"display_name\" cli parancs által beállítva"
+    },
+    "osdTextElementEscRpmFreq": {
+        "message": "ESC RPM frekvencia",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementEscRpmFreq": {
+        "message": "RPC frekvencia az ESC telemetriai adatai szerint"
+    },
+    "osdTextElementRateProfileName": {
+        "message": "Profil: rate profil neve",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementRateProfileName": {
+        "message": "Megjeleníti az aktuális rate profil nevét"
+    },
+    "osdTextElementPidProfileName": {
+        "message": "Profil: PID profil neve",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementPidProfileName": {
+        "message": "Megjeleníti az aktuális PID profilnevet"
+    },
+    "osdTextElementOsdProfileName": {
+        "message": "Profil: OSD profil neve",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementOsdProfileName": {
+        "message": "Az OSD profil neve az \"osd_profile_1_name\", \"osd_profile_2_name\" és \"osd_profile_3_name\" CLI változókban beállítva"
+    },
+    "osdTextElementRssiDbmValue": {
+        "message": "RSSI dBm érték",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementRssiDbmValue": {
+        "message": "Az RSSI jel dBm-ben megadott értéke, ha rendelkezésre áll"
+    },
+    "osdTextElementRcChannels": {
+        "message": "RC Csatornák",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementRcChannels": {
+        "message": "Legfeljebb 4 csatorna érték megjelenítése. A csatornákat az 'osd_rcchannels' CLI változóval kell megadni"
+    },
+    "osdTextElementCameraFrame": {
+        "message": "Kamera frame",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementCameraFrame": {
+        "message": "Beállít egy állítható körvonalas elemet, amelyet a pilóta HD kamera látómezőjének megjelenítésére terveztek. <br><br> A szélességet és a magasságot a CLI-ben beállíthatja az 'osd_camera_frame_width' és 'osd_camera_frame_height' segítségével"
+    },
+    "osdTextElementEfficiency": {
+        "message": "Az akkumulátor hatékonysága",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementEfficiency": {
+        "message": "Az akkumulátor pillanatnyi fogyasztása mAh / távolságban. (Érvényes GPS-javítást igényel)"
+    },
+    "osdTextElementUnknown": {
+        "message": "Ismeretlen $1",
+        "description": "One of the elements of the OSD"
+    },
     "osdDescElementUnknown": {
         "message": "Ismeretlen elem (további részletek a későbbi verziókban várhatók)"
+    },
+    "osdTextStatMaxSpeed": {
+        "message": "Maximális sebesség",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatMaxSpeed": {
         "message": "Maximális mért sebesség"
     },
+    "osdTextStatMinBattery": {
+        "message": "Akku feszültség minimum",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
     "osdDescStatMinBattery": {
         "message": "Minimális mért akkumulátor feszültség"
+    },
+    "osdTextStatMinRssi": {
+        "message": "RSSI minimum",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatMinRssi": {
         "message": "Maximális mért RSSI"
     },
+    "osdTextStatMaxCurrent": {
+        "message": "Maximális áramfogyasztás",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatMaxCurrent": {
+        "message": "A maximális rögzített áramfelvétel"
+    },
+    "osdTextStatUsedMah": {
+        "message": "Elhasznált áram mAh",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatUsedMah": {
+        "message": "Használt akkumulátor kapacitás"
+    },
+    "osdTextStatMaxAltitude": {
+        "message": "Maximális magasság",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
     "osdDescStatMaxAltitude": {
         "message": "Maximális mért magasság"
+    },
+    "osdTextStatBlackbox": {
+        "message": "Blackbox használat",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatBlackbox": {
         "message": "Blackbox százalékos kihasználtsága"
     },
+    "osdTextStatEndBattery": {
+        "message": "Az akkumulátor feszültségének vége",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
     "osdDescStatEndBattery": {
         "message": "Akkumulátorfeszültség a biztosítás pillanatában"
+    },
+    "osdTextStatFlyTime": {
+        "message": "Összes repülési idő",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatFlyTime": {
         "message": "Teljes élesítve töltött idő az aktuális akkumulátortöltettel"
     },
+    "osdTextStatArmedTime": {
+        "message": "A repülési idő az utolsó élesítés óta",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
     "osdDescStatArmedTime": {
         "message": "Legutóbbi élesítés ota eltelt idő"
+    },
+    "osdTextStatMaxDistance": {
+        "message": "Maximális otthon távolság",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatMaxDistance": {
+        "message": "Maximális távolság az otthontól"
+    },
+    "osdTextStatBlackboxLogNumber": {
+        "message": "Blackbox szám",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatBlackboxLogNumber": {
+        "message": "A repülések naplószáma Blackbox log"
+    },
+    "osdTextStatTimer1": {
+        "message": "Stopper 1",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatTimer1": {
+        "message": "Az 1. stopper értéke hatástalanításkor"
+    },
+    "osdTextStatTimer2": {
+        "message": "Stopper 2",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatTimer2": {
+        "message": "A 2. stopper értéke hatástalanításkor"
+    },
+    "osdTextStatRtcDateTime": {
+        "message": "RTC dátum és idő",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatRtcDateTime": {
+        "message": "Valós idejű Dátum és idő"
+    },
+    "osdTextStatBattery": {
+        "message": "Akkumulátor feszültség",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatBattery": {
+        "message": "Az akkumulátor feszültsége valós időben"
+    },
+    "osdTextStatGForce": {
+        "message": "G force maximális",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatGForce": {
+        "message": "Max. G-Force, amelyet a drón tapasztalt"
+    },
+    "osdTextStatEscTemperature": {
+        "message": "Maximális ESC hőmérséklet",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatEscTemperature": {
+        "message": "Max ESC hőmérséklet"
     },
     "osdTimerSource": {
         "message": "Forrás:"
@@ -4287,22 +4737,286 @@
     "osdWarningVisualBeeper": {
         "message": "Vizuális csipogó (4 villogó csillag)."
     },
+    "osdWarningEscFail": {
+        "message": "Felsorolja a hibás ESC-k / motorok listáját (az RPM vagy a hőmérséklet túllép a beállított küszöbértéken)"
+    },
+    "osdWarningTextCoreTemperature": {
+        "message": "Maghőmérséklet",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningCoreTemperature": {
+        "message": "Figyelmeztet, ha az MCU maghőmérséklete meghaladja a beállított küszöböt"
+    },
+    "osdWarningTextRcSmoothingFailure": {
+        "message": "RC simítási hiba",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningRcSmoothingFailure": {
+        "message": "Figyelmeztet, ha az RC Smoothing inicializálása sikertelen"
+    },
+    "osdWarningTextFailsafe": {
+        "message": "Failsafe",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningFailsafe": {
+        "message": "Figyelmeztet, ha hibabiztonság jelentkezik"
+    },
+    "osdWarningTextLaunchControl": {
+        "message": "Indítási művelet",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningLaunchControl": {
+        "message": "Figyelmeztet, amikor az Indítási művelet üzemmód be van kapcsolva"
+    },
+    "osdWarningTextGpsRescueUnavailable": {
+        "message": "A GPS mentés nem érhető el",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningGpsRescueUnavailable": {
+        "message": "Figyelmeztet, ha a GPS mentés nem érhető el és nem aktiválható"
+    },
+    "osdWarningTextGpsRescueDisabled": {
+        "message": "A GPS mentés le van tiltva",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningGpsRescueDisabled": {
+        "message": "Figyelmeztet, ha a GPS mentés le van tiltva"
+    },
+    "osdWarningTextRSSI": {
+        "message": "RSSI",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningRSSI": {
+        "message": "Figyelmeztet, ha az RSSI alatti riasztás beállítás alatt van"
+    },
+    "osdWarningTextLinkQuality": {
+        "message": "Link minőség",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningLinkQuality": {
+        "message": "Figyelmeztet, ha a Link minősége nem éri el a riasztási beállítást"
+    },
+    "osdWarningTextRssiDbm": {
+        "message": "RSSI dBm",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningRssiDbm": {
+        "message": "Figyelmeztet, ha az RSSI dBm érték a riasztási beállítás alatt van"
+    },
+    "osdWarningTextOverCap": {
+        "message": "Az akkumulátor kapacitása meghaladja a beállított értéket",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningOverCap": {
+        "message": "Figyelmeztet, ha az elfogyasztott mAh meghaladja a beállított kapacitáskorlátot"
+    },
+    "osdWarningTextUnknown": {
+        "message": "Ismeretlen $1"
+    },
+    "osdWarningUnknown": {
+        "message": "Ismeretlen figyelmeztetés (részletek hozzá kell adni egy jövőbeli kiadáshoz)"
+    },
     "osdSectionHelpElements": {
         "message": "OSD elemek be- vagy kikapcsolása"
+    },
+    "osdSectionHelpVideoMode": {
+        "message": "Állítsa be a kamera várható videomódját (ez általában hagyható az AUTO üzemmódban, ha nehézségekbe ütközik, akkor állítsa be a kamera kimenetére)."
+    },
+    "osdSectionHelpUnits": {
+        "message": "Beállítja a numerikus leolvasáshoz használt egységrendszert."
+    },
+    "osdSectionHelpTimers": {
+        "message": "Konfigurálja a repülési stoppereket."
+    },
+    "osdSectionHelpAlarms": {
+        "message": "Állítsa be az OSD elemekhez használt küszöbértékeket riasztási állapotokkal."
+    },
+    "osdSectionHelpStats": {
+        "message": "Állítsa be a repülés utáni statisztikai képernyőn megjelenő értékeket."
+    },
+    "osdSectionHelpWarnings": {
+        "message": "Engedélyezze vagy tiltja a FIGYELMEZTETÉSEK elemen megjelenő figyelmeztetéseket."
     },
     "osdSettingsSaved": {
         "message": "OSD beállítások elmenve"
     },
+    "osdWritePermissions": {
+        "message": "Nincs <span class=\"message-negative\"> írási engedély</span> ehhez a fájlhoz"
+    },
     "osdButtonSaved": {
         "message": "Mentve"
+    },
+    "vtxHelp": {
+        "message": "Itt konfigurálhatja a videó adó (VTX) értékeit. Megtekintheti és módosíthatja az átviteli értékeket, beleértve a VTX táblázatokat is, ha a repülésvezérlő és a VTX támogatják.<br>A VTX beállításához hajtsa végre a következő lépéseket:<br> 1. Menj <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight/wiki/VTX-tables\">a</a>oldalra<br>2. Keresse meg az országának és a VTX modellnek megfelelő VTX konfigurációs fájlt, és töltse le;<br>3. Kattintson a $t(vtxButtonLoadFile.message) gombra majd válassza ki a VTX konfigurációs fájlt majd töltse be<br>4. Ellenőrizze, hogy a beállítások helyesek-e<br>5. Kattintson a $t(vtxButtonSave.message) gombra, hogy a VTX beállításokat elmentse a repülésvezérlőn.<br>6. Opcionálisan kattintson a $t(vtxButtonSaveLua.message) gombra a beaflight lua szkriptekkel használható lua konfigurációs fájl mentéséhez. (További infó: <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">itt elérhető</a>.)",
+        "description": "Introduction message in the VTX tab"
+    },
+    "vtxMessageNotSupported": {
+        "message": "<span class=\"message-negative\"> Figyelem: </span> A VTX nincs konfigurálva vagy nem támogatott. Tehát itt nem módosíthatja a VTX értékeket. Ez csak akkor lesz lehetséges, ha a repülésvezérlőt valamilyen protokoll, például Tramp vagy SmartAudio segítségével csatlakoztatják a VTX-hez, és szükség esetén helyesen van beállítva a $t(tabPorts.message) lapon.",
+        "description": "Message to show when the VTX is not supported in the VTX tab"
+    },
+    "vtxMessageTableNotConfigured": {
+        "message": "<span class=\"message-negative\">Figyelem: </span> A $t(vtxSelectedMode.message) mezők használatához be kell állítania és el kell mentenie az ELSŐ VTX táblázatot az alján.",
+        "description": "Message to show when the VTX is not supported in the VTX tab"
+    },
+    "vtxMessageFactoryBandsNotSupported": {
+        "message": "<span class=\"message-negative\"> Figyelem: </span> A kiválasztott VTX típus nem támogatja a sávok „gyári” beállítását, de néhány sáv rendelkezik ezzel a beállítással. Kattintson a $t(vtxButtonSave.message) elemre a javításhoz.",
+        "description": "Message to show when the configured VTX type does not support factory bands, but one or more of the configured bands are of this type"
+    },
+    "vtxMessageVerifyTable": {
+        "message": "<span class=\"message-negative\">Figyelem: </span> A VTX táblázat értékeit betöltötték, de még nem mentették a repülésvezérlőn. Ellenőriznie kell és módosítania kell az értékeket, hogy megbizonyosodjon arról, hogy érvényesek és törvényesek-e az Ön országában, majd nyomja meg a $t(vtxButtonSave.message) gombot, hogy azokat a repülésvezérlőbe mentse.",
+        "description": "Message to show when the VTX Table has been loaded from a external source"
+    },
+    "vtxFrequencyChannel": {
+        "message": "Adja meg közvetlenül a frekvenciát",
+        "description": "Text of one of the fields of the VTX tab"
+    },
+    "vtxFrequencyChannelHelp": {
+        "message": "Ha engedélyezi ezt, a Configurator lehetővé teszi, hogy frekvenciát válasszon a szokásos sáv / csatorna helyett. Ahhoz, hogy ez működjön, a VTX-nek támogatnia kell ezt a funkciót.",
+        "description": "Help text for the frequency or channel select field of the VTX tab"
+    },
+    "vtxSelectedMode": {
+        "message": "Kiválasztott mód",
+        "description": "Title for the actual mode header of the VTX"
+    },
+    "vtxActualState": {
+        "message": "Jelenlegi értékek",
+        "description": "Title for the actual values header of the VTX"
+    },
+    "vtxType": {
+        "message": "VTX típus",
+        "description": "Text of one of the fields of the VTX tab"
+    },
+    "vtxType_0": {
+        "message": "Nem támogatott",
+        "description": "Text for one of the types of the VTX type in VTX tab"
+    },
+    "vtxType_1": {
+        "message": "RTC607",
+        "description": "Text for one of the types of the VTX type in VTX tab"
+    },
+    "vtxType_3": {
+        "message": "SmartAudio",
+        "description": "Text for one of the types of the VTX type in VTX tab"
+    },
+    "vtxType_4": {
+        "message": "Tramp",
+        "description": "Text for one of the types of the VTX type in VTX tab"
+    },
+    "vtxType_255": {
+        "message": "Ismeretlen",
+        "description": "Text for one of the types of the VTX type in VTX tab"
+    },
+    "vtxBand": {
+        "message": "Sáv",
+        "description": "Text of one of the fields of the VTX tab"
+    },
+    "vtxBandHelp": {
+        "message": "Itt választhatja ki a sávot a VTX készülékéhez",
+        "description": "Help text for the band field of the VTX tab"
+    },
+    "vtxBand_0": {
+        "message": "Semmi",
+        "description": "Text of one of the options for the band field of the VTX tab"
+    },
+    "vtxBand_X": {
+        "message": "Sáv {{bandName}}",
+        "description": "Text of one of the options for the band field of the VTX tab"
+    },
+    "vtxChannel_0": {
+        "message": "Semmi",
+        "description": "Text of one of the options for the channel field of the VTX tab"
+    },
+    "vtxChannel_X": {
+        "message": "Csatorna {{channelName}}",
+        "description": "Text of one of the options for the channel field of the VTX tab"
+    },
+    "vtxPower_0": {
+        "message": "Semmi",
+        "description": "Text of one of the options for the power field of the VTX tab"
+    },
+    "vtxPower_X": {
+        "message": "Szint {{powerLevel}}",
+        "description": "Text of one of the options for the power field of the VTX tab"
+    },
+    "vtxChannel": {
+        "message": "Csatorna",
+        "description": "Text of one of the fields of the VTX tab"
+    },
+    "vtxChannelHelp": {
+        "message": "Itt választhatja ki a csatornát a VTX készülékéhez",
+        "description": "Help text for the channel field of the VTX tab"
+    },
+    "vtxFrequency": {
+        "message": "Frekvencia",
+        "description": "Text of one of the fields of the VTX tab"
+    },
+    "vtxFrequencyHelp": {
+        "message": "Itt kiválaszthatja a VTX frekvenciáját, ha támogatott",
+        "description": "Help text for the frequency field of the VTX tab"
+    },
+    "vtxDeviceReady": {
+        "message": "A készülék készen áll",
+        "description": "Text of one of the fields of the VTX tab"
+    },
+    "vtxPower": {
+        "message": "Power",
+        "description": "Text of one of the fields of the VTX tab"
+    },
+    "vtxPowerHelp": {
+        "message": "Ez a VTX-hez kiválasztott teljesítmény. Módosítható, ha a $t(vtxPitMode.message) vagy a $t(vtxLowPowerDisarm.message) engedélyezve van",
+        "description": "Help text for the power field of the VTX tab"
+    },
+    "vtxPitMode": {
+        "message": "Pit mód",
+        "description": "Text of one of the fields of the VTX tab"
+    },
+    "vtxPitModeHelp": {
+        "message": "Ha engedélyezve van, a VTX nagyon alacsony teljesítményű módba lép, hogy a quad a padon legyen, anélkül, hogy más pilótákat zavarna. Általában ennek a módnak a hatótávolsága kevesebb, mint 5 m. <br><br> MEGJEGYZÉS: Egyes protokollok, például a SmartAudio, nem kapcsolhatják be a Pit módot szoftver segítségével a bekapcsolás után.",
+        "description": "Help text for the pit mode field of the VTX tab"
+    },
+    "vtxPitModeFrequency": {
+        "message": "Pit mód frekvenciája",
+        "description": "Text of one of the fields of the VTX tab"
+    },
+    "vtxPitModeFrequencyHelp": {
+        "message": "Frekvencia, amelyen a Pit üzemmód megváltozik, ha engedélyezve van.",
+        "description": "Help text for the pit mode field of the VTX tab"
+    },
+    "vtxLowPowerDisarm": {
+        "message": "Alacsony teljesítmény hatástalanítás",
+        "description": "Text of one of the fields of the VTX tab"
+    },
+    "vtxLowPowerDisarmHelp": {
+        "message": "Engedélyezése esetén a VTX hatástalanítja a rendelkezésre álló legalacsonyabb teljesítményt (kivéve ha hibabiztonság történt).",
+        "description": "Help text for the low power disarm field of the VTX tab"
+    },
+    "vtxLowPowerDisarmOption_0": {
+        "message": "Ki",
+        "description": "One of the options for the Low Power Disarm mode of the VTX"
+    },
+    "vtxLowPowerDisarmOption_1": {
+        "message": "Be",
+        "description": "One of the options for the Low Power Disarm mode of the VTX"
+    },
+    "vtxLowPowerDisarmOption_2": {
+        "message": "Az első élesítésig be",
+        "description": "One of the options for the Low Power Disarm mode of the VTX"
     },
     "vtxTable": {
         "message": "VTX-videóadó Tábla",
         "description": "Text of the header of the VTX Table element in the VTX tab"
     },
+    "vtxTablePowerLevels": {
+        "message": "Teljesítmény szintek száma",
+        "description": "Text of one of the fields of the VTX Table element in the VTX tab"
+    },
     "vtxTablePowerLevelsHelp": {
         "message": "Ez határozza meg milyen jelsugárzási erő szinteket támogat a videóadód",
         "description": "Help for the number of power levels field of the VTX Table element in the VTX tab"
+    },
+    "vtxTablePowerLevelsTableHelp": {
+        "message": "Ez a táblázat a VTX-hez felhasználható különféle teljesítményértékeket képviseli. Két részre oszthatók: <br><b>- $t(vtxTablePowerLevelsValue.message):</b>Minden teljesítményszinthez egy hardvergyártó által megadott értéket kell megadni. Kérjen a gyártótól a helyes értéket, vagy keresse meg a VTX táblázatok Betaflight wiki oldalát, hogy megragadjon néhány mintát. <br<b>-$t(vtxTablePowerLevelsLabel.message):</b> ide helyezheti a kívánt címkét az egyes teljesítményszintekhez. Lehet számok (25, 200, 600, 1.2), betűk (OFF, MIN, MAX) vagy ezek keveréke. <br><br><br>Csak</b> az országában törvényes teljesítményszinteket állítsa be.",
+        "description": "Help for the table of power levels (value-label) that appears in the VTX tab"
     },
     "vtxTablePowerLevelsValue": {
         "message": "Érték",
@@ -4335,6 +5049,22 @@
     "vtxTableBandTitleFactory": {
         "message": "Gyártó",
         "description": "Text of one of the titles of the VTX Table element in the VTX tab"
+    },
+    "vtxTableBandsChannelsTableHelp": {
+        "message": "Ez a táblázat az összes olyan frekvenciát képviseli, amelyet fel lehet használni a VTX készülékéhez. Több sáv lehet, és minden sávhoz konfigurálnia kell: <br><b>- $t(vtxTableBandTitleName.message): </b> Neve, amelyet hozzá kell rendelni ehhez a sávhoz, például BOSCAM_A, FATSHARK vagy RACEBAND.<br><b>$t(vtxTableBandTitleLetter.message): </b> Rövid betű, amely a sávra utal.<br><b> - $t(vtxTableBandTitleFactory.message): </b> Ez azt jelzi, hogy ez egy gyári sáv. Ha engedélyezett, a Betaflight egy sávot és csatornaszámot küld a VTX-nek. A VTX ezután használja a beépített frekvencia tábláját, és az itt konfigurált frekvenciák csak az értéket jelenítik meg az OSD-n és más helyeken. Ha nincs engedélyezve, akkor a Betaflight az itt beállított valós frekvenciát küldi a VTX-nek.<br><b>- Frekvenciák: </b> ennek a sávnak a frekvenciája. <br><br> Ne feledje, hogy nem minden frekvencia törvényes az Ön országában. Minden olyan frekvenciaindexhez <b> nulla </b> értéket kell megadnia, amelyet nem szabad felhasználni.",
+        "description": "Help for the table of bands-channels that appears in the VTX tab"
+    },
+    "vtxSavedFileOk": {
+        "message": "A VTX konfigurációs fájl <span class=\"message-positive\"> elmentve </span>",
+        "description": "Message in the GUI log when the VTX Config file is saved"
+    },
+    "vtxSavedFileKo": {
+        "message": "<span class=\"message-negative\"> Hiba </span> a VTX Config fájl mentése közben",
+        "description": "Message in the GUI log when the VTX Config file is saved"
+    },
+    "vtxLoadFileOk": {
+        "message": "A VTX konfigurációs fájl<span class=\"message-positive\"> betöltve </span>",
+        "description": "Message in the GUI log when the VTX Config file is loaded"
     },
     "vtxButtonSaveFile": {
         "message": "Lementés fájlként",
@@ -4539,5 +5269,13 @@
     },
     "pidTuningRatesTypeTip": {
         "message": "A Rate típus módosítása megváltoztatja az aránygörbét és a beállítási módot"
+    },
+    "gpsSbasIndianGAGAN": {
+        "message": "Indiai GAGAN",
+        "description": "One of the options selectable for the GPS SBAS system"
+    },
+    "gpsSbasNone": {
+        "message": "Semmi",
+        "description": "One of the options selectable for the GPS SBAS system"
     }
 }
