@@ -999,9 +999,6 @@
     "featureVTX": {
         "message": "VTX設定"
     },
-    "featureANTI_GRAVITY": {
-        "message": "スロットル可変時における一時的なI値のブースト"
-    },
     "featureDYNAMIC_FILTER": {
         "message": "動的ジャイロノッチフィルター"
     },
