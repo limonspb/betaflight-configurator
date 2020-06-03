@@ -901,9 +901,6 @@
     "featureVTX": {
         "message": "Video odašiljač"
     },
-    "featureANTI_GRAVITY": {
-        "message": "Privremeno pojačaj I-Term na velikim promjenama gasa/throttlea"
-    },
     "featureDYNAMIC_FILTER": {
         "message": "Dinamički gyro notch filter"
     },
