@@ -1053,9 +1053,6 @@
     "featureVTX": {
         "message": "Émetteur vidéo"
     },
-    "featureANTI_GRAVITY": {
-        "message": "Boost temporairement les I lors de grosses variations de gaz"
-    },
     "featureDYNAMIC_FILTER": {
         "message": "Filtre dynamique Notch gyro"
     },
