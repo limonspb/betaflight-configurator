@@ -995,9 +995,6 @@
     "featureVTX": {
         "message": "Transmissor de vídeo"
     },
-    "featureANTI_GRAVITY": {
-        "message": "Aumenta temporariamente o termo I quando houver grandes alterações no acelerador"
-    },
     "featureDYNAMIC_FILTER": {
         "message": "Filtro Notch dinâmico do giroscópio"
     },
