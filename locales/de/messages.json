@@ -996,9 +996,6 @@
     "featureVTX": {
         "message": "Video Sender"
     },
-    "featureANTI_GRAVITY": {
-        "message": "Kurzfristiger I-Wert Boost bei starken Gas Änderungen"
-    },
     "featureDYNAMIC_FILTER": {
         "message": "Dynamischer Gyro Notch Filter"
     },
@@ -1425,6 +1422,9 @@
     },
     "portsFunction_RUNCAM_DEVICE_CONTROL": {
         "message": "Kamera (RunCam Protokoll)"
+    },
+    "portsFunction_FRSKY_OSD": {
+        "message": "OSD (FrSky Protokoll)"
     },
     "pidTuningProfileOption": {
         "message": "Profil $1"
@@ -5236,6 +5236,10 @@
         "message": "Bidirektionales DShot (benötigt unterstützte ESC Firmware)",
         "description": "Feature for the ESC/Motor"
     },
+    "configurationDshotBidirHelp": {
+        "message": "Sendet ESC Daten an den FC via DShot Telemetrie. Wird von RPM Filterung und dynamischem Leerlauf benötigt. <br><br>Hinweis: Benötigt wird ein kompatibler ESC mit entsprechender Firmware, z.B. JESC, JazzMaverick, BLHeli-32.",
+        "description": "Description of the Bidirectional DShot feature of the ESC/Motor"
+    },
     "configurationGyroSyncDenom": {
         "message": "Gyro Update Frequenz"
     },
@@ -5428,6 +5432,10 @@
     },
     "dialogRatesTypeConfirm": {
         "message": "Änderung"
+    },
+    "gpsSbasAutoDetect": {
+        "message": "Automatische Erkennung",
+        "description": "One of the options selectable for the GPS SBAS system"
     },
     "gpsSbasEuropeanEGNOS": {
         "message": "Europäisches EGNOS",
