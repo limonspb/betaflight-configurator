@@ -665,9 +665,6 @@
     "featureVTX": {
         "message": "Videolähetin"
     },
-    "featureANTI_GRAVITY": {
-        "message": "Kasvata väliaikaisesti I-Term -arvoa havaittaessa suuria muutoksia kaasun asennossa"
-    },
     "featureDYNAMIC_FILTER": {
         "message": "Dynaaminen gyron pykälän suodatus"
     },
