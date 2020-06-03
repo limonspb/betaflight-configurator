@@ -633,7 +633,10 @@
         "message": "On Screen Display (duomenų atvaizdavimas į kameros vaizdą)"
     },
     "featureANTI_GRAVITY": {
-        "message": "Laikinai didinti I-Term, esant aukštiems \"gazo\" svirties reikšmėms"
+        "message": "Nuolat įjungti Anti Gravity režimą"
+    },
+    "featureANTI_GRAVITYTip": {
+        "message": "Jeigu tai išjungta, tam kad įjungti antigravitaciją jungikliu, naudokite 'ANTI GRAVITY' režimą."
     },
     "featureDYNAMIC_FILTER": {
         "message": "Dinaminis gyro režekcinis filtravimas"
