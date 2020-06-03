@@ -1006,9 +1006,6 @@
     "featureVTX": {
         "message": "Videó Adó"
     },
-    "featureANTI_GRAVITY": {
-        "message": "Ideiglenes fokozása az I-Term-nek magas gázváltozásoknál"
-    },
     "featureDYNAMIC_FILTER": {
         "message": "Dinamikus giroszkóp-szűrés"
     },
