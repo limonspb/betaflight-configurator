@@ -899,9 +899,6 @@
     "featureVTX": {
         "message": "Video raidītājs"
     },
-    "featureANTI_GRAVITY": {
-        "message": "Īslaicīgi palielināt I-Term pie lielām droseles vērtībām izmaiņām"
-    },
     "featureDYNAMIC_FILTER": {
         "message": "Žiroskopa dinamiskā joslas filtrēšana"
     },
