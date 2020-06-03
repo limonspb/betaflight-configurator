@@ -999,9 +999,6 @@
     "featureVTX": {
         "message": "Trasmettitore Video"
     },
-    "featureANTI_GRAVITY": {
-        "message": "Aumenta temporaneamente I-Term in caso di forti variazioni del gas"
-    },
     "featureDYNAMIC_FILTER": {
         "message": "Filtro notch dinamico giroscopio"
     },
