@@ -1000,7 +1000,10 @@
         "message": "Видеопередатчик"
     },
     "featureANTI_GRAVITY": {
-        "message": "Временно увеличивает параметр I при резком увеличении газа"
+        "message": "Включить Anti Gravity по умолчанию"
+    },
+    "featureANTI_GRAVITYTip": {
+        "message": "Если это отключено, то для включения антигравитации можно использовать режим 'ANTI GRAVITY'."
     },
     "featureDYNAMIC_FILTER": {
         "message": "Адаптивная полосно-заграждающая фильтрация"
