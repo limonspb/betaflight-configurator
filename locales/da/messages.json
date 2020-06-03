@@ -740,9 +740,6 @@
     "featureVTX": {
         "message": "Videosender"
     },
-    "featureANTI_GRAVITY": {
-        "message": "Boost midlertidigt I-Term ved højgasændringer"
-    },
     "featureDYNAMIC_FILTER": {
         "message": "Dynamisk gyro notch filtrering"
     },
