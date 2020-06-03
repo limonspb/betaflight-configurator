@@ -966,7 +966,10 @@
         "message": "Video Zender"
     },
     "featureANTI_GRAVITY": {
-        "message": "Tijdelijke boost I-Term bij snelle gas wijzigingen"
+        "message": "Anti Gravity permanent inschakelen"
+    },
+    "featureANTI_GRAVITYTip": {
+        "message": "Als dit is uitgeschakeld, kan de 'ANTI GRAVITY' modus worden gebruikt om Anti Gravity met een schakelaar in te schakelen."
     },
     "featureDYNAMIC_FILTER": {
         "message": "Dynamic gyro notch filtering"
