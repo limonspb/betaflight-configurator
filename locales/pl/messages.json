@@ -937,9 +937,6 @@
     "featureVTX": {
         "message": "Nadajnik wideo"
     },
-    "featureANTI_GRAVITY": {
-        "message": "Chwilowo podbijaj I podczas dużych zmian gazu"
-    },
     "featureDYNAMIC_FILTER": {
         "message": "Dynamiczny filtr Notch dla żyroskopu"
     },
