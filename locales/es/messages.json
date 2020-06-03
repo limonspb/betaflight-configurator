@@ -1000,7 +1000,10 @@
         "message": "Transmisor de Vídeo"
     },
     "featureANTI_GRAVITY": {
-        "message": "Aumento temporal I Term en cambios de acelerador bruscos"
+        "message": "Activar Anti Gravedad permanentemente"
+    },
+    "featureANTI_GRAVITYTip": {
+        "message": "Si se desactiva, el modo 'ANTI GRAVITY' puede usarse para activar Anti Gravedad con un interruptor."
     },
     "featureDYNAMIC_FILTER": {
         "message": "Filtro notch dinámico para el giro"
