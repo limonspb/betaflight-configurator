@@ -975,9 +975,6 @@
     "featureVTX": {
         "message": "Videosändare"
     },
-    "featureANTI_GRAVITY": {
-        "message": "Öka I-Term tillfälligt vid hastiga gasändringar"
-    },
     "featureDYNAMIC_FILTER": {
         "message": "Dynamisk gyro-bandspärrfiltrering"
     },
