@@ -1063,9 +1063,6 @@
     "featureVTX": {
         "message": "图传"
     },
-    "featureANTI_GRAVITY": {
-        "message": "油门剧烈变动时短暂提高 I 值"
-    },
     "featureDYNAMIC_FILTER": {
         "message": "动态陷波滤波"
     },
