@@ -1091,7 +1091,10 @@
         "message": "crwdns5563:0crwdne5563:0"
     },
     "featureANTI_GRAVITY": {
-        "message": "crwdns5564:0crwdne5564:0"
+        "message": "crwdns10150:0crwdne10150:0"
+    },
+    "featureANTI_GRAVITYTip": {
+        "message": "crwdns10152:0crwdne10152:0"
     },
     "featureDYNAMIC_FILTER": {
         "message": "crwdns5565:0crwdne5565:0"
