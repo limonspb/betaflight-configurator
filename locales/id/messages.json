@@ -755,9 +755,6 @@
     "featureVTX": {
         "message": "Transmitter Video"
     },
-    "featureANTI_GRAVITY": {
-        "message": "Naikkan I-Term sementara pada perubahan throttle tinggi"
-    },
     "featureDYNAMIC_FILTER": {
         "message": "Filter notch gyro dinamis"
     },
