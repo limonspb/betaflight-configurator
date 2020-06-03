@@ -1091,7 +1091,10 @@
         "message": "Transmisor de video"
     },
     "featureANTI_GRAVITY": {
-        "message": "Incrementar temporalmente o termo I en grandes cambios de acelerador."
+        "message": "Anti Gravity activo permanentemente"
+    },
+    "featureANTI_GRAVITYTip": {
+        "message": "Se está desactivado, pódese empregar o modo 'ANTI GRAVITY' cun conmutador."
     },
     "featureDYNAMIC_FILTER": {
         "message": "Filtrado notch dinámico do xiro"
