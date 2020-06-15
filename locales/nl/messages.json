@@ -2476,6 +2476,9 @@
     "firmwareFlasherMessage": {
         "message": "Bericht:"
     },
+    "firmwareFlasherWarningText": {
+        "message": "Probeer <span class=\"message-negative\">niet</span> om firmware <strong>anders dan Betaflight firmware</strong> te flashen met deze tool!<br />Ontkoppel <span class=\"message-negative\">niet</span> <strong>het bord</strong> of zet <strong>niet</strong> je computer uit tijdens het flashen!<br /><br /><strong>Opmerking: </strong>STM32 bootloader is opgeslagen in ROM, deze kan niet aangepast worden.<br /><strong>Opmerking: </strong><span class=\"message-negative\">Auto-Connect</span> is altijd uitgeschakeld als u op de firmware flasher pagina bent.<br /><strong>Opmerking: </strong>Zorg ervoor dat u een back-up heeft; sommige upgrades/downgrades kunnen uw configuratie wissen.<br /><strong>Opmerking:</strong> Als je problemen hebt met het flashen, <strong>probeer dan eerst alle kabels los te koppelen van uw vluchtcontroller. </strong>Probeer uw computer opnieuw te starten, upgrade naar de laatste versie van chrome en upgrade alle drivers.<br /><strong>Opmerking:</strong> Als u een bord flasht die direct verbonden is met een USB aansluiting (Dit is het geval bij bijna alle nieuwe borden) zorg er dan voor dat u de Betaflight handleiding heeft gelezen en dat u de juiste software en drivers heeft geïnstalleerd"
+    },
     "firmwareFlasherRecoveryHead": {
         "message": "<strong>Herstellen / Communicatie verloren</strong>"
     },
@@ -3050,6 +3053,18 @@
     "failsafeGpsRescueItemSanityChecksOn": {
         "message": "Aan"
     },
+    "failsafeGpsRescueItemSanityChecksFSOnly": {
+        "message": "Alleen Failsafe"
+    },
+    "failsafeSwitchTitle": {
+        "message": "Failsafe Schakelaar"
+    },
+    "failsafeSwitchModeItem": {
+        "message": "Failsafe Schakelaar Actie"
+    },
+    "failsafeSwitchModeHelp": {
+        "message": "Deze optie bepaalt wat er gebeurt als Failsafe via de AUX-schakelaar wordt geactiveerd:<br/><strong>Fase 1</strong> activeert failsave fase 1. Dit is handig voor als u signaalverlies wilt simuleren.<br/><strong>Fase 2</strong> slaat fase 1 over en activeert direct de fase 2 procedure<br/><strong>Kill</strong> schakelt de quad direct uit (je drone zal gelijk crashen)"
+    },
     "failsafeSwitchOptionStage1": {
         "message": "Fase 1"
     },
@@ -3106,6 +3121,9 @@
     },
     "powerCalibrationManagerTitle": {
         "message": "Kalibratie Manager"
+    },
+    "powerCalibrationManagerHelp": {
+        "message": "Om te kalibreren dient u gebruik te maken van een multimeter om de daadwerkelijke voltage/ amperage van uw drone te meten (de batterij dient ingeplugd te zijn). Voer de gemeten waardes hieronder in. Klik vervolgens op [Calibrate] terwijl u de batterij aangesloten houdt."
     },
     "powerCalibrationManagerWarning": {
         "message": "<span class=\"message-negative\">Waarschuwing:</span> De batterij <span class=\"message-negative\">is niet aangesloten</span> of de voltage en amperage bronnen zijn <span class=\"message-negative\">niet goed ingesteld.</span> Zorg ervoor dat de spanning en/of amperage een waarde boven 0 uitlezen. Anders kunt u deze tool niet gebruiken om te kalibreren."
@@ -3275,6 +3293,9 @@
     "powerAmperageScale": {
         "message": "Schaal [1/10th mV/A]"
     },
+    "powerAmperageOffset": {
+        "message": "Verschuiving [mA]"
+    },
     "powerAmperageCalibration": {
         "message": "Gemeten Amperage"
     },
@@ -3313,6 +3334,12 @@
     },
     "osdSetupNoOsdChipDetectWarning": {
         "message": "<span class=\"message-negative\"><b>WAARSCHUWING:</b></span> Er is geen OSD chip gedetecteerd. Sommige vluchtcontrollers zullen de OSD chip niet correct van energie voorzien tenzij deze is aangesloten op een batterij. Sluit de batterij aan voordat via USB aansluit. (VERWIJDER WEL EERST JE PROPELLORS!)"
+    },
+    "osdSetupPreviewHelp": {
+        "message": "<strong>Opmerking:</strong> het OSD voorbeeld kan mogelijk niet het werkelijke lettertype weergeven dat is geïnstalleerd op uw vlucht controller. De lay-out van afzonderlijke elementen kan er anders uitzien wanneer oudere versies van de firmware worden gebruikt. Bekijk de lay-out door uw bril voordat u gaat vliegen."
+    },
+    "osdSetupUnsupportedNote1": {
+        "message": "Uw vlucht controller reageert niet op OSD opdrachten. Dit betekent waarschijnlijk dat het niet de geïntegreerde BetaFlight OSD heeft."
     },
     "osdSetupUnsupportedNote2": {
         "message": "Merk op dat sommige vluchtcontrollers een onboard <a href=\"https://www.youtube.com/watch?v=ikKH_6SQ-Tk\" target=\"_blank\" rel=\"noopener noreferrer\">MinimOSD</a> hebben die geflasht en geconfigureerd kan worden met <a href=\"https://github.com/ShikOfTheRa/scarab-osd/releases/latest\" target='_blank'>scarab-osd</a>. De MinimOSD kan echter niet via deze interface worden geconfigureerd."
@@ -3533,6 +3560,13 @@
     },
     "osdDescElementHorizonSidebars": {
         "message": "Zijbalken rond kunstmatige horizon indicator"
+    },
+    "osdTextElementCraftName": {
+        "message": "Naam drone",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementCraftName": {
+        "message": "Naam drone zoals ingesteld op het configuratie-tabblad"
     },
     "osdTextElementAltitude": {
         "message": "Hoogte",
@@ -4092,6 +4126,10 @@
     "osdWarningRssiDbm": {
         "message": "Waarschuwt wanneer de RSSI dBm waarde onder de ingestelde drempelwaarde komt"
     },
+    "osdWarningTextOverCap": {
+        "message": "Te veel batterij capaciteit verbruikt",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
     "osdWarningOverCap": {
         "message": "Waarschuwt wanneer de verbruikte mAh de ingestelde capaciteitslimiet overschrijdt"
     },
@@ -4107,8 +4145,14 @@
     "osdSectionHelpVideoMode": {
         "message": "Stel de verwachte videomodus van de camera in (meestal kan deze instelling op de AUTO blijven staan. Als u problemen heeft, stel dan deze waarde correct in)."
     },
+    "osdSectionHelpUnits": {
+        "message": "Stelt het eenheid systeem in dat wordt gebruikt voor numerieke waarden."
+    },
     "osdSectionHelpTimers": {
         "message": "Configureer vlucht timers."
+    },
+    "osdSectionHelpAlarms": {
+        "message": "Stel de drempelwaarden in voor OSD elementen met alarmstaten."
     },
     "osdSectionHelpStats": {
         "message": "Stel de waarden in die zichtbaar zijn op het post-flight statistieken scherm."
@@ -4121,6 +4165,26 @@
     },
     "osdButtonSaved": {
         "message": "Opgeslagen"
+    },
+    "vtxHelp": {
+        "message": "Hier kun u de waarden voor uw video zender (VTX) configureren. U kunt de transmissiewaarden en de VTX-tabellen bekijken maar ook wijzigen als de vluchtcontroller en de VTX dit ondersteunen.<br>Om uw VTX in te stellen volgt u de volgende stappen:<br>1. Ga naar <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight/wiki/VTX-tables\">deze</a> pagina;<br>2. Zoek het juiste VTX-configuratiebestand op voor uw land en uw VTX model en download deze;<br>3. Klik hieronder op '$t(vtxButtonLoadFile.message)', selecteer het VTX configuratiebestand wat u gedownload heeft en laad deze in;<br>4. Controleer of de instellingen correct zijn;<br>5. Klik op ''$t(vtxButtonSave.message)' om de instellingen op te slaan op uw vluchtcontroller.<br>6. Klik optioneel op '$t(vtxButtonSaveLua.message)' om een lua configuratiebestand op te slaan dat u kunt gebruiken met de betaflight lua scripts (Lees meer hierover op <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">deze link</a>.)",
+        "description": "Introduction message in the VTX tab"
+    },
+    "vtxMessageNotSupported": {
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> Uw VTX is niet geconfigureerd of wordt niet ondersteund. U kunt de VTX-waarden daardoor hier niet wijzigen. Dit is alleen mogelijk als uw vluchtcontroller is aangesloten op uw VTX met behulp van een protocol zoals Tramp of SmartAudio. En deze correct is geconfigureerd in het tabblad $t(tabPorts.message).",
+        "description": "Message to show when the VTX is not supported in the VTX tab"
+    },
+    "vtxMessageTableNotConfigured": {
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> U moet de VTX Tabel eerst configureren en daarna opslaan alvorens u gebruik kan maken van de $t(vtxSelectedMode.message) velden.",
+        "description": "Message to show when the VTX is not supported in the VTX tab"
+    },
+    "vtxMessageFactoryBandsNotSupported": {
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> Het geselecteerde VTX type ondersteunt niet de 'fabriekinstellingen' voor banden. Echter voor sommige van de in te stellen banden kan dit wel. Klik op '$t(vtxButtonSave.message)' om dit op te lossen.",
+        "description": "Message to show when the configured VTX type does not support factory bands, but one or more of the configured bands are of this type"
+    },
+    "vtxMessageVerifyTable": {
+        "message": "<span class=\"message-negative\">Waarschuwing:</span> De waarden van de VTX Tabel zijn ingeladen, maar nog niet opgeslagen op uw vluchtcontroller. Je moet de waardes controleren en waar nodig aanpassen om er zeker van te zijn dat ze geldig maar ook legaal te gebruiken zijn in jouw land. Druk na deze controle vervolgens op de $t(vtxButtonSave.message) knop om de instellingen op te slaan op de vluchtcontroller.",
+        "description": "Message to show when the VTX Table has been loaded from a external source"
     },
     "vtxFrequencyChannel": {
         "message": "Voer frequentie rechtstreeks in",
@@ -4230,6 +4294,10 @@
         "message": "Frequentie waar naar toe wordt geschakeld als de Pit Modus is ingeschakeld.",
         "description": "Help text for the pit mode field of the VTX tab"
     },
+    "vtxLowPowerDisarmHelp": {
+        "message": "Wanneer dit is ingeschakeld gebruikt de VTX het laagst mogelijke beschikbare vermogen wanneer de quad is gedisarmed (behalve als er een failsafe is opgetreden).",
+        "description": "Help text for the low power disarm field of the VTX tab"
+    },
     "vtxLowPowerDisarmOption_0": {
         "message": "Uit",
         "description": "One of the options for the Low Power Disarm mode of the VTX"
@@ -4249,6 +4317,10 @@
     "vtxTablePowerLevelsHelp": {
         "message": "Dit definieert het aantal stroomniveaus die uw VTX ondersteund",
         "description": "Help for the number of power levels field of the VTX Table element in the VTX tab"
+    },
+    "vtxTablePowerLevelsTableHelp": {
+        "message": "Deze tabel representeert de verschillende vermogenswaarden die kunnen worden gebruikt door uw VTX. De waarden zijn tweeledig: <br><b>- $t(vtxTablePowerLevelsValue.message):</b> elk stroomniveau heeft een door de hardware-fabrikant gedefinieerde waarde nodig. Vraag uw fabrikant naar de juiste waardes of raadpleeg de Betaflight wiki. Hierop staan enkele voorbeelden.<br><b>- $t(vtxTablePowerLevelsLabel.message):</b> je kunt hier een gewenste label zetten voor elk stroomniveau. Dit is vrij in te vullen. U kunt bijvoorbeeld gebruik maken van getallen zoals (25, 200, 600, 1.), of letters (OFF, MIN, MAX) of een mix ervan. <br><br>U dient hier <b>alleen</b> de stroomniveaus in te vullen die legaal zijn in uw land.",
+        "description": "Help for the table of power levels (value-label) that appears in the VTX tab"
     },
     "vtxTablePowerLevelsValue": {
         "message": "Waarde",
@@ -4280,6 +4352,10 @@
     },
     "vtxSavedFileOk": {
         "message": "VTX configuratiebestand <span class=\"message-positive\">opgeslagen</span>",
+        "description": "Message in the GUI log when the VTX Config file is saved"
+    },
+    "vtxSavedFileKo": {
+        "message": "<span class=\"message-negative\">Fout</span> tijdens het opslaan van het VTX configuratiebestand",
         "description": "Message in the GUI log when the VTX Config file is saved"
     },
     "vtxLoadFileOk": {
