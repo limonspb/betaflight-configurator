@@ -1655,6 +1655,9 @@
     "pidTuningDerivative": {
         "message": "Pochodna"
     },
+    "pidTuningDMax": {
+        "message": "D Max"
+    },
     "pidTuningDerivativeHelp": {
         "message": "Kontroluje z jaką siłą odbywać ma się korekta ruch drona przy KAŻDEJ zmianie kierunku. Kiedy drążki są poruszane, D-term tłumi polecenie. W przypadku wpływu zewnętrznego ( dryfowanie  lub porywy wiatru) D-term tłumi wpływ. <br> <br> Wyższe wzmocnienie zapewnia większe tłumienie i zmniejsza nadmiar P-term i FF. <br> D-term jest BARDZO wrażliwy na wibracje wysokiej częstotliwości które zakłócają  pracę żyroskopu  (zakłócenia zwiększają się od 10 do 100x). <br> <br> Wibracje o wysokiej częstotliwości mogą powodować grzanie się silników co może doprowadzić do ich zniszczenia, jeśli wzmocnienie D jest zbyt wysokie lub wibracje żyroskopowe  nie są dobrze filtrowane (patrz w zakładce Filtr). <br> <br> D-term jest podobny do amortyzatora, ale ma negatywną właściwość wzmacniania szumu żyroskopowego wysokiej częstotliwości.",
         "description": "Derivative Term helpicon message on PID table titlebar"
@@ -5479,14 +5482,35 @@
     "darkTheme": {
         "message": "Włącz ciemny motyw"
     },
+    "pidTuningRatesType": {
+        "message": "Profil szybkości(rates)"
+    },
     "pidTuningRatesTypeTip": {
         "message": "Zmiana typu szybkości zmieni krzywą szybkości i sposób jej ustawienia"
+    },
+    "pidTuningRcRateRaceflight": {
+        "message": "Profil szybkości"
+    },
+    "pidTuningRcExpoRaceflight": {
+        "message": "Expo"
+    },
+    "pidTuningRateRaceflight": {
+        "message": "Acro+"
     },
     "pidTuningRcExpoKISS": {
         "message": "Krzywa RC"
     },
+    "pidTuningRateQuickRates": {
+        "message": "Max Rate"
+    },
     "pidTuningRcRateActual": {
         "message": "Czułość środkowa"
+    },
+    "dialogRatesTypeTitle": {
+        "message": "Zmiana profilu szybkości(rates)"
+    },
+    "dialogRatesTypeNote": {
+        "message": "<span class=\"message-negative\"><b>OSTRZEŻENIE: Zmieniasz profil szybkości(rates).</b></span> Jeśli zmienisz profil szybkości, twoje aktualne profile zostaną zastąpione domyślną charakterystyką."
     },
     "dialogRatesTypeConfirm": {
         "message": "Zmień"
@@ -5505,6 +5529,10 @@
     },
     "gpsSbasJapaneseMSAS": {
         "message": "Japoński MSAS(wspiera DGPS - różnicowy sygnał gps)",
+        "description": "One of the options selectable for the GPS SBAS system"
+    },
+    "gpsSbasIndianGAGAN": {
+        "message": "Indyjski GAGAN (rozszerzona nawigacja wspomagana GPS-em)",
         "description": "One of the options selectable for the GPS SBAS system"
     },
     "gpsSbasNone": {
