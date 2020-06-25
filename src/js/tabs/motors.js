@@ -77,7 +77,7 @@ TABS.motors.initialize = function (callback) {
     }
 
     function load_html() {
-        $('#content').load("./tabs/motors.html", process_html);
+        $('#content').load("./tabs/motors.html", process_html);        
     }
 
     // Get information from Betaflight
@@ -222,6 +222,13 @@ TABS.motors.initialize = function (callback) {
         }
 
         $('.mixerPreview img').attr('src', './resources/motor_order/' + mixerList[mixer - 1].image + reverse + '.svg');
+
+        if (mixerList[mixer - 1].name == "Quad X"){
+            $('#motorRemapDialogOpen').show();
+        }
+        else{
+            $('#motorRemapDialogOpen').hide();
+        }
     }
 
     function process_html() {
@@ -726,7 +733,36 @@ TABS.motors.initialize = function (callback) {
         // enable Status and Motor data pulling
         GUI.interval_add('motor_and_status_pull', get_status, 50, true);
 
-        GUI.content_ready(callback);
+        setup_motor_remap_dialog(content_ready);
+
+        function content_ready()
+        {
+            GUI.content_ready(callback);
+        }
+    }
+
+    function setup_motor_remap_dialog(callback)
+    {
+        $('#dialogMotorRemap-closebtn').click(function() {
+            $('#motorsEnableTestMode').prop('checked', false);
+            $('#motorsEnableTestMode').change();
+            $('#dialogMotorRemap')[0].close();
+            motorRemapComponent.close();
+        });
+
+        $('#motorRemapDialogOpen').click(function() {
+            function get_motor_remap() {
+                console.log(MOTOR_REMAP);
+            }
+
+            MSP.send_message(MSPCodes.MSP_MOTOR_REMAP, false, false, get_motor_remap);
+
+            $('#motorsEnableTestMode').prop('checked', false);
+            $('#motorsEnableTestMode').change();
+            $('#dialogMotorRemap')[0].showModal();
+        });
+
+        var motorRemapComponent = new MotorRemapComponent($('#dialogMotorRemapContent'), callback);
     }
 };
 

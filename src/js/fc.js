@@ -27,6 +27,7 @@ var SERVO_RULES;
 var SERIAL_CONFIG;
 var SENSOR_DATA;
 var MOTOR_DATA;
+var MOTOR_REMAP;
 var MOTOR_TELEMETRY_DATA;
 var SERVO_DATA;
 var GPS_DATA;
@@ -218,6 +219,7 @@ var FC = {
 
         MOTOR_DATA =                    new Array(8);
         SERVO_DATA =                    new Array(8);
+        MOTOR_REMAP = [];
 
         MOTOR_TELEMETRY_DATA = {
             rpm:                        [0, 0, 0, 0, 0, 0, 0, 0],
