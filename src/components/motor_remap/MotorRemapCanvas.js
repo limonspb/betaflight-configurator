@@ -57,7 +57,7 @@ class MotorRemapCanvas {
     onMouseClick() {
         var motorIndex = this.getMouseHoverMotorIndex();
 
-        if (this.motorClickCallback && motorIndex != -1) {
+        if (this.motorClickCallback && motorIndex != -1 && !this.readyMotors.includes(motorIndex)) {
             this.motorClickCallback(motorIndex);
         }
     }
