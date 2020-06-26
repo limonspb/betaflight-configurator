@@ -543,7 +543,7 @@ TABS.motors.initialize = function (callback) {
 
             $('div.sliders input').trigger('input');
 
-            mspHelper.setArmingEnabled(enabled, enabled);
+            //mspHelper.setArmingEnabled(enabled, enabled); !!!!!!!!!
         }).change();
 
         var buffering_set_motor = [],
@@ -743,12 +743,24 @@ TABS.motors.initialize = function (callback) {
 
     function setup_motor_remap_dialog(callback)
     {
-        $('#dialogMotorRemap-closebtn').click(function() {
+        function closeDialog()
+        {
             $('#motorsEnableTestMode').prop('checked', false);
+            mspHelper.setArmingEnabled(false, false);
             $('#motorsEnableTestMode').change();
             $('#dialogMotorRemap')[0].close();
             motorRemapComponent.close();
-        });
+            $(document).off("keydown", onDocumentKeyPress);
+        }
+
+        function onDocumentKeyPress(event)
+        {
+            if ( event.which == 27 ) {
+                closeDialog();
+            }
+        }
+
+        $('#dialogMotorRemap-closebtn').click(closeDialog);
 
         $('#motorRemapDialogOpen').click(function() {
             function get_motor_remap() {
@@ -759,10 +771,11 @@ TABS.motors.initialize = function (callback) {
 
             $('#motorsEnableTestMode').prop('checked', false);
             $('#motorsEnableTestMode').change();
+            $(document).on("keydown", onDocumentKeyPress);
             $('#dialogMotorRemap')[0].showModal();
         });
 
-        var motorRemapComponent = new MotorRemapComponent($('#dialogMotorRemapContent'), callback);
+        var motorRemapComponent = new MotorRemapComponent($('#dialogMotorRemapContent'), callback, mixerList[MIXER_CONFIG.mixer - 1].name, 1000, 1200);
     }
 };
 

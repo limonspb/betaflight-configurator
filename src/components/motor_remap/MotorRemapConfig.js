@@ -6,7 +6,10 @@ function MotorRemapConfig(screenSize){
     this.PropEdgeLineWidth = 3;
     this.MotorNumberTextFont = screenSize * 0.1 + "px 'Open Sans', 'Segoe UI', Tahoma, sans-serif";
     this.MotorNumberTextColor = 'rgb(0, 0, 0)';
-    this.ArrowColor = 'rgb(255,0,0)';
+    this.MotorMouseHoverColor = 'rgba(255, 187, 0, 0.4)';
+    this.MotorReadyColor = 'rgba(0,128,0,0.4)';
+
+    this.ArrowColor = 'rgb(182,67,67)';
     this.DirectionArrowPoints = [
         {x: -0.02 * screenSize, y:  0.07 * screenSize},
         {x: -0.02 * screenSize, y: -0.03 * screenSize},
