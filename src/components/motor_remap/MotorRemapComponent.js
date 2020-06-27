@@ -13,6 +13,8 @@ class MotorRemapComponent
         this.currentJerkingTimeout = -1;
         this.currentJerkingMotor = -1;
 
+        this.currentSpinningMotor = -1;
+
         this.contentDiv.load("./components/motor_remap/body.html", ()=>{this.setupdialog();});
 
         this.ready = false;
@@ -20,11 +22,8 @@ class MotorRemapComponent
 
     setupdialog() {
         i18n.localizePage();
-        $('#dialogMotorRemapMain').hide();
-        $('#dialogMotorRemapWarning').show();
-        $('#dialogMotorRemapAgreeButton').hide();
 
-        $('#motorsEnableTestMode-dialogMotorRemap').prop('checked', false);
+        this.resetGui();
 
         $('#motorsEnableTestMode-dialogMotorRemap').change(function () {
             var enabled = $(this).is(':checked');
@@ -39,6 +38,9 @@ class MotorRemapComponent
 
         $('#dialogMotorRemapAgreeButton').click(()=>{this.agreeButtonClicked()});
 
+        $("#dialogMotorRemapStartOver").click(()=>{this.startOver()});
+        $("#dialogMotorRemapSave").click(()=>{this.save()});
+
         //$('#dialogMotorRemapAgreeButton').click();//TODO: REMOVE AFTER TESTING
         this.onLoadedCallback();
     }
@@ -49,44 +51,96 @@ class MotorRemapComponent
 
     close() {
         this.stopAnyMotorJerking();
+        this.stopMotor();
+        this.stopUserInteraction();
+        this.resetGui();
+    }
 
-        if (this.ready) {
-            function save_to_eeprom() {
-                MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, reboot);
-            }
+    resetGui() {
+        $('#dialogMotorRemapMainContent').hide();
+        $('#dialogMotorRemapWarning').show();
+        $('#dialogMotorRemapAgreeButton').hide();
 
-            function reboot() {
-                GUI.log(i18n.getMessage('configurationEepromSaved'));
+        $('#motorsEnableTestMode-dialogMotorRemap').prop('checked', false);
+        $('#motorsEnableTestMode-dialogMotorRemap').change();
+        this.showSaveStartOverButtons(false);
+    }
 
-                GUI.tab_switch_cleanup(function() {
-                    MSP.send_message(MSPCodes.MSP_SET_REBOOT, false, false);
-                    reinitialiseConnection(self);
-                });
-            }
+    save() {
+        function save_to_eeprom() {
+            MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, reboot);
+        }
 
-            var buffer = [];
+        function reboot() {
+            GUI.log(i18n.getMessage('configurationEepromSaved'));
 
-            buffer.push8(4);
-            buffer.push8(7);
-            buffer.push8(6);
-            buffer.push8(5);
-            buffer.push8(4);
+            GUI.tab_switch_cleanup(function() {
+                MSP.send_message(MSPCodes.MSP_SET_REBOOT, false, false);
+                reinitialiseConnection(self);
+            });
+        }
 
-            //MSP.send_message(MSPCodes.MSP_SET_MOTOR_REMAP, buffer);
+        var buffer = [];
 
-            save_to_eeprom();
+        buffer.push8(this.motorRemapCanvas.readyMotors.length);
+
+        for (let i = 0; i < this.motorRemapCanvas.readyMotors.length; i++)
+        {
+            buffer.push8(MOTOR_REMAP[this.motorRemapCanvas.readyMotors.indexOf(i)]);
+        }
+
+        MSP.send_message(MSPCodes.MSP_SET_MOTOR_REMAP, buffer);
+
+        save_to_eeprom();
+    }
+
+    startOver() {
+        this.showSaveStartOverButtons(false);
+        this.startUserInteraction();
+    }
+
+    showSaveStartOverButtons(show)
+    {
+        if (show) {
+            $("#dialogMotorRemapStartOver").show();
+            $("#dialogMotorRemapSave").show();
+        } else {
+            $("#dialogMotorRemapStartOver").hide();
+            $("#dialogMotorRemapSave").hide();
         }
     }
 
     agreeButtonClicked() {
         $('#motorRemapActionHint').text(i18n.getMessage("motorRemapDialogSelectSpinningMotor"));
         $('#dialogMotorRemapWarning').hide();
-        $('#dialogMotorRemapMain').show();
+        $('#dialogMotorRemapMainContent').show();
         this.startUserInteraction();
     }
 
+    stopUserInteraction()
+    {
+        if (this.motorRemapCanvas) {
+            this.motorRemapCanvas.pause();
+        }
+    }
+
     startUserInteraction() {
-        this.motorRemapCanvas = new MotorRemapCanvas($('#motorRemapCanvas'), this.droneConfiguration, (motorIndex)=>{this.onMotorClick(motorIndex);});
+        if (this.motorRemapCanvas) {
+            this.motorRemapCanvas.startOver();
+        } else {
+            this.motorRemapCanvas = new MotorRemapCanvas($('#motorRemapCanvas'),
+            this.droneConfiguration,
+            (motorIndex)=>{this.onMotorClick(motorIndex);},
+            (motorIndex)=>{
+                if (-1 == motorIndex)
+                {
+                    this.spinMotor(motorIndex);
+                } else {
+                    this.spinMotor(MOTOR_REMAP[this.motorRemapCanvas.readyMotors.indexOf(motorIndex)]);
+                }
+            },
+            );
+        }
 
         //this.spinMotor(1);
         this.startMotorJerking(0);
@@ -122,6 +176,7 @@ class MotorRemapComponent
 
 
     spinMotor(motorIndex) {
+        this.currentSpinningMotor = motorIndex;
         var buffer = [];
 
         for (let  i = 0; i < this.config[this.droneConfiguration].Motors.length; i++)
@@ -133,10 +188,13 @@ class MotorRemapComponent
             }
         }
 
-        //MOTOR_CONFIG.motor_count
-        console.log(buffer);
         MSP.send_message(MSPCodes.MSP_SET_MOTOR, buffer);
+    }
 
+    stopMotor() {
+        if (-1 != this.currentSpinningMotor) {
+            this.spinMotor(-1);
+        }
     }
 
     onMotorClick(motorIndex) {
@@ -149,40 +207,9 @@ class MotorRemapComponent
         } else {
             this.stopAnyMotorJerking();
             $('#motorRemapActionHint').text(i18n.getMessage("motorRemapDialogRemapIsDone"));
+            this.motorRemapCanvas.remappingReady = true;
             this.ready = true;
+            this.showSaveStartOverButtons(true);
         }
     }
 }
-
-
-
-
-        /*
-        this.apply = function()
-        {
-            function save_to_eeprom() {
-                MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, reboot);
-            }
-
-            function reboot() {
-                GUI.log(i18n.getMessage('configurationEepromSaved'));
-
-                GUI.tab_switch_cleanup(function() {
-                    MSP.send_message(MSPCodes.MSP_SET_REBOOT, false, false);
-                    reinitialiseConnection(self);
-                });
-            }
-
-            var buffer = [];
-
-            buffer.push8(4);
-            buffer.push8(7);
-            buffer.push8(6);
-            buffer.push8(5);
-            buffer.push8(4);
-
-            MSP.send_message(MSPCodes.MSP_SET_MOTOR_REMAP, buffer);
-
-            save_to_eeprom();
-        }
-        */

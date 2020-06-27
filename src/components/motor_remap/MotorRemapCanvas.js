@@ -1,13 +1,13 @@
 'use strict';
 
 class MotorRemapCanvas {
-    constructor(canvas, droneConfiguration, motorClickCallback) {
+    constructor(canvas, droneConfiguration, motorClickCallback, spinMotorCallback) {
+        this.spinMotorCallback = spinMotorCallback;
         this.canvas = canvas;
         this.motorClickCallback = motorClickCallback;
         this.width = this.canvas.width();
         this.height = this.canvas.height();
         this.screenSize = Math.min(this.width, this.height);
-        this.readyMotors = []; //motors that already being selected
 
         this.config = new MotorRemapConfig(this.screenSize);
 
@@ -28,12 +28,24 @@ class MotorRemapCanvas {
 
         this.canvas.mousemove((event)=>{this.onMouseMove(event);});
         this.canvas.mouseleave(()=>{this.onMouseLeave(event);});
+        this.canvas.mousedown(()=>{this.onMouseDown(event);});
+        this.canvas.mouseup(()=>{this.onMouseUp(event);});
         this.canvas.click(()=>{this.onMouseClick();});
 
+        this.startOver();
+    }
+
+    pause() {
+        this.keepDrawing = false;
+    }
+
+    startOver()
+    {
+        this.readyMotors = []; //motors that already being selected
+        this.remappingReady = false;
+        this.motorIndexToSpinOnMouseDown = -1;
         this.keepDrawing = true;
-
         this.mouse = {x : 0, y: 0};
-
         window.requestAnimationFrame(()=>{this.drawOnce()});
     }
 
@@ -54,6 +66,30 @@ class MotorRemapCanvas {
         }
     }
 
+    onMouseDown()
+    {
+        if (this.remappingReady)
+        {
+            var mouseHoverMotorIndex = this.getMouseHoverMotorIndex();
+            this.motorIndexToSpinOnMouseDown = mouseHoverMotorIndex;
+            if (this.spinMotorCallback) {
+                this.spinMotorCallback(this.motorIndexToSpinOnMouseDown);
+            }
+        }
+    }
+
+    onMouseUp()
+    {
+        if (-1 != this.motorIndexToSpinOnMouseDown) {
+
+            this.motorIndexToSpinOnMouseDown = -1;
+
+            if (this.spinMotorCallback) {
+                this.spinMotorCallback(this.motorIndexToSpinOnMouseDown);
+            }
+        }
+    }
+
     onMouseClick() {
         var motorIndex = this.getMouseHoverMotorIndex();
 
@@ -71,6 +107,15 @@ class MotorRemapCanvas {
     onMouseLeave() {
         this.mouse.x = Number.MIN_SAFE_INTEGER;
         this.mouse.y = Number.MIN_SAFE_INTEGER;
+
+        if (-1 != this.motorIndexToSpinOnMouseDown) {
+
+            this.motorIndexToSpinOnMouseDown = -1;
+
+            if (this.spinMotorCallback) {
+                this.spinMotorCallback(this.motorIndexToSpinOnMouseDown);
+            }
+        }
     }
 
     markMotors() {
@@ -78,22 +123,46 @@ class MotorRemapCanvas {
         var droneConfiguration = this.droneConfiguration;
         var config = this.config;
         var motors = config[droneConfiguration].Motors;
-        for (let i = 0; i < this.readyMotors.length; i++) {
-            var motorIndex = this.readyMotors[i];
-            ctx.beginPath();
-            ctx.arc(motors[motorIndex].x, motors[motorIndex].y, config[droneConfiguration].PropRadius, 0, 2 * Math.PI);
-            ctx.closePath();
-            ctx.fillStyle = config.MotorReadyColor;
-            ctx.fill();
-        }
 
-        var mouseHoverMotorIndex = this.getMouseHoverMotorIndex();
-        if (mouseHoverMotorIndex != -1 && !this.readyMotors.includes(mouseHoverMotorIndex)) {
-            ctx.beginPath();
-            ctx.arc(motors[mouseHoverMotorIndex].x, motors[mouseHoverMotorIndex].y, config[droneConfiguration].PropRadius, 0, 2 * Math.PI);
-            ctx.closePath();
-            ctx.fillStyle = config.MotorMouseHoverColor;
-            ctx.fill();
+        if (-1 == this.motorIndexToSpinOnMouseDown)
+        {
+            for (let i = 0; i < this.readyMotors.length; i++) {
+                var motorIndex = this.readyMotors[i];
+                ctx.beginPath();
+                ctx.arc(motors[motorIndex].x, motors[motorIndex].y, config[droneConfiguration].PropRadius, 0, 2 * Math.PI);
+                ctx.closePath();
+                ctx.fillStyle = config.MotorReadyColor;
+                ctx.fill();
+            }
+
+            var mouseHoverMotorIndex = this.getMouseHoverMotorIndex();
+            if (mouseHoverMotorIndex != -1 && !this.readyMotors.includes(mouseHoverMotorIndex)) {
+                ctx.beginPath();
+                ctx.arc(motors[mouseHoverMotorIndex].x, motors[mouseHoverMotorIndex].y, config[droneConfiguration].PropRadius, 0, 2 * Math.PI);
+                ctx.closePath();
+                ctx.fillStyle = config.MotorMouseHoverColor;
+                ctx.fill();
+            }
+        } else {
+            var mouseHoverMotorIndex = this.getMouseHoverMotorIndex();
+            var spinningMotor = this.motorIndexToSpinOnMouseDown;
+
+            var motors = config[droneConfiguration].Motors;
+
+            for (let i = 0; i < motors.length; i++) {
+                ctx.fillStyle = config.MotorReadyColor;
+                if (i == spinningMotor)
+                {
+                    ctx.fillStyle = config.MotorSpinningColor;
+                } else if (i == mouseHoverMotorIndex) {
+                    ctx.fillStyle = config.MotorMouseHoverColor;
+                }
+
+                ctx.beginPath();
+                ctx.arc(motors[i].x, motors[i].y, config[droneConfiguration].PropRadius, 0, 2 * Math.PI);
+                ctx.closePath();
+                ctx.fill();
+            }
         }
     }
 
@@ -130,11 +199,13 @@ class MotorRemapCanvas {
             ctx.beginPath();
             ctx.arc(motors[i].x, motors[i].y, config[droneConfiguration].PropRadius, 0, 2 * Math.PI);
             ctx.stroke();
+
             ctx.font = config.MotorNumberTextFont;
             ctx.fillStyle = config.MotorNumberTextColor;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillText(i + 1, motors[i].x, motors[i].y);
+
         }
     }
 
@@ -166,10 +237,32 @@ class MotorRemapCanvas {
 
         switch(this.droneConfiguration) {
             case "Quad X":
+            case "Quad +":
                 ctx.moveTo(motors[0].x, motors[0].y);
                 ctx.lineTo(motors[3].x, motors[3].y);
                 ctx.moveTo(motors[1].x, motors[1].y);
                 ctx.lineTo(motors[2].x, motors[2].y);
+                break;
+            case "Quad X 1234":
+                ctx.moveTo(motors[0].x, motors[0].y);
+                ctx.lineTo(motors[2].x, motors[2].y);
+                ctx.moveTo(motors[3].x, motors[3].y);
+                ctx.lineTo(motors[1].x, motors[1].y);
+                break;
+            case "Tricopter":
+                ctx.moveTo(motors[1].x, motors[1].y);
+                ctx.lineTo(motors[2].x, motors[2].y);
+                ctx.moveTo(motors[0].x, motors[0].y);
+                ctx.lineTo(motors[0].x, motors[2].y);
+                break;
+            case "Hex +":
+            case "Hex X":
+                ctx.moveTo(motors[0].x, motors[0].y);
+                ctx.lineTo(motors[3].x, motors[3].y);
+                ctx.moveTo(motors[1].x, motors[1].y);
+                ctx.lineTo(motors[2].x, motors[2].y);
+                ctx.moveTo(motors[4].x, motors[4].y);
+                ctx.lineTo(motors[5].x, motors[5].y);
                 break;
         }
         ctx.stroke();

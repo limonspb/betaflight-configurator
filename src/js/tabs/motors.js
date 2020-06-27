@@ -57,7 +57,11 @@ TABS.motors.initialize = function (callback) {
     }
 
     function load_esc_protocol() {
-        MSP.send_message(MSPCodes.MSP_ADVANCED_CONFIG, false, false, load_motor_data);
+        MSP.send_message(MSPCodes.MSP_ADVANCED_CONFIG, false, false, load_motor_remap);
+    }
+
+    function load_motor_remap() {
+        MSP.send_message(MSPCodes.MSP_MOTOR_REMAP, false, false, load_motor_data);
     }
 
     function load_motor_data() {
@@ -223,10 +227,11 @@ TABS.motors.initialize = function (callback) {
 
         $('.mixerPreview img').attr('src', './resources/motor_order/' + mixerList[mixer - 1].image + reverse + '.svg');
 
-        if (mixerList[mixer - 1].name == "Quad X"){
+        var motorMapConfig = new MotorRemapConfig(100);
+
+        if (mixerList[mixer - 1].name in motorMapConfig && MOTOR_REMAP.length > 0) {
             $('#motorRemapDialogOpen').show();
-        }
-        else{
+        } else {
             $('#motorRemapDialogOpen').hide();
         }
     }
@@ -543,7 +548,7 @@ TABS.motors.initialize = function (callback) {
 
             $('div.sliders input').trigger('input');
 
-            //mspHelper.setArmingEnabled(enabled, enabled); !!!!!!!!!
+            mspHelper.setArmingEnabled(enabled, enabled);
         }).change();
 
         var buffering_set_motor = [],
@@ -733,7 +738,12 @@ TABS.motors.initialize = function (callback) {
         // enable Status and Motor data pulling
         GUI.interval_add('motor_and_status_pull', get_status, 50, true);
 
-        setup_motor_remap_dialog(content_ready);
+        var zeroThrottleValue = rangeMin;
+        if (self.feature3DEnabled) {
+            zeroThrottleValue = neutral3d;
+        }
+
+        setup_motor_remap_dialog(content_ready, zeroThrottleValue);
 
         function content_ready()
         {
@@ -741,7 +751,7 @@ TABS.motors.initialize = function (callback) {
         }
     }
 
-    function setup_motor_remap_dialog(callback)
+    function setup_motor_remap_dialog(callback, zeroThrottleValue)
     {
         function closeDialog()
         {
@@ -763,19 +773,14 @@ TABS.motors.initialize = function (callback) {
         $('#dialogMotorRemap-closebtn').click(closeDialog);
 
         $('#motorRemapDialogOpen').click(function() {
-            function get_motor_remap() {
-                console.log(MOTOR_REMAP);
-            }
-
-            MSP.send_message(MSPCodes.MSP_MOTOR_REMAP, false, false, get_motor_remap);
-
             $('#motorsEnableTestMode').prop('checked', false);
             $('#motorsEnableTestMode').change();
             $(document).on("keydown", onDocumentKeyPress);
             $('#dialogMotorRemap')[0].showModal();
         });
 
-        var motorRemapComponent = new MotorRemapComponent($('#dialogMotorRemapContent'), callback, mixerList[MIXER_CONFIG.mixer - 1].name, 1000, 1200);
+        var motorRemapComponent = new MotorRemapComponent($('#dialogMotorRemapContent'),
+            callback, mixerList[MIXER_CONFIG.mixer - 1].name, zeroThrottleValue, zeroThrottleValue + 150);
     }
 };
 

@@ -1,18 +1,29 @@
-<div class="component" style="display:flex; height:100%; flex-flow:column;">
-    <h3 i18n="motorsRemapDialogTitle" style="margin-bottom: 20px"></h3>
-    <div class="componentContent" id="dialogMotorRemapMain" style="display:flex; height:100%; flex-flow:column;">
-        <canvas id="motorRemapCanvas" style="width:100%; height:100%; flex-grow: 1;">
+<div class="motorRemapComponent">
+    <h3 i18n="motorsRemapDialogTitle" class="motorRemapComponentHeader"></h3>
+    <div class="componentContent" id="dialogMotorRemapMainContent">
+        <canvas id="motorRemapCanvas"></canvas>
         </canvas>
-        <h4 id="motorRemapActionHint"></h3>
+        <div id="motorRemapActionPanel">
+            <h4 id="motorRemapActionHint"></h4>
+            <a href="#" id="dialogMotorRemapSave" class="regular-button right" i18n="dialogMotorRemapSave"></a>
+            <a href="#" id="dialogMotorRemapStartOver" class="regular-button right" i18n="dialogMotorRemapStartOver"></a>
+        </div>
     </div>
     <div class="componentContent" id="dialogMotorRemapWarning">
         <div class="notice">
-            <p i18n="motorsNotice"></p>
-            <input id="motorsEnableTestMode-dialogMotorRemap" type="checkbox" class="togglesmall"/>
-            <span class="motorsEnableTestMode" i18n="motorsEnableControl"></span>
+            <p class="motorsRemapDialogRiskNoticeText" i18n="motorsRemapDialogRiskNotice"></p>
+            <div class="motorsRemapToggleParentContainer">
+                <div class="motorsRemapToggleNarrow">
+                    <input id="motorsEnableTestMode-dialogMotorRemap" type="checkbox" class="toggle"/>
+                </div>
+                <div class="motorsRemapToggleWide">
+                    <span class="motorsEnableTestMode motorsRemapDialogRiskNoticeText" i18n="motorsRemapDialogUnderstandRisks"></span>
+                </div>
+            </div>
+            <div class="motorsRemapDialogRExplanationText" i18n="motorsRemapDialogRExplanation"></div>
         </div>
         <div class="buttons">
-            <a href="#" id="dialogMotorRemapAgreeButton"  class="regular-button" i18n="motorRemapDialogAgree"></a>
+            <a href="#" id="dialogMotorRemapAgreeButton" class="regular-button" i18n="motorRemapDialogAgree"></a>
         </div>
     </div>
 </div>
