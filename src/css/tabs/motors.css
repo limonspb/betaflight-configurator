@@ -18,6 +18,10 @@
     float: left;
 }
 
+.tab-motors #dialogMotorRemap-closebtn {
+    margin-right: 0px;
+}
+
 .tab-motors .mixerPreview img {
     width: 120px;
     height: 120px;

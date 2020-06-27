@@ -8,7 +8,7 @@
             <div class="wrapper modelAndGraph">
                 <div class="mixerPreview">
                     <img src="./resources/motor_order/custom.svg" />
-                </div>
+                </div>                
                 <svg id="graph">
                  <g class="grid x" transform="translate(40, 120)"></g>
                  <g class="grid y" transform="translate(40, 10)"></g>
@@ -98,9 +98,9 @@
                     </div>
                   </div>
                 </div>
-            </div>
-
+            </div>            
             <div class="power_info">
+                <a href="#" id="motorRemapDialogOpen" class="regular-button" i18n="motorRemapDialogOpen"></a>
                 <span i18n="motorsVoltage" class="power_text"></span><span class="motors-bat-voltage power_value"></span>
                 <span i18n="motorsADrawing" class="power_text"></span><span class="motors-bat-mah-drawing power_value"></span>
                 <span i18n="motorsmAhDrawn" class="power_text"></span><span class="motors-bat-mah-drawn power_value"></span>
@@ -108,7 +108,8 @@
 
           </div>
         </div>
-        <div class="gui_box motorblock">
+
+        <div class="gui_box motorblock">          
             <div class="spacer">
                 <div class="left motors">
                     <div class="title2" i18n="motorsText"></div>
@@ -189,4 +190,12 @@
             </div>
         </div>
     </div>
+
+    <dialog id="dialogMotorRemap" style="width: 400px; height:440px;">
+      <div id="dialogMotorRemapContent" class="component_wrapper" style="height: calc(100% - 35px);">
+      </div>
+      <div class="buttons right bottom">
+        <a href="#" id="dialogMotorRemap-closebtn"  class="regular-button" i18n="motorRemapDialogClose"></a>
+      </div>
+    </dialog>
 </div>
