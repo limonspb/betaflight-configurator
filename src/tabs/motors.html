@@ -99,8 +99,8 @@
                   </div>
                 </div>
             </div>
-
             <div class="power_info">
+                <a href="#" id="motorRemapDialogOpen" class="regular-button" i18n="motorRemapDialogOpen"></a>
                 <span i18n="motorsVoltage" class="power_text"></span><span class="motors-bat-voltage power_value"></span>
                 <span i18n="motorsADrawing" class="power_text"></span><span class="motors-bat-mah-drawing power_value"></span>
                 <span i18n="motorsmAhDrawn" class="power_text"></span><span class="motors-bat-mah-drawn power_value"></span>
@@ -189,4 +189,16 @@
             </div>
         </div>
     </div>
+
+    <!--<dialog id="dialogMotorRemap" style="width: 400px; height:440px;">-->
+    <dialog id="dialogMotorRemap" style="width: 400px; height:440px;">
+      <div style=" display: flex; flex-flow: column; width: 100%; height: 100%;">
+        <div id="dialogMotorRemapContent" class="component_wrapper" style="flex-grow: 1;">
+          display:flex; flex-flow:column;
+        </div>
+        <div class="">
+          <a href="#" id="dialogMotorRemap-closebtn"  class="regular-button right" i18n="motorRemapDialogClose"></a>
+        </div>
+      </div>
+    </dialog>
 </div>
