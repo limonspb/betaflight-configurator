@@ -782,7 +782,7 @@ TABS.motors.initialize = function (callback) {
         });
 
         var motorRemapComponent = new MotorRemapComponent($('#dialogMotorRemapContent'),
-            callback, mixerList[MIXER_CONFIG.mixer - 1].name, zeroThrottleValue, zeroThrottleValue + 150);
+            callback, mixerList[MIXER_CONFIG.mixer - 1].name, zeroThrottleValue, zeroThrottleValue + 200);
     }
 };
 

@@ -81,13 +81,22 @@ class MotorRemapComponent
         var buffer = [];
         buffer.push8(this.motorRemapCanvas.readyMotors.length);
 
-        for (let i = 0; i < this.motorRemapCanvas.readyMotors.length; i++) {
-            buffer.push8(this._remapMotorIndex(i));
+        for (let i = 0; i < this._newMotorRemap.length; i++) {
+            buffer.push8(this._newMotorRemap[i]);
         }
 
         MSP.send_message(MSPCodes.MSP_SET_MOTOR_REMAP, buffer);
 
         save_to_eeprom();
+    }
+
+    _getNewMotorRemap()
+    {
+        this._newMotorRemap = [];
+
+        for (let i = 0; i < this.motorRemapCanvas.readyMotors.length; i++) {
+            this._newMotorRemap.push(this._remapMotorIndex(i));
+        }
     }
 
     _remapMotorIndex(motorIndex)
@@ -135,7 +144,8 @@ class MotorRemapComponent
                     if (-1 == motorIndex) {
                         this._spinMotor(motorIndex);
                     } else {
-                        this._spinMotor(this._remapMotorIndex(motorIndex));
+                        let indexToSpin = this.motorRemapCanvas.readyMotors.indexOf(motorIndex);
+                        this._spinMotor(indexToSpin);
                     }
             });
         }
@@ -202,6 +212,7 @@ class MotorRemapComponent
         } else {
             this._stopAnyMotorJerking();
             $('#motorRemapActionHint').text(i18n.getMessage("motorRemapDialogRemapIsDone"));
+            this._getNewMotorRemap();
             this.motorRemapCanvas.remappingReady = true;
             this._showSaveStartOverButtons(true);
         }
