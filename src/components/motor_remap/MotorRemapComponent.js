@@ -2,76 +2,74 @@
 
 class MotorRemapComponent
 {
-    constructor(contentDiv, onLoadedCallback, droneConfiguration, motorStopValue, motorSpinValue) {
-        this.contentDiv = contentDiv;
-        this.onLoadedCallback = onLoadedCallback;
-        this.droneConfiguration = droneConfiguration;
-        this.motorStopValue = motorStopValue;
-        this.motorSpinValue = motorSpinValue;
-        this.config = new MotorRemapConfig(100);
+    constructor(contentDiv, onLoadedCallback, droneConfiguration, motorStopValue, motorSpinValue)
+    {
+        this._contentDiv = contentDiv;
+        this._onLoadedCallback = onLoadedCallback;
+        this._droneConfiguration = droneConfiguration;
+        this._motorStopValue = motorStopValue;
+        this._motorSpinValue = motorSpinValue;
+        this._config = new MotorRemapConfig(100);
 
-        this.currentJerkingTimeout = -1;
-        this.currentJerkingMotor = -1;
+        this._currentJerkingTimeout = -1;
+        this._currentJerkingMotor = -1;
 
-        this.currentSpinningMotor = -1;
+        this._currentSpinningMotor = -1;
 
-        this.contentDiv.load("./components/motor_remap/body.html", ()=>{this.setupdialog();});
-
-        this.ready = false;
+        this._contentDiv.load("./components/motor_remap/body.html", ()=>{ this._setupdialog(); });
     }
 
-    setupdialog() {
+    _setupdialog()
+    {
         i18n.localizePage();
 
-        this.resetGui();
+        this._resetGui();
 
-        $('#motorsEnableTestMode-dialogMotorRemap').change(function () {
+        $('#motorsEnableTestMode-dialogMotorRemap').change(function ()
+        {
             var enabled = $(this).is(':checked');
 
             if (enabled) {
                 $('#dialogMotorRemapAgreeButton').show();
-            }
-            else{
+            } else {
                 $('#dialogMotorRemapAgreeButton').hide();
             }
         });
 
-        $('#dialogMotorRemapAgreeButton').click(()=>{this.agreeButtonClicked()});
+        $('#dialogMotorRemapAgreeButton').click(()=>{ this._onAgreeButtonClicked(); });
+        $("#motorsRemapDialogStartOver").click(()=>{ this._startOver(); });
+        $("#motorsRemapDialogSave").click(()=>{ this._save(); });
 
-        $("#dialogMotorRemapStartOver").click(()=>{this.startOver()});
-        $("#dialogMotorRemapSave").click(()=>{this.save()});
-
-        //$('#dialogMotorRemapAgreeButton').click();//TODO: REMOVE AFTER TESTING
-        this.onLoadedCallback();
+        this._onLoadedCallback();
     }
 
-    clear() {
-        this.contentDiv.empty();
+    close()
+    {
+        this._stopAnyMotorJerking();
+        this._stopMotor();
+        this._stopUserInteraction();
+        this._resetGui();
     }
 
-    close() {
-        this.stopAnyMotorJerking();
-        this.stopMotor();
-        this.stopUserInteraction();
-        this.resetGui();
-    }
-
-    resetGui() {
+    _resetGui()
+    {
         $('#dialogMotorRemapMainContent').hide();
         $('#dialogMotorRemapWarning').show();
         $('#dialogMotorRemapAgreeButton').hide();
 
         $('#motorsEnableTestMode-dialogMotorRemap').prop('checked', false);
         $('#motorsEnableTestMode-dialogMotorRemap').change();
-        this.showSaveStartOverButtons(false);
+        this._showSaveStartOverButtons(false);
     }
 
-    save() {
-        function save_to_eeprom() {
+    _save() {
+        function save_to_eeprom()
+        {
             MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, reboot);
         }
 
-        function reboot() {
+        function reboot()
+        {
             GUI.log(i18n.getMessage('configurationEepromSaved'));
 
             GUI.tab_switch_cleanup(function() {
@@ -81,12 +79,10 @@ class MotorRemapComponent
         }
 
         var buffer = [];
-
         buffer.push8(this.motorRemapCanvas.readyMotors.length);
 
-        for (let i = 0; i < this.motorRemapCanvas.readyMotors.length; i++)
-        {
-            buffer.push8(MOTOR_REMAP[this.motorRemapCanvas.readyMotors.indexOf(i)]);
+        for (let i = 0; i < this.motorRemapCanvas.readyMotors.length; i++) {
+            buffer.push8(this._remapMotorIndex(i));
         }
 
         MSP.send_message(MSPCodes.MSP_SET_MOTOR_REMAP, buffer);
@@ -94,31 +90,35 @@ class MotorRemapComponent
         save_to_eeprom();
     }
 
-    startOver() {
-        this.showSaveStartOverButtons(false);
+    _remapMotorIndex(motorIndex)
+    {
+        return MOTOR_REMAP[this.motorRemapCanvas.readyMotors.indexOf(motorIndex)];
+    }
+
+    _startOver()
+    {
+        this._showSaveStartOverButtons(false);
         this.startUserInteraction();
     }
 
-    showSaveStartOverButtons(show)
-    {
+    _showSaveStartOverButtons(show) {
         if (show) {
-            $("#dialogMotorRemapStartOver").show();
-            $("#dialogMotorRemapSave").show();
+            $("#motorsRemapDialogStartOver").show();
+            $("#motorsRemapDialogSave").show();
         } else {
-            $("#dialogMotorRemapStartOver").hide();
-            $("#dialogMotorRemapSave").hide();
+            $("#motorsRemapDialogStartOver").hide();
+            $("#motorsRemapDialogSave").hide();
         }
     }
 
-    agreeButtonClicked() {
+    _onAgreeButtonClicked() {
         $('#motorRemapActionHint').text(i18n.getMessage("motorRemapDialogSelectSpinningMotor"));
         $('#dialogMotorRemapWarning').hide();
         $('#dialogMotorRemapMainContent').show();
         this.startUserInteraction();
     }
 
-    stopUserInteraction()
-    {
+    _stopUserInteraction() {
         if (this.motorRemapCanvas) {
             this.motorRemapCanvas.pause();
         }
@@ -129,87 +129,81 @@ class MotorRemapComponent
             this.motorRemapCanvas.startOver();
         } else {
             this.motorRemapCanvas = new MotorRemapCanvas($('#motorRemapCanvas'),
-            this.droneConfiguration,
-            (motorIndex)=>{this.onMotorClick(motorIndex);},
-            (motorIndex)=>{
-                if (-1 == motorIndex)
-                {
-                    this.spinMotor(motorIndex);
-                } else {
-                    this.spinMotor(MOTOR_REMAP[this.motorRemapCanvas.readyMotors.indexOf(motorIndex)]);
-                }
-            },
-            );
+                this._droneConfiguration,
+                (motorIndex)=>{this._onMotorClick(motorIndex);},
+                (motorIndex)=>{
+                    if (-1 == motorIndex) {
+                        this._spinMotor(motorIndex);
+                    } else {
+                        this._spinMotor(this._remapMotorIndex(motorIndex));
+                    }
+            });
         }
 
-        //this.spinMotor(1);
-        this.startMotorJerking(0);
+        this._startMotorJerking(0);
     }
 
-    stopAnyMotorJerking()
-    {
-        if (this.currentJerkingTimeout != -1) {
-            clearTimeout(this.currentJerkingTimeout);
-            this.currentJerkingTimeout = -1;
-            this.spinMotor(-1);
+    _stopAnyMotorJerking() {
+        if (this._currentJerkingTimeout != -1) {
+            clearTimeout(this._currentJerkingTimeout);
+            this._currentJerkingTimeout = -1;
+            this._spinMotor(-1);
         }
-        this.currentJerkingMotor = -1;
+
+        this._currentJerkingMotor = -1;
     }
 
-    startMotorJerking(motorIndex) {
-        this.stopAnyMotorJerking();
-        this.currentJerkingMotor = motorIndex;
-        this.motorStartTimeout(motorIndex);
+    _startMotorJerking(motorIndex) {
+        this._stopAnyMotorJerking();
+        this._currentJerkingMotor = motorIndex;
+        this._motorStartTimeout(motorIndex);
     }
 
-    motorStartTimeout(motorIndex)
-    {
-        this.spinMotor(motorIndex);
-        this.currentJerkingTimeout = setTimeout(()=>{ this.motorStopTimeout(motorIndex); }, 250);
+    _motorStartTimeout(motorIndex) {
+        this._spinMotor(motorIndex);
+        this._currentJerkingTimeout = setTimeout(()=>{ this._motorStopTimeout(motorIndex); }, 250);
     }
 
-    motorStopTimeout(motorIndex)
-    {
-        this.spinMotor(-1);
-        this.currentJerkingTimeout = setTimeout(()=>{ this.motorStartTimeout(motorIndex); }, 500);
+    _motorStopTimeout(motorIndex) {
+        this._spinMotor(-1);
+        this._currentJerkingTimeout = setTimeout(()=>{ this._motorStartTimeout(motorIndex); }, 500);
     }
 
 
-    spinMotor(motorIndex) {
-        this.currentSpinningMotor = motorIndex;
+    _spinMotor(motorIndex) {
+        this._currentSpinningMotor = motorIndex;
         var buffer = [];
 
-        for (let  i = 0; i < this.config[this.droneConfiguration].Motors.length; i++)
-        {
+        for (let  i = 0; i < this._config[this._droneConfiguration].Motors.length; i++) {
             if (i == motorIndex) {
-                buffer.push16(this.motorSpinValue);
+                buffer.push16(this._motorSpinValue);
             } else {
-                buffer.push16(this.motorStopValue);
+                buffer.push16(this._motorStopValue);
             }
         }
 
         MSP.send_message(MSPCodes.MSP_SET_MOTOR, buffer);
     }
 
-    stopMotor() {
-        if (-1 != this.currentSpinningMotor) {
-            this.spinMotor(-1);
+    _stopMotor()
+    {
+        if (-1 != this._currentSpinningMotor) {
+            this._spinMotor(-1);
         }
     }
 
-    onMotorClick(motorIndex) {
+    _onMotorClick(motorIndex) {
         console.log(motorIndex);
         this.motorRemapCanvas.readyMotors.push(motorIndex);
-        this.currentJerkingMotor ++;
+        this._currentJerkingMotor ++;
 
-        if (this.currentJerkingMotor < this.config[this.droneConfiguration].Motors.length) {
-            this.startMotorJerking(this.currentJerkingMotor);
+        if (this._currentJerkingMotor < this._config[this._droneConfiguration].Motors.length) {
+            this._startMotorJerking(this._currentJerkingMotor);
         } else {
-            this.stopAnyMotorJerking();
+            this._stopAnyMotorJerking();
             $('#motorRemapActionHint').text(i18n.getMessage("motorRemapDialogRemapIsDone"));
             this.motorRemapCanvas.remappingReady = true;
-            this.ready = true;
-            this.showSaveStartOverButtons(true);
+            this._showSaveStartOverButtons(true);
         }
     }
 }

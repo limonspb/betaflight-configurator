@@ -81,7 +81,7 @@ TABS.motors.initialize = function (callback) {
     }
 
     function load_html() {
-        $('#content').load("./tabs/motors.html", process_html);        
+        $('#content').load("./tabs/motors.html", process_html);
     }
 
     // Get information from Betaflight
@@ -745,10 +745,11 @@ TABS.motors.initialize = function (callback) {
 
         setup_motor_remap_dialog(content_ready, zeroThrottleValue);
 
-        function content_ready()
-        {
+        function content_ready() {
             GUI.content_ready(callback);
         }
+
+       GUI.content_ready(callback);
     }
 
     function setup_motor_remap_dialog(callback, zeroThrottleValue)
@@ -772,7 +773,8 @@ TABS.motors.initialize = function (callback) {
 
         $('#dialogMotorRemap-closebtn').click(closeDialog);
 
-        $('#motorRemapDialogOpen').click(function() {
+        $('#motorRemapDialogOpen').click(function()
+        {
             $('#motorsEnableTestMode').prop('checked', false);
             $('#motorsEnableTestMode').change();
             $(document).on("keydown", onDocumentKeyPress);

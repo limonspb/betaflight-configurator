@@ -2535,7 +2535,7 @@
         "message": "Click on the spining motor..."
     },
     "motorRemapDialogRemapIsDone": {
-        "message": "Motors are being remapped."
+        "message": "Ready! Check the motors spinning order by clicking on the image."
     },
     "motorsRemapDialogUnderstandRisks": {
         "message": "<strong>I understand the risks</strong>,<br />the propellers are removed."
@@ -2543,13 +2543,13 @@
     "motorsRemapDialogRiskNotice": {
         "message": "<strong>Safety notice</strong><br /><strong class=\"message-negative\">Remove all propellers to prevent injury!</strong><br />The motors will <strong>spin up!</strong>"
     },
-    "motorsRemapDialogRExplanation": {
+    "motorsRemapDialogExplanations": {
         "message": "<strong>Information notice</strong><br />Motors will spin up one by one and you will be able to select which motor is spinning. The battery should be plugged in, correct ESC protocol should be selected. This utility can only re-arrange currently active motors. More complex re-mapping requires the CLI Resource command.  Refer to this <a href=\"https://github.com/betaflight/betaflight/wiki/Betaflight-resource-remapping\" target=\"_blank\" rel=\"noopener noreferrer\">Wiki page</a>."
     },
-    "dialogMotorRemapSave": {
+    "motorsRemapDialogSave": {
         "message": "Save"
     },
-    "dialogMotorRemapStartOver": {
+    "motorsRemapDialogStartOver": {
         "message": "Start over"
     },
 

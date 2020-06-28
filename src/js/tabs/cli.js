@@ -479,7 +479,7 @@ TABS.cli.send = function (line, callback) {
     for (var c_key = 0; c_key < line.length; c_key++) {
         bufView[c_key] = line.charCodeAt(c_key);
     }
-    
+
     serial.send(bufferOut, callback);
 };
 

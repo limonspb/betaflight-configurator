@@ -1,131 +1,128 @@
 'use strict';
 
-class MotorRemapCanvas {
-    constructor(canvas, droneConfiguration, motorClickCallback, spinMotorCallback) {
-        this.spinMotorCallback = spinMotorCallback;
-        this.canvas = canvas;
-        this.motorClickCallback = motorClickCallback;
-        this.width = this.canvas.width();
-        this.height = this.canvas.height();
-        this.screenSize = Math.min(this.width, this.height);
+class MotorRemapCanvas
+{
+    constructor(canvas, droneConfiguration, motorClickCallback, spinMotorCallback)
+    {
+        this._spinMotorCallback = spinMotorCallback;
+        this._canvas = canvas;
+        this._motorClickCallback = motorClickCallback;
+        this._width = this._canvas.width();
+        this._height = this._canvas.height();
+        this._screenSize = Math.min(this._width, this._height);
 
-        this.config = new MotorRemapConfig(this.screenSize);
+        this._config = new MotorRemapConfig(this._screenSize);
 
-        canvas[0].width = canvas[0].height *
-        (canvas[0].clientWidth / canvas[0].clientHeight);
-
-        canvas.prop({
-            width: this.width,
-            height: this.height
+        // no component resize allowing yet
+        this._canvas.prop({
+            width: this._width,
+            height: this._height
         });
 
-        this.droneConfiguration = droneConfiguration;
+        this._droneConfiguration = droneConfiguration;
 
-        this.ctx = this.canvas[0].getContext("2d");
-        this.ctx.canvas.width = this.width;
-        this.ctx.canvas.heigh = this.height;
-        this.ctx.translate(this.width / 2, this.height / 2);
+        this._ctx = this._canvas[0].getContext("2d");
+        this._ctx.translate(this._width / 2, this._height / 2);
 
-        this.canvas.mousemove((event)=>{this.onMouseMove(event);});
-        this.canvas.mouseleave(()=>{this.onMouseLeave(event);});
-        this.canvas.mousedown(()=>{this.onMouseDown(event);});
-        this.canvas.mouseup(()=>{this.onMouseUp(event);});
-        this.canvas.click(()=>{this.onMouseClick();});
+        this._canvas.mousemove((event)=>{ this._onMouseMove(event); });
+        this._canvas.mouseleave(()=>{ this._onMouseLeave(event); });
+        this._canvas.mousedown(()=>{ this._onMouseDown(event); });
+        this._canvas.mouseup(()=>{ this._onMouseUp(event); });
+        this._canvas.click(()=>{ this._onMouseClick(); });
 
         this.startOver();
     }
 
-    pause() {
-        this.keepDrawing = false;
+    pause()
+    {
+        this._keepDrawing = false;
     }
 
     startOver()
     {
-        this.readyMotors = []; //motors that already being selected
+        this.readyMotors = []; //motors that already being selected for remapping by user
         this.remappingReady = false;
-        this.motorIndexToSpinOnMouseDown = -1;
-        this.keepDrawing = true;
-        this.mouse = {x : 0, y: 0};
-        window.requestAnimationFrame(()=>{this.drawOnce()});
+        this._motorIndexToSpinOnMouseDown = -1;
+        this._keepDrawing = true;
+        this._mouse = {x : 0, y: 0};
+        window.requestAnimationFrame(()=>{ this._drawOnce(); });
     }
 
-    drawOnce() {
-        var ctx = this.ctx;
-        var droneConfiguration = this.droneConfiguration;
-        var config = this.config;
-
-        ctx.clearRect(- this.width / 2,  -this.height / 2, this.width, this.height);
-
-        this.drawFrame();
-        this.drawDirectionArrow()
-        this.markMotors();
-        this.drawMotors();
-
-        if (this.keepDrawing) {
-            window.requestAnimationFrame(()=>{this.drawOnce()});
-        }
-    }
-
-    onMouseDown()
+    _drawOnce()
     {
-        if (this.remappingReady)
-        {
-            var mouseHoverMotorIndex = this.getMouseHoverMotorIndex();
-            this.motorIndexToSpinOnMouseDown = mouseHoverMotorIndex;
-            if (this.spinMotorCallback) {
-                this.spinMotorCallback(this.motorIndexToSpinOnMouseDown);
-            }
+        this._ctx.clearRect(- this._width / 2,  -this._height / 2, this._width, this._height);
+
+        this._drawFrame();
+        this._drawDirectionArrow()
+        this._markMotors();
+        this._drawMotors();
+
+        if (this._keepDrawing) {
+            window.requestAnimationFrame(()=>{this._drawOnce()});
         }
     }
 
-    onMouseUp()
+    _onMouseDown()
     {
-        if (-1 != this.motorIndexToSpinOnMouseDown) {
-
-            this.motorIndexToSpinOnMouseDown = -1;
-
-            if (this.spinMotorCallback) {
-                this.spinMotorCallback(this.motorIndexToSpinOnMouseDown);
+        if (this.remappingReady) {
+            var mouseHoverMotorIndex = this._getMouseHoverMotorIndex();
+            this._motorIndexToSpinOnMouseDown = mouseHoverMotorIndex;
+            if (this._spinMotorCallback) {
+                this._spinMotorCallback(this._motorIndexToSpinOnMouseDown);
             }
         }
     }
 
-    onMouseClick() {
-        var motorIndex = this.getMouseHoverMotorIndex();
+    _onMouseUp()
+    {
+        if (-1 != this._motorIndexToSpinOnMouseDown) {
 
-        if (this.motorClickCallback && motorIndex != -1 && !this.readyMotors.includes(motorIndex)) {
-            this.motorClickCallback(motorIndex);
-        }
-    }
+            this._motorIndexToSpinOnMouseDown = -1;
 
-    onMouseMove(event) {
-        var boundingRect = this.canvas[0].getBoundingClientRect();
-        this.mouse.x = event.clientX - boundingRect.left - this.width / 2;
-        this.mouse.y = event.clientY - boundingRect.top - this.height / 2;
-    }
-
-    onMouseLeave() {
-        this.mouse.x = Number.MIN_SAFE_INTEGER;
-        this.mouse.y = Number.MIN_SAFE_INTEGER;
-
-        if (-1 != this.motorIndexToSpinOnMouseDown) {
-
-            this.motorIndexToSpinOnMouseDown = -1;
-
-            if (this.spinMotorCallback) {
-                this.spinMotorCallback(this.motorIndexToSpinOnMouseDown);
+            if (this._spinMotorCallback) {
+                this._spinMotorCallback(this._motorIndexToSpinOnMouseDown);
             }
         }
     }
 
-    markMotors() {
-        var ctx = this.ctx;
-        var droneConfiguration = this.droneConfiguration;
-        var config = this.config;
+    _onMouseClick()
+    {
+        var motorIndex = this._getMouseHoverMotorIndex();
+
+        if (this._motorClickCallback && motorIndex != -1 && !this.readyMotors.includes(motorIndex)) {
+            this._motorClickCallback(motorIndex);
+        }
+    }
+
+    _onMouseMove(event)
+    {
+        var boundingRect = this._canvas[0].getBoundingClientRect();
+        this._mouse.x = event.clientX - boundingRect.left - this._width / 2;
+        this._mouse.y = event.clientY - boundingRect.top - this._height / 2;
+    }
+
+    _onMouseLeave()
+    {
+        this._mouse.x = Number.MIN_SAFE_INTEGER;
+        this._mouse.y = Number.MIN_SAFE_INTEGER;
+
+        if (-1 != this._motorIndexToSpinOnMouseDown) {
+            this._motorIndexToSpinOnMouseDown = -1;
+
+            if (this._spinMotorCallback) {
+                this._spinMotorCallback(this._motorIndexToSpinOnMouseDown);
+            }
+        }
+    }
+
+    _markMotors()
+    {
+        var ctx = this._ctx;
+        var droneConfiguration = this._droneConfiguration;
+        var config = this._config;
         var motors = config[droneConfiguration].Motors;
 
-        if (-1 == this.motorIndexToSpinOnMouseDown)
-        {
+        if (-1 == this._motorIndexToSpinOnMouseDown) {
             for (let i = 0; i < this.readyMotors.length; i++) {
                 var motorIndex = this.readyMotors[i];
                 ctx.beginPath();
@@ -135,7 +132,7 @@ class MotorRemapCanvas {
                 ctx.fill();
             }
 
-            var mouseHoverMotorIndex = this.getMouseHoverMotorIndex();
+            var mouseHoverMotorIndex = this._getMouseHoverMotorIndex();
             if (mouseHoverMotorIndex != -1 && !this.readyMotors.includes(mouseHoverMotorIndex)) {
                 ctx.beginPath();
                 ctx.arc(motors[mouseHoverMotorIndex].x, motors[mouseHoverMotorIndex].y, config[droneConfiguration].PropRadius, 0, 2 * Math.PI);
@@ -144,15 +141,14 @@ class MotorRemapCanvas {
                 ctx.fill();
             }
         } else {
-            var mouseHoverMotorIndex = this.getMouseHoverMotorIndex();
-            var spinningMotor = this.motorIndexToSpinOnMouseDown;
+            var mouseHoverMotorIndex = this._getMouseHoverMotorIndex();
+            var spinningMotor = this._motorIndexToSpinOnMouseDown;
 
             var motors = config[droneConfiguration].Motors;
 
             for (let i = 0; i < motors.length; i++) {
                 ctx.fillStyle = config.MotorReadyColor;
-                if (i == spinningMotor)
-                {
+                if (i == spinningMotor) {
                     ctx.fillStyle = config.MotorSpinningColor;
                 } else if (i == mouseHoverMotorIndex) {
                     ctx.fillStyle = config.MotorMouseHoverColor;
@@ -166,18 +162,19 @@ class MotorRemapCanvas {
         }
     }
 
-    getMouseHoverMotorIndex() {
-        var x = this.mouse.x;
-        var y = this.mouse.y;
+    _getMouseHoverMotorIndex()
+    {
+        var x = this._mouse.x;
+        var y = this._mouse.y;
 
         var result = -1;
         var currentDist = Number.MAX_SAFE_INTEGER;
-        var droneConfiguration = this.droneConfiguration;
-        var motors = this.config[droneConfiguration].Motors;
+        var droneConfiguration = this._droneConfiguration;
+        var motors = this._config[droneConfiguration].Motors;
 
         for (let i = 0; i < motors.length; i++) {
             var dist = Math.sqrt((x - motors[i].x) * (x - motors[i].x) + (y - motors[i].y) * (y - motors[i].y));
-            if (dist < this.config[droneConfiguration].PropRadius && dist < currentDist) {
+            if (dist < this._config[droneConfiguration].PropRadius && dist < currentDist) {
                 currentDist = dist;
                 result = i;
             }
@@ -186,10 +183,11 @@ class MotorRemapCanvas {
         return result;
     }
 
-    drawMotors() {
-        var ctx = this.ctx;
-        var droneConfiguration = this.droneConfiguration;
-        var config = this.config;
+    _drawMotors()
+    {
+        var ctx = this._ctx;
+        var droneConfiguration = this._droneConfiguration;
+        var config = this._config;
 
         ctx.lineWidth = config.PropEdgeLineWidth;
         ctx.strokeStyle = config.PropEdgeColor;
@@ -200,19 +198,22 @@ class MotorRemapCanvas {
             ctx.arc(motors[i].x, motors[i].y, config[droneConfiguration].PropRadius, 0, 2 * Math.PI);
             ctx.stroke();
 
+            /*
+            // uncomment for checking new configurations motor order
             ctx.font = config.MotorNumberTextFont;
             ctx.fillStyle = config.MotorNumberTextColor;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillText(i + 1, motors[i].x, motors[i].y);
-
+            */
         }
     }
 
-    drawDirectionArrow() {
-        var ctx = this.ctx;
-        var droneConfiguration = this.droneConfiguration;
-        var config = this.config;
+    _drawDirectionArrow()
+    {
+        var ctx = this._ctx;
+        var droneConfiguration = this._droneConfiguration;
+        var config = this._config;
 
         ctx.beginPath();
         ctx.moveTo(config.DirectionArrowPoints[0].x, config.DirectionArrowPoints[0].y);
@@ -224,10 +225,11 @@ class MotorRemapCanvas {
         ctx.fill();
     }
 
-    drawFrame() {
-        var ctx = this.ctx;
-        var droneConfiguration = this.droneConfiguration;
-        var config = this.config;
+    _drawFrame()
+    {
+        var ctx = this._ctx;
+        var droneConfiguration = this._droneConfiguration;
+        var config = this._config;
 
         ctx.beginPath();
         ctx.lineWidth = config[droneConfiguration].ArmWidth;
@@ -235,7 +237,7 @@ class MotorRemapCanvas {
         ctx.strokeStyle = config.FrameColor;
         var motors = config[droneConfiguration].Motors;
 
-        switch(this.droneConfiguration) {
+        switch(this._droneConfiguration) {
             case "Quad X":
             case "Quad +":
                 ctx.moveTo(motors[0].x, motors[0].y);

@@ -1,6 +1,7 @@
 'use strict';
 
-function MotorRemapConfig(screenSize){
+function MotorRemapConfig(screenSize)
+{
     this.FrameColor    = 'rgb(186, 186, 186)';
     this.PropEdgeColor = 'rgb(255, 187, 0)';
     this.PropEdgeLineWidth = 3;
@@ -15,12 +16,13 @@ function MotorRemapConfig(screenSize){
         {x: -0.03 * screenSize, y:  0.11 * screenSize},
         {x: -0.03 * screenSize, y: -0.01 * screenSize},
         {x: -0.07 * screenSize, y: -0.01 * screenSize},
-        {x: -0.0 * screenSize,  y: -0.13 * screenSize},
+        {x:  0.0  * screenSize, y: -0.13 * screenSize},
         {x:  0.07 * screenSize, y: -0.01 * screenSize},
         {x:  0.03 * screenSize, y: -0.01 * screenSize},
         {x:  0.03 * screenSize, y:  0.11 * screenSize},
     ];
 
+    //===========================================
     var FrameRaduis = 0.28 * screenSize;
     this["Quad X"] =
     {
@@ -35,6 +37,7 @@ function MotorRemapConfig(screenSize){
         ]
     };
 
+    //===========================================
     var FrameRaduis = 0.28 * screenSize;
     this["Quad X 1234"] =
     {
@@ -49,6 +52,7 @@ function MotorRemapConfig(screenSize){
         ]
     };
 
+    //===========================================
     var FrameRaduis = 0.32 * screenSize;
     this["Quad +"] =
     {
@@ -63,6 +67,7 @@ function MotorRemapConfig(screenSize){
         ]
     };
 
+    //===========================================
     var FrameRaduis = 0.30 * screenSize;
     this["Tricopter"] =
     {
@@ -76,6 +81,7 @@ function MotorRemapConfig(screenSize){
         ]
     };
 
+    //===========================================
     var FrameRaduis = 0.35 * screenSize;
     this["Hex +"] =
     {
@@ -104,8 +110,7 @@ function MotorRemapConfig(screenSize){
     angle = dAngle * 0;
     this["Hex +"].Motors.push({x: Math.sin(angle) * FrameRaduis, y: Math.cos(angle) * FrameRaduis});
 
-
-
+    //===========================================
     var FrameRaduis = 0.35 * screenSize;
     this["Hex X"] =
     {
