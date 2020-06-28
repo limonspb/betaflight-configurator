@@ -1,0 +1,72 @@
+.motorRemapComponent {
+    display:flex;
+    height:100%;
+    flex-flow:column;
+}
+
+.motorRemapComponentHeader {
+    border-bottom: 1px solid var(--accent);
+    margin-bottom: 10px;
+    padding-bottom: 12px;
+}
+
+#dialogMotorRemapMainContent {
+    display:flex;
+    height:100%;
+    flex-flow:column;
+}
+
+#dialogMotorRemapWarning {
+    display:flex;
+    height:100%;
+    flex-flow:column;
+}
+
+#motorRemapCanvas {
+    width:100%;
+    flex-grow: 1;
+}
+
+#motorRemapActionPanel {
+    height: 46px;
+}
+
+#dialogMotorRemapSave {
+    margin-right: 0px;
+}
+
+.motorsRemapToggleParentContainer {
+    display: flex;
+    margin-bottom: 1.5em;
+    margin-top: 1.5em;
+}
+
+#motorRemapActionHint {
+    margin-top: 1.0em;
+    display: inline-block;
+}
+
+.motorsRemapToggleNarrow {
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.motorsRemapToggleWide {
+    flex: 1;
+}
+
+.motorsRemapDialogRiskNoticeText {
+    font-size: 1.2em;
+}
+
+.motorsRemapDialogRExplanationText {
+    font-size: 1.0em;
+    margin-bottom: 1.5em;
+    margin-top: 1.5em;
+}
+
+#motorRemapSaveStartOverButtonsPanel {
+    position: absolute;
+    bottom: 4px;
+}

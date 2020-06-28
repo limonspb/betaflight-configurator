@@ -57,7 +57,11 @@ TABS.motors.initialize = function (callback) {
     }
 
     function load_esc_protocol() {
-        MSP.send_message(MSPCodes.MSP_ADVANCED_CONFIG, false, false, load_motor_data);
+        MSP.send_message(MSPCodes.MSP_ADVANCED_CONFIG, false, false, load_motor_remap);
+    }
+
+    function load_motor_remap() {
+        MSP.send_message(MSPCodes.MSP_MOTOR_REMAP, false, false, load_motor_data);
     }
 
     function load_motor_data() {
@@ -222,6 +226,14 @@ TABS.motors.initialize = function (callback) {
         }
 
         $('.mixerPreview img').attr('src', './resources/motor_order/' + mixerList[mixer - 1].image + reverse + '.svg');
+
+        var motorMapConfig = new MotorRemapConfig(100);
+
+        if (mixerList[mixer - 1].name in motorMapConfig && MOTOR_REMAP.length > 0) {
+            $('#motorRemapDialogOpen').show();
+        } else {
+            $('#motorRemapDialogOpen').hide();
+        }
     }
 
     function process_html() {
@@ -726,7 +738,51 @@ TABS.motors.initialize = function (callback) {
         // enable Status and Motor data pulling
         GUI.interval_add('motor_and_status_pull', get_status, 50, true);
 
-        GUI.content_ready(callback);
+        var zeroThrottleValue = rangeMin;
+        if (self.feature3DEnabled) {
+            zeroThrottleValue = neutral3d;
+        }
+
+        setup_motor_remap_dialog(content_ready, zeroThrottleValue);
+
+        function content_ready() {
+            GUI.content_ready(callback);
+        }
+
+       GUI.content_ready(callback);
+    }
+
+    function setup_motor_remap_dialog(callback, zeroThrottleValue)
+    {
+        function closeDialog()
+        {
+            $('#motorsEnableTestMode').prop('checked', false);
+            mspHelper.setArmingEnabled(false, false);
+            $('#motorsEnableTestMode').change();
+            $('#dialogMotorRemap')[0].close();
+            motorRemapComponent.close();
+            $(document).off("keydown", onDocumentKeyPress);
+        }
+
+        function onDocumentKeyPress(event)
+        {
+            if ( event.which == 27 ) {
+                closeDialog();
+            }
+        }
+
+        $('#dialogMotorRemap-closebtn').click(closeDialog);
+
+        $('#motorRemapDialogOpen').click(function()
+        {
+            $('#motorsEnableTestMode').prop('checked', false);
+            $('#motorsEnableTestMode').change();
+            $(document).on("keydown", onDocumentKeyPress);
+            $('#dialogMotorRemap')[0].showModal();
+        });
+
+        var motorRemapComponent = new MotorRemapComponent($('#dialogMotorRemapContent'),
+            callback, mixerList[MIXER_CONFIG.mixer - 1].name, zeroThrottleValue, zeroThrottleValue + 200);
     }
 };
 
