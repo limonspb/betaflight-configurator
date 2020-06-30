@@ -149,9 +149,9 @@ MspHelper.prototype.process_data = function(dataHandler) {
                 break;
             case MSPCodes.MSP_MOTOR_REMAP:
                 MOTOR_REMAP = [];
-                var arraySize = data.read8();
+                let arraySize = data.read8();
                 for (let i = 0; i < arraySize; i++) {
-                    MOTOR_REMAP[i] = data.readU8();
+                    MOTOR_REMAP[i] = data.readU8();``
                 }
                 break;
             case MSPCodes.MSP_MOTOR_TELEMETRY:

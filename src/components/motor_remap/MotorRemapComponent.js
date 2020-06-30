@@ -16,29 +16,50 @@ class MotorRemapComponent
 
         this._currentSpinningMotor = -1;
 
-        this._contentDiv.load("./components/motor_remap/body.html", ()=>{ this._setupdialog(); });
+        this._contentDiv.load("./components/motor_remap/body.html", () => {
+            this._setupdialog();
+        });
+    }
+
+    _readDom()
+    {
+        this._domAgreeSafetyCheckBox = $('#motorsEnableTestMode-dialogMotorRemap');
+        this._domAgreeButton = $('#dialogMotorRemapAgreeButton');
+        this._domStartOverButton = $('#motorsRemapDialogStartOver');
+        this._domSaveButton = $('#motorsRemapDialogSave');
+        this._domMainContentBlock = $('#dialogMotorRemapMainContent');
+        this._domWarningContentBlock = $('#dialogMotorRemapWarning');
+        this._domActionHintBlock = $('#motorRemapActionHint');
+        this._domCanvas = $('#motorRemapCanvas');
     }
 
     _setupdialog()
     {
         i18n.localizePage();
+        this._readDom();
 
         this._resetGui();
 
-        $('#motorsEnableTestMode-dialogMotorRemap').change(function ()
+        this._domAgreeSafetyCheckBox.change(() =>
         {
-            var enabled = $(this).is(':checked');
+            let enabled = this._domAgreeSafetyCheckBox.is(':checked');
 
             if (enabled) {
-                $('#dialogMotorRemapAgreeButton').show();
+                this._domAgreeButton.show();
             } else {
-                $('#dialogMotorRemapAgreeButton').hide();
+                this._domAgreeButton.hide();
             }
         });
 
-        $('#dialogMotorRemapAgreeButton').click(()=>{ this._onAgreeButtonClicked(); });
-        $("#motorsRemapDialogStartOver").click(()=>{ this._startOver(); });
-        $("#motorsRemapDialogSave").click(()=>{ this._save(); });
+        this._domAgreeButton.click(() => {
+            this._onAgreeButtonClicked();
+        });
+        this._domStartOverButton.click(() => {
+            this._startOver();
+        });
+        this._domSaveButton.click(() => {
+            this._save();
+        });
 
         this._onLoadedCallback();
     }
@@ -53,12 +74,12 @@ class MotorRemapComponent
 
     _resetGui()
     {
-        $('#dialogMotorRemapMainContent').hide();
-        $('#dialogMotorRemapWarning').show();
-        $('#dialogMotorRemapAgreeButton').hide();
+        this._domMainContentBlock.hide();
+        this._domWarningContentBlock.show();
+        this._domAgreeButton.hide();
 
-        $('#motorsEnableTestMode-dialogMotorRemap').prop('checked', false);
-        $('#motorsEnableTestMode-dialogMotorRemap').change();
+        this._domAgreeSafetyCheckBox.prop('checked', false);
+        this._domAgreeSafetyCheckBox.change();
         this._showSaveStartOverButtons(false);
     }
 
@@ -78,7 +99,7 @@ class MotorRemapComponent
             });
         }
 
-        var buffer = [];
+        let buffer = [];
         buffer.push8(this.motorRemapCanvas.readyMotors.length);
 
         for (let i = 0; i < this._newMotorRemap.length; i++) {
@@ -112,18 +133,18 @@ class MotorRemapComponent
 
     _showSaveStartOverButtons(show) {
         if (show) {
-            $("#motorsRemapDialogStartOver").show();
-            $("#motorsRemapDialogSave").show();
+            this._domStartOverButton.show();
+            this._domSaveButton.show();
         } else {
-            $("#motorsRemapDialogStartOver").hide();
-            $("#motorsRemapDialogSave").hide();
+            this._domStartOverButton.hide();
+            this._domSaveButton.hide();
         }
     }
 
     _onAgreeButtonClicked() {
-        $('#motorRemapActionHint').text(i18n.getMessage("motorRemapDialogSelectSpinningMotor"));
-        $('#dialogMotorRemapWarning').hide();
-        $('#dialogMotorRemapMainContent').show();
+        this._domActionHintBlock.text(i18n.getMessage("motorRemapDialogSelectSpinningMotor"));
+        this._domWarningContentBlock.hide();
+        this._domMainContentBlock.show();
         this.startUserInteraction();
     }
 
@@ -137,24 +158,28 @@ class MotorRemapComponent
         if (this.motorRemapCanvas) {
             this.motorRemapCanvas.startOver();
         } else {
-            this.motorRemapCanvas = new MotorRemapCanvas($('#motorRemapCanvas'),
+            this.motorRemapCanvas = new MotorRemapCanvas(this._domCanvas,
                 this._droneConfiguration,
-                (motorIndex)=>{this._onMotorClick(motorIndex);},
-                (motorIndex)=>{
-                    if (-1 == motorIndex) {
-                        this._spinMotor(motorIndex);
-                    } else {
-                        let indexToSpin = this.motorRemapCanvas.readyMotors.indexOf(motorIndex);
-                        this._spinMotor(indexToSpin);
+                (motorIndex) => { // motor click callback
+                    this._onMotorClick(motorIndex);
+                },
+                (motorIndex) => { // motor spin callback
+                    let indexToSpin = -1;
+
+                    if (-1 !== motorIndex) {
+                        indexToSpin = this.motorRemapCanvas.readyMotors.indexOf(motorIndex);
                     }
-            });
+
+                    this._spinMotor(indexToSpin);
+                },
+            );
         }
 
         this._startMotorJerking(0);
     }
 
     _stopAnyMotorJerking() {
-        if (this._currentJerkingTimeout != -1) {
+        if (-1 !== this._currentJerkingTimeout) {
             clearTimeout(this._currentJerkingTimeout);
             this._currentJerkingTimeout = -1;
             this._spinMotor(-1);
@@ -171,21 +196,25 @@ class MotorRemapComponent
 
     _motorStartTimeout(motorIndex) {
         this._spinMotor(motorIndex);
-        this._currentJerkingTimeout = setTimeout(()=>{ this._motorStopTimeout(motorIndex); }, 250);
+        this._currentJerkingTimeout = setTimeout(() => {
+            this._motorStopTimeout(motorIndex);
+        }, 250);
     }
 
     _motorStopTimeout(motorIndex) {
         this._spinMotor(-1);
-        this._currentJerkingTimeout = setTimeout(()=>{ this._motorStartTimeout(motorIndex); }, 500);
+        this._currentJerkingTimeout = setTimeout(() => {
+            this._motorStartTimeout(motorIndex);
+        }, 500);
     }
 
 
     _spinMotor(motorIndex) {
         this._currentSpinningMotor = motorIndex;
-        var buffer = [];
+        let buffer = [];
 
         for (let  i = 0; i < this._config[this._droneConfiguration].Motors.length; i++) {
-            if (i == motorIndex) {
+            if (i === motorIndex) {
                 buffer.push16(this._motorSpinValue);
             } else {
                 buffer.push16(this._motorStopValue);
@@ -197,7 +226,7 @@ class MotorRemapComponent
 
     _stopMotor()
     {
-        if (-1 != this._currentSpinningMotor) {
+        if (-1 !== this._currentSpinningMotor) {
             this._spinMotor(-1);
         }
     }
@@ -211,7 +240,7 @@ class MotorRemapComponent
             this._startMotorJerking(this._currentJerkingMotor);
         } else {
             this._stopAnyMotorJerking();
-            $('#motorRemapActionHint').text(i18n.getMessage("motorRemapDialogRemapIsDone"));
+            this._domActionHintBlock.text(i18n.getMessage("motorRemapDialogRemapIsDone"));
             this._getNewMotorRemap();
             this.motorRemapCanvas.remappingReady = true;
             this._showSaveStartOverButtons(true);

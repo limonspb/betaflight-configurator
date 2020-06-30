@@ -227,12 +227,13 @@ TABS.motors.initialize = function (callback) {
 
         $('.mixerPreview img').attr('src', './resources/motor_order/' + mixerList[mixer - 1].image + reverse + '.svg');
 
-        var motorMapConfig = new MotorRemapConfig(100);
+        let motorOutputReorderConfig = new MotorRemapConfig(100);
+        let domMotorRemapDialogOpen = $('#motorRemapDialogOpen');
 
-        if (mixerList[mixer - 1].name in motorMapConfig && MOTOR_REMAP.length > 0) {
-            $('#motorRemapDialogOpen').show();
+        if (mixerList[mixer - 1].name in motorOutputReorderConfig && MOTOR_REMAP.length > 0) {
+            domMotorRemapDialogOpen.show();
         } else {
-            $('#motorRemapDialogOpen').hide();
+            domMotorRemapDialogOpen.hide();
         }
     }
 
@@ -752,14 +753,18 @@ TABS.motors.initialize = function (callback) {
        GUI.content_ready(callback);
     }
 
-    function setup_motor_remap_dialog(callback, zeroThrottleValue)
+    function setup_motor_remap_dialog(callbackFunction, zeroThrottleValue)
     {
+        let domMotorsEnableTestModeCheckbox = $('#motorsEnableTestMode');
+        let domDialogMotorRemap = $('#dialogMotorRemap');
+        let motorRemapComponent;
+
         function closeDialog()
         {
-            $('#motorsEnableTestMode').prop('checked', false);
+            domMotorsEnableTestModeCheckbox.prop('checked', false);
             mspHelper.setArmingEnabled(false, false);
-            $('#motorsEnableTestMode').change();
-            $('#dialogMotorRemap')[0].close();
+            domMotorsEnableTestModeCheckbox.change();
+            domDialogMotorRemap[0].close();
             motorRemapComponent.close();
             $(document).off("keydown", onDocumentKeyPress);
         }
@@ -775,14 +780,15 @@ TABS.motors.initialize = function (callback) {
 
         $('#motorRemapDialogOpen').click(function()
         {
-            $('#motorsEnableTestMode').prop('checked', false);
-            $('#motorsEnableTestMode').change();
+            domMotorsEnableTestModeCheckbox.prop('checked', false);
+            domMotorsEnableTestModeCheckbox.change();
             $(document).on("keydown", onDocumentKeyPress);
-            $('#dialogMotorRemap')[0].showModal();
+            domDialogMotorRemap[0].showModal();
         });
 
-        var motorRemapComponent = new MotorRemapComponent($('#dialogMotorRemapContent'),
-            callback, mixerList[MIXER_CONFIG.mixer - 1].name, zeroThrottleValue, zeroThrottleValue + 200);
+        motorRemapComponent = new MotorRemapComponent($('#dialogMotorRemapContent'),
+            callbackFunction, mixerList[MIXER_CONFIG.mixer - 1].name,
+            zeroThrottleValue, zeroThrottleValue + 200);
     }
 };
 
