@@ -147,11 +147,11 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.MOTOR_DATA[i] = data.readU16();
                 }
                 break;
-            case MSPCodes.MSP_MOTOR_REMAP:
-                MOTOR_REMAP = [];
-                let arraySize = data.read8();
+            case MSPCodes.MSP_MOTOR_OUTPUT_REORDERING:
+                MOTOR_OUTPUT_ORDER = [];
+                const arraySize = data.read8();
                 for (let i = 0; i < arraySize; i++) {
-                    MOTOR_REMAP[i] = data.readU8();``
+                    MOTOR_OUTPUT_ORDER[i] = data.readU8();
                 }
                 break;
             case MSPCodes.MSP_MOTOR_TELEMETRY:

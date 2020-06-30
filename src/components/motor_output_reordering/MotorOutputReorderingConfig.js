@@ -1,6 +1,6 @@
 'use strict';
 
-function MotorRemapConfig(screenSize)
+function MotorOutputReorderConfig(screenSize)
 {
     this.FrameColor    = 'rgb(186, 186, 186)';
     this.PropEdgeColor = 'rgb(255, 187, 0)';
@@ -119,7 +119,6 @@ function MotorRemapConfig(screenSize)
         Motors: [],
     };
     dAngle = Math.PI / 3;
-    angle = 0;
 
     angle = dAngle * 1;
     this["Hex X"].Motors.push({x: Math.cos(angle) * frameRaduis, y: Math.sin(angle) * frameRaduis});
@@ -138,4 +137,4 @@ function MotorRemapConfig(screenSize)
 
     angle = dAngle * 3;
     this["Hex X"].Motors.push({x: Math.cos(angle) * frameRaduis, y: Math.sin(angle) * frameRaduis});
-};
+}

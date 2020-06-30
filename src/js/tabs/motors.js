@@ -57,11 +57,11 @@ TABS.motors.initialize = function (callback) {
     }
 
     function load_esc_protocol() {
-        MSP.send_message(MSPCodes.MSP_ADVANCED_CONFIG, false, false, load_motor_remap);
+        MSP.send_message(MSPCodes.MSP_ADVANCED_CONFIG, false, false, load_motor_output_reordering);
     }
 
-    function load_motor_remap() {
-        MSP.send_message(MSPCodes.MSP_MOTOR_REMAP, false, false, load_motor_data);
+    function load_motor_output_reordering() {
+        MSP.send_message(MSPCodes.MSP_MOTOR_OUTPUT_REORDERING, false, false, load_motor_data);
     }
 
     function load_motor_data() {
@@ -227,13 +227,13 @@ TABS.motors.initialize = function (callback) {
 
         $('.mixerPreview img').attr('src', './resources/motor_order/' + mixerList[mixer - 1].image + reverse + '.svg');
 
-        let motorOutputReorderConfig = new MotorRemapConfig(100);
-        let domMotorRemapDialogOpen = $('#motorRemapDialogOpen');
+        const motorOutputReorderConfig = new MotorOutputReorderConfig(100);
+        const domMotorOutputReorderDialogOpen = $('#motorOutputReorderDialogOpen');
 
-        if (mixerList[mixer - 1].name in motorOutputReorderConfig && MOTOR_REMAP.length > 0) {
-            domMotorRemapDialogOpen.show();
+        if (mixerList[mixer - 1].name in motorOutputReorderConfig && MOTOR_OUTPUT_ORDER.length > 0) {
+            domMotorOutputReorderDialogOpen.show();
         } else {
-            domMotorRemapDialogOpen.hide();
+            domMotorOutputReorderDialogOpen.hide();
         }
     }
 
@@ -739,12 +739,13 @@ TABS.motors.initialize = function (callback) {
         // enable Status and Motor data pulling
         GUI.interval_add('motor_and_status_pull', get_status, 50, true);
 
-        var zeroThrottleValue = rangeMin;
+        let zeroThrottleValue = rangeMin;
+
         if (self.feature3DEnabled) {
             zeroThrottleValue = neutral3d;
         }
 
-        setup_motor_remap_dialog(content_ready, zeroThrottleValue);
+        setup_motor_output_reordering_dialog(content_ready, zeroThrottleValue);
 
         function content_ready() {
             GUI.content_ready(callback);
@@ -753,42 +754,41 @@ TABS.motors.initialize = function (callback) {
        GUI.content_ready(callback);
     }
 
-    function setup_motor_remap_dialog(callbackFunction, zeroThrottleValue)
+    function setup_motor_output_reordering_dialog(callbackFunction, zeroThrottleValue)
     {
-        let domMotorsEnableTestModeCheckbox = $('#motorsEnableTestMode');
-        let domDialogMotorRemap = $('#dialogMotorRemap');
-        let motorRemapComponent;
+        const domMotorsEnableTestModeCheckbox = $('#motorsEnableTestMode');
+        const domDialogMotorOutputReorder = $('#dialogMotorOutputReorder');
+
+        const motorOutputReorderComponent = new MotorOutputReorderComponent($('#dialogMotorOutputReorderContent'),
+            callbackFunction, mixerList[MIXER_CONFIG.mixer - 1].name,
+            zeroThrottleValue, zeroThrottleValue + 200);
+
+        $('#dialogMotorOutputReorder-closebtn').click(closeDialog);
 
         function closeDialog()
         {
             domMotorsEnableTestModeCheckbox.prop('checked', false);
             mspHelper.setArmingEnabled(false, false);
             domMotorsEnableTestModeCheckbox.change();
-            domDialogMotorRemap[0].close();
-            motorRemapComponent.close();
+            domDialogMotorOutputReorder[0].close();
+            motorOutputReorderComponent.close();
             $(document).off("keydown", onDocumentKeyPress);
         }
 
         function onDocumentKeyPress(event)
         {
-            if ( event.which == 27 ) {
+            if (27 == event.which) {
                 closeDialog();
             }
         }
 
-        $('#dialogMotorRemap-closebtn').click(closeDialog);
-
-        $('#motorRemapDialogOpen').click(function()
+        $('#motorOutputReorderDialogOpen').click(function()
         {
             domMotorsEnableTestModeCheckbox.prop('checked', false);
             domMotorsEnableTestModeCheckbox.change();
             $(document).on("keydown", onDocumentKeyPress);
-            domDialogMotorRemap[0].showModal();
+            domDialogMotorOutputReorder[0].showModal();
         });
-
-        motorRemapComponent = new MotorRemapComponent($('#dialogMotorRemapContent'),
-            callbackFunction, mixerList[MIXER_CONFIG.mixer - 1].name,
-            zeroThrottleValue, zeroThrottleValue + 200);
     }
 };
 

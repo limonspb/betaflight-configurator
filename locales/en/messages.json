@@ -2533,22 +2533,22 @@
         "message": "<strong>I understand the risks</strong>, the propellers are removed - enable motor control and arming, and disable Runaway Takeoff Prevention."
     },
 
-    "motorRemapDialogClose": {
+    "motorOutputReorderDialogClose": {
         "message": "Cancel"
     },
-    "motorRemapDialogAgree": {
+    "motorOutputReorderDialogAgree": {
         "message": "Start"
     },
     "motorsRemapDialogTitle": {
         "message": "Remap motors"
     },
-    "motorRemapDialogOpen": {
+    "motorOutputReorderDialogOpen": {
         "message": "Remap motors"
     },
-    "motorRemapDialogSelectSpinningMotor": {
+    "motorOutputReorderDialogSelectSpinningMotor": {
         "message": "Click on the spining motor..."
     },
-    "motorRemapDialogRemapIsDone": {
+    "motorOutputReorderDialogRemapIsDone": {
         "message": "Ready! Check the motors spinning order by clicking on the image."
     },
     "motorsRemapDialogUnderstandRisks": {

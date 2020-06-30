@@ -1,6 +1,6 @@
 'use strict';
 
-class MotorRemapComponent
+class MotorOutputReorderComponent
 {
     constructor(contentDiv, onLoadedCallback, droneConfiguration, motorStopValue, motorSpinValue)
     {
@@ -9,28 +9,28 @@ class MotorRemapComponent
         this._droneConfiguration = droneConfiguration;
         this._motorStopValue = motorStopValue;
         this._motorSpinValue = motorSpinValue;
-        this._config = new MotorRemapConfig(100);
+        this._config = new MotorOutputReorderConfig(100);
 
         this._currentJerkingTimeout = -1;
         this._currentJerkingMotor = -1;
 
         this._currentSpinningMotor = -1;
 
-        this._contentDiv.load("./components/motor_remap/body.html", () => {
+        this._contentDiv.load("./components/motor_output_reordering/body.html", () => {
             this._setupdialog();
         });
     }
 
     _readDom()
     {
-        this._domAgreeSafetyCheckBox = $('#motorsEnableTestMode-dialogMotorRemap');
-        this._domAgreeButton = $('#dialogMotorRemapAgreeButton');
+        this._domAgreeSafetyCheckBox = $('#motorsEnableTestMode-dialogMotorOutputReorder');
+        this._domAgreeButton = $('#dialogMotorOutputReorderAgreeButton');
         this._domStartOverButton = $('#motorsRemapDialogStartOver');
         this._domSaveButton = $('#motorsRemapDialogSave');
-        this._domMainContentBlock = $('#dialogMotorRemapMainContent');
-        this._domWarningContentBlock = $('#dialogMotorRemapWarning');
-        this._domActionHintBlock = $('#motorRemapActionHint');
-        this._domCanvas = $('#motorRemapCanvas');
+        this._domMainContentBlock = $('#dialogMotorOutputReorderMainContent');
+        this._domWarningContentBlock = $('#dialogMotorOutputReorderWarning');
+        this._domActionHintBlock = $('#motorOutputReorderActionHint');
+        this._domCanvas = $('#motorOutputReorderCanvas');
     }
 
     _setupdialog()
@@ -42,7 +42,7 @@ class MotorRemapComponent
 
         this._domAgreeSafetyCheckBox.change(() =>
         {
-            let enabled = this._domAgreeSafetyCheckBox.is(':checked');
+            const enabled = this._domAgreeSafetyCheckBox.is(':checked');
 
             if (enabled) {
                 this._domAgreeButton.show();
@@ -99,30 +99,30 @@ class MotorRemapComponent
             });
         }
 
-        let buffer = [];
-        buffer.push8(this.motorRemapCanvas.readyMotors.length);
+        const buffer = [];
+        buffer.push8(this.motorOutputReorderCanvas.readyMotors.length);
 
-        for (let i = 0; i < this._newMotorRemap.length; i++) {
-            buffer.push8(this._newMotorRemap[i]);
+        for (let i = 0; i < this._newMotorOutputReorder.length; i++) {
+            buffer.push8(this._newMotorOutputReorder[i]);
         }
 
-        MSP.send_message(MSPCodes.MSP_SET_MOTOR_REMAP, buffer);
+        MSP.send_message(MSPCodes.MSP_SET_MOTOR_OUTPUT_REORDERING, buffer);
 
         save_to_eeprom();
     }
 
-    _getNewMotorRemap()
+    _getNewMotorOutputReorder()
     {
-        this._newMotorRemap = [];
+        this._newMotorOutputReorder = [];
 
-        for (let i = 0; i < this.motorRemapCanvas.readyMotors.length; i++) {
-            this._newMotorRemap.push(this._remapMotorIndex(i));
+        for (let i = 0; i < this.motorOutputReorderCanvas.readyMotors.length; i++) {
+            this._newMotorOutputReorder.push(this._remapMotorIndex(i));
         }
     }
 
     _remapMotorIndex(motorIndex)
     {
-        return MOTOR_REMAP[this.motorRemapCanvas.readyMotors.indexOf(motorIndex)];
+        return MOTOR_OUTPUT_ORDER[this.motorOutputReorderCanvas.readyMotors.indexOf(motorIndex)];
     }
 
     _startOver()
@@ -142,23 +142,23 @@ class MotorRemapComponent
     }
 
     _onAgreeButtonClicked() {
-        this._domActionHintBlock.text(i18n.getMessage("motorRemapDialogSelectSpinningMotor"));
+        this._domActionHintBlock.text(i18n.getMessage("motorOutputReorderDialogSelectSpinningMotor"));
         this._domWarningContentBlock.hide();
         this._domMainContentBlock.show();
         this.startUserInteraction();
     }
 
     _stopUserInteraction() {
-        if (this.motorRemapCanvas) {
-            this.motorRemapCanvas.pause();
+        if (this.motorOutputReorderCanvas) {
+            this.motorOutputReorderCanvas.pause();
         }
     }
 
     startUserInteraction() {
-        if (this.motorRemapCanvas) {
-            this.motorRemapCanvas.startOver();
+        if (this.motorOutputReorderCanvas) {
+            this.motorOutputReorderCanvas.startOver();
         } else {
-            this.motorRemapCanvas = new MotorRemapCanvas(this._domCanvas,
+            this.motorOutputReorderCanvas = new MotorOutputReorderCanvas(this._domCanvas,
                 this._droneConfiguration,
                 (motorIndex) => { // motor click callback
                     this._onMotorClick(motorIndex);
@@ -167,7 +167,7 @@ class MotorRemapComponent
                     let indexToSpin = -1;
 
                     if (-1 !== motorIndex) {
-                        indexToSpin = this.motorRemapCanvas.readyMotors.indexOf(motorIndex);
+                        indexToSpin = this.motorOutputReorderCanvas.readyMotors.indexOf(motorIndex);
                     }
 
                     this._spinMotor(indexToSpin);
@@ -211,7 +211,7 @@ class MotorRemapComponent
 
     _spinMotor(motorIndex) {
         this._currentSpinningMotor = motorIndex;
-        let buffer = [];
+        const buffer = [];
 
         for (let  i = 0; i < this._config[this._droneConfiguration].Motors.length; i++) {
             if (i === motorIndex) {
@@ -233,16 +233,16 @@ class MotorRemapComponent
 
     _onMotorClick(motorIndex) {
         console.log(motorIndex);
-        this.motorRemapCanvas.readyMotors.push(motorIndex);
+        this.motorOutputReorderCanvas.readyMotors.push(motorIndex);
         this._currentJerkingMotor ++;
 
         if (this._currentJerkingMotor < this._config[this._droneConfiguration].Motors.length) {
             this._startMotorJerking(this._currentJerkingMotor);
         } else {
             this._stopAnyMotorJerking();
-            this._domActionHintBlock.text(i18n.getMessage("motorRemapDialogRemapIsDone"));
-            this._getNewMotorRemap();
-            this.motorRemapCanvas.remappingReady = true;
+            this._domActionHintBlock.text(i18n.getMessage("motorOutputReorderDialogRemapIsDone"));
+            this._getNewMotorOutputReorder();
+            this.motorOutputReorderCanvas.remappingReady = true;
             this._showSaveStartOverButtons(true);
         }
     }

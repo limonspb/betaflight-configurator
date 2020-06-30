@@ -1,6 +1,6 @@
 'use strict';
 
-class MotorRemapCanvas
+class MotorOutputReorderCanvas
 {
     constructor(canvas, droneConfiguration, motorClickCallback, spinMotorCallback)
     {
@@ -11,7 +11,7 @@ class MotorRemapCanvas
         this._height = this._canvas.height();
         this._screenSize = Math.min(this._width, this._height);
 
-        this._config = new MotorRemapConfig(this._screenSize);
+        this._config = new MotorOutputReorderConfig(this._screenSize);
 
         // no component resize allowing yet
         this._canvas.prop({
@@ -70,7 +70,9 @@ class MotorRemapCanvas
         this._drawMotors();
 
         if (this._keepDrawing) {
-            window.requestAnimationFrame(()=>{this._drawOnce()});
+            window.requestAnimationFrame(() => {
+                this._drawOnce();
+            });
         }
     }
 
@@ -128,10 +130,10 @@ class MotorRemapCanvas
 
     _markMotors()
     {
-        let motors = this._config[this._droneConfiguration].Motors;
+        const motors = this._config[this._droneConfiguration].Motors;
         const mouseHoverMotorIndex = this._getMouseHoverMotorIndex();
 
-        if (-1 == this._motorIndexToSpinOnMouseDown) {
+        if (-1 === this._motorIndexToSpinOnMouseDown) {
             for (let i = 0; i < this.readyMotors.length; i++) {
                 const motorIndex = this.readyMotors[i];
                 this._ctx.beginPath();
@@ -174,7 +176,7 @@ class MotorRemapCanvas
 
         let result = -1;
         let currentDist = Number.MAX_SAFE_INTEGER;
-        let motors = this._config[this._droneConfiguration].Motors;
+        const motors = this._config[this._droneConfiguration].Motors;
 
         for (let i = 0; i < motors.length; i++) {
             const dist = Math.sqrt((x - motors[i].x) * (x - motors[i].x) + (y - motors[i].y) * (y - motors[i].y));
@@ -193,7 +195,7 @@ class MotorRemapCanvas
 
         this._ctx.lineWidth = this._config.PropEdgeLineWidth;
         this._ctx.strokeStyle = this._config.PropEdgeColor;
-        let motors = this._config[this._droneConfiguration].Motors;
+        const motors = this._config[this._droneConfiguration].Motors;
 
         for (let i = 0; i < motors.length; i++) {
             this._ctx.beginPath();
@@ -231,7 +233,7 @@ class MotorRemapCanvas
         this._ctx.lineWidth = this._config[this._droneConfiguration].ArmWidth;
         this._ctx.lineCap = "round";
         this._ctx.strokeStyle = this._config.FrameColor;
-        let motors = this._config[this._droneConfiguration].Motors;
+        const motors = this._config[this._droneConfiguration].Motors;
 
         switch(this._droneConfiguration) {
             case "Quad X":

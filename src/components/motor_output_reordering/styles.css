@@ -1,37 +1,37 @@
-.motorRemapComponent {
+.motorOutputReorderComponent {
     display:flex;
     height:100%;
     flex-flow:column;
 }
 
-.motorRemapComponentHeader {
+.motorOutputReorderComponentHeader {
     border-bottom: 1px solid var(--accent);
     margin-bottom: 10px;
     padding-bottom: 12px;
 }
 
-#dialogMotorRemapMainContent {
+#dialogMotorOutputReorderMainContent {
     display:flex;
     height:100%;
     flex-flow:column;
 }
 
-#dialogMotorRemapWarning {
+#dialogMotorOutputReorderWarning {
     display:flex;
     height:100%;
     flex-flow:column;
 }
 
-#motorRemapCanvas {
+#motorOutputReorderCanvas {
     width:100%;
     flex-grow: 1;
 }
 
-#motorRemapActionPanel {
+#motorOutputReorderActionPanel {
     height: 46px;
 }
 
-#dialogMotorRemapSave {
+#dialogMotorOutputReorderSave {
     margin-right: 0px;
 }
 
@@ -41,7 +41,7 @@
     margin-top: 1.5em;
 }
 
-#motorRemapActionHint {
+#motorOutputReorderActionHint {
     margin-top: 1.0em;
     display: inline-block;
 }
@@ -66,7 +66,7 @@
     margin-top: 1.5em;
 }
 
-#motorRemapSaveStartOverButtonsPanel {
+#motorOutputReorderSaveStartOverButtonsPanel {
     position: absolute;
     bottom: 4px;
 }

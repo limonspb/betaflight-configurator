@@ -116,7 +116,7 @@ var MSPCodes = {
     MSP_VTXTABLE_POWERLEVEL:        138,
 
     MSP_MOTOR_TELEMETRY:            139,
-    MSP_MOTOR_REMAP:                140,
+    MSP_MOTOR_OUTPUT_REORDERING:    140,
 
     MSP_STATUS_EX:                  150,
 
@@ -156,7 +156,7 @@ var MSPCodes = {
 
     MSP_SET_VTXTABLE_BAND:          227,
     MSP_SET_VTXTABLE_POWERLEVEL:    228,
-    MSP_SET_MOTOR_REMAP:            229,
+    MSP_SET_MOTOR_OUTPUT_REORDERING:229,
 
     MSP_MULTIPLE_MSP:               230,
 
