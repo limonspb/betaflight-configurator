@@ -777,7 +777,7 @@ TABS.motors.initialize = function (callback) {
 
         function onDocumentKeyPress(event)
         {
-            if (27 == event.which) {
+            if (27 === event.which) {
                 closeDialog();
             }
         }
