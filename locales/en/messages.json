@@ -2540,13 +2540,13 @@
         "message": "Start"
     },
     "motorsRemapDialogTitle": {
-        "message": "Remap motors"
+        "message": "Reorder motors"
     },
     "motorOutputReorderDialogOpen": {
-        "message": "Remap motors"
+        "message": "Reorder motors"
     },
     "motorOutputReorderDialogSelectSpinningMotor": {
-        "message": "Click on the spining motor..."
+        "message": "Click on the spinning motor..."
     },
     "motorOutputReorderDialogRemapIsDone": {
         "message": "Ready! Check the motors spinning order by clicking on the image."
@@ -2566,7 +2566,6 @@
     "motorsRemapDialogStartOver": {
         "message": "Start over"
     },
-
 
     "sensorsInfo": {
         "message": "Keep in mind that using fast update periods and rendering multiple graphs at the same time is resource heavy and will burn your battery quicker if you use a laptop.<br />We recommend to only render graphs for sensors you are interested in while using reasonable update periods."

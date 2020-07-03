@@ -230,11 +230,8 @@ TABS.motors.initialize = function (callback) {
         const motorOutputReorderConfig = new MotorOutputReorderConfig(100);
         const domMotorOutputReorderDialogOpen = $('#motorOutputReorderDialogOpen');
 
-        if (mixerList[mixer - 1].name in motorOutputReorderConfig && MOTOR_OUTPUT_ORDER.length > 0) {
-            domMotorOutputReorderDialogOpen.show();
-        } else {
-            domMotorOutputReorderDialogOpen.hide();
-        }
+        const isMotorReorderingAvailable = mixerList[mixer - 1].name in motorOutputReorderConfig && FC.MOTOR_OUTPUT_ORDER.length > 0;
+        domMotorOutputReorderDialogOpen.toggle(isMotorReorderingAvailable);
     }
 
     function process_html() {

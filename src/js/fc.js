@@ -69,6 +69,7 @@ const FC = {
     VTXTABLE_BAND: null,
     VTXTABLE_POWERLEVEL: null,
     VTX_CONFIG: null,
+    MOTOR_OUTPUT_ORDER: null,
 
     resetState () {
         this.CONFIG = {
@@ -220,6 +221,7 @@ const FC = {
 
         this.MOTOR_DATA =               Array.from({length: 8});
         this.SERVO_DATA =               Array.from({length: 8});
+        this.MOTOR_OUTPUT_ORDER =       [];
 
         this.MOTOR_TELEMETRY_DATA = {
             rpm:                        [0, 0, 0, 0, 0, 0, 0, 0],

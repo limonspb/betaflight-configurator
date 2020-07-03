@@ -24,19 +24,24 @@ class MotorOutputReorderCanvas
         this._ctx = this._canvas[0].getContext("2d");
         this._ctx.translate(this._width / 2, this._height / 2);
 
-        this._canvas.mousemove((event) => {
+        this._canvas.mousemove((event) =>
+        {
             this._onMouseMove(event);
         });
-        this._canvas.mouseleave(() => {
+        this._canvas.mouseleave(() =>
+        {
             this._onMouseLeave();
         });
-        this._canvas.mousedown(() => {
+        this._canvas.mousedown(() =>
+        {
             this._onMouseDown();
         });
-        this._canvas.mouseup(() => {
+        this._canvas.mouseup(() =>
+        {
             this._onMouseUp(event);
         });
-        this._canvas.click(() => {
+        this._canvas.click(() =>
+        {
             this._onMouseClick();
         });
 
@@ -55,14 +60,15 @@ class MotorOutputReorderCanvas
         this._motorIndexToSpinOnMouseDown = -1;
         this._keepDrawing = true;
         this._mouse = {x : 0, y: 0};
-        window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() =>
+        {
             this._drawOnce();
         });
     }
 
     _drawOnce()
     {
-        this._ctx.clearRect(- this._width / 2,  -this._height / 2, this._width, this._height);
+        this._ctx.clearRect(-this._width / 2,  -this._height / 2, this._width, this._height);
 
         this._drawFrame();
         this._drawDirectionArrow();
@@ -70,7 +76,8 @@ class MotorOutputReorderCanvas
         this._drawMotors();
 
         if (this._keepDrawing) {
-            window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(() =>
+            {
                 this._drawOnce();
             });
         }
@@ -201,15 +208,6 @@ class MotorOutputReorderCanvas
             this._ctx.beginPath();
             this._ctx.arc(motors[i].x, motors[i].y, this._config[this._droneConfiguration].PropRadius, 0, 2 * Math.PI);
             this._ctx.stroke();
-
-            /*
-            // uncomment for checking new configurations motor order
-            this._ctx.font = this._config.MotorNumberTextFont;
-            this._ctx.fillStyle = this._config.MotorNumberTextColor;
-            this._ctx.textAlign = "center";
-            this._ctx.textBaseline = "middle";
-            this._ctx.fillText(i + 1, motors[i].x, motors[i].y);
-            */
         }
     }
 

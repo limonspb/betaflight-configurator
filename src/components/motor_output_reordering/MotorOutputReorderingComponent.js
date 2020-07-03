@@ -16,7 +16,8 @@ class MotorOutputReorderComponent
 
         this._currentSpinningMotor = -1;
 
-        this._contentDiv.load("./components/motor_output_reordering/body.html", () => {
+        this._contentDiv.load("./components/motor_output_reordering/body.html", () =>
+        {
             this._setupdialog();
         });
     }
@@ -43,21 +44,19 @@ class MotorOutputReorderComponent
         this._domAgreeSafetyCheckBox.change(() =>
         {
             const enabled = this._domAgreeSafetyCheckBox.is(':checked');
-
-            if (enabled) {
-                this._domAgreeButton.show();
-            } else {
-                this._domAgreeButton.hide();
-            }
+            this._domAgreeButton.toggle(enabled);
         });
 
-        this._domAgreeButton.click(() => {
+        this._domAgreeButton.click(() =>
+        {
             this._onAgreeButtonClicked();
         });
-        this._domStartOverButton.click(() => {
+        this._domStartOverButton.click(() =>
+        {
             this._startOver();
         });
-        this._domSaveButton.click(() => {
+        this._domSaveButton.click(() =>
+        {
             this._save();
         });
 
@@ -83,7 +82,8 @@ class MotorOutputReorderComponent
         this._showSaveStartOverButtons(false);
     }
 
-    _save() {
+    _save()
+    {
         function save_to_eeprom()
         {
             MSP.send_message(MSPCodes.MSP_EEPROM_WRITE, false, false, reboot);
@@ -93,25 +93,21 @@ class MotorOutputReorderComponent
         {
             GUI.log(i18n.getMessage('configurationEepromSaved'));
 
-            GUI.tab_switch_cleanup(function() {
+            GUI.tab_switch_cleanup(function()
+            {
                 MSP.send_message(MSPCodes.MSP_SET_REBOOT, false, false);
                 reinitialiseConnection(self);
             });
         }
 
-        const buffer = [];
-        buffer.push8(this.motorOutputReorderCanvas.readyMotors.length);
+        FC.MOTOR_OUTPUT_ORDER = Array.from(this._newMotorOutputReorder);
 
-        for (let i = 0; i < this._newMotorOutputReorder.length; i++) {
-            buffer.push8(this._newMotorOutputReorder[i]);
-        }
-
-        MSP.send_message(MSPCodes.MSP_SET_MOTOR_OUTPUT_REORDERING, buffer);
+        MSP.send_message(MSPCodes.MSP_SET_MOTOR_OUTPUT_REORDERING, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_OUTPUT_REORDERING));
 
         save_to_eeprom();
     }
 
-    _getNewMotorOutputReorder()
+    _calculateNewMotorOutputReorder()
     {
         this._newMotorOutputReorder = [];
 
@@ -122,16 +118,17 @@ class MotorOutputReorderComponent
 
     _remapMotorIndex(motorIndex)
     {
-        return MOTOR_OUTPUT_ORDER[this.motorOutputReorderCanvas.readyMotors.indexOf(motorIndex)];
+        return FC.MOTOR_OUTPUT_ORDER[this.motorOutputReorderCanvas.readyMotors.indexOf(motorIndex)];
     }
 
     _startOver()
     {
         this._showSaveStartOverButtons(false);
-        this.startUserInteraction();
+        this._startUserInteraction();
     }
 
-    _showSaveStartOverButtons(show) {
+    _showSaveStartOverButtons(show)
+    {
         if (show) {
             this._domStartOverButton.show();
             this._domSaveButton.show();
@@ -141,29 +138,34 @@ class MotorOutputReorderComponent
         }
     }
 
-    _onAgreeButtonClicked() {
+    _onAgreeButtonClicked()
+    {
         this._domActionHintBlock.text(i18n.getMessage("motorOutputReorderDialogSelectSpinningMotor"));
         this._domWarningContentBlock.hide();
         this._domMainContentBlock.show();
-        this.startUserInteraction();
+        this._startUserInteraction();
     }
 
-    _stopUserInteraction() {
+    _stopUserInteraction()
+    {
         if (this.motorOutputReorderCanvas) {
             this.motorOutputReorderCanvas.pause();
         }
     }
 
-    startUserInteraction() {
+    _startUserInteraction()
+    {
         if (this.motorOutputReorderCanvas) {
             this.motorOutputReorderCanvas.startOver();
         } else {
             this.motorOutputReorderCanvas = new MotorOutputReorderCanvas(this._domCanvas,
                 this._droneConfiguration,
-                (motorIndex) => { // motor click callback
+                (motorIndex) =>
+                { // motor click callback
                     this._onMotorClick(motorIndex);
                 },
-                (motorIndex) => { // motor spin callback
+                (motorIndex) =>
+                { // motor spin callback
                     let indexToSpin = -1;
 
                     if (-1 !== motorIndex) {
@@ -178,7 +180,8 @@ class MotorOutputReorderComponent
         this._startMotorJerking(0);
     }
 
-    _stopAnyMotorJerking() {
+    _stopAnyMotorJerking()
+    {
         if (-1 !== this._currentJerkingTimeout) {
             clearTimeout(this._currentJerkingTimeout);
             this._currentJerkingTimeout = -1;
@@ -188,28 +191,34 @@ class MotorOutputReorderComponent
         this._currentJerkingMotor = -1;
     }
 
-    _startMotorJerking(motorIndex) {
+    _startMotorJerking(motorIndex)
+    {
         this._stopAnyMotorJerking();
         this._currentJerkingMotor = motorIndex;
         this._motorStartTimeout(motorIndex);
     }
 
-    _motorStartTimeout(motorIndex) {
+    _motorStartTimeout(motorIndex)
+    {
         this._spinMotor(motorIndex);
-        this._currentJerkingTimeout = setTimeout(() => {
+        this._currentJerkingTimeout = setTimeout(() =>
+        {
             this._motorStopTimeout(motorIndex);
         }, 250);
     }
 
-    _motorStopTimeout(motorIndex) {
+    _motorStopTimeout(motorIndex)
+    {
         this._spinMotor(-1);
-        this._currentJerkingTimeout = setTimeout(() => {
+        this._currentJerkingTimeout = setTimeout(() =>
+        {
             this._motorStartTimeout(motorIndex);
         }, 500);
     }
 
 
-    _spinMotor(motorIndex) {
+    _spinMotor(motorIndex)
+    {
         this._currentSpinningMotor = motorIndex;
         const buffer = [];
 
@@ -231,8 +240,8 @@ class MotorOutputReorderComponent
         }
     }
 
-    _onMotorClick(motorIndex) {
-        console.log(motorIndex);
+    _onMotorClick(motorIndex)
+    {
         this.motorOutputReorderCanvas.readyMotors.push(motorIndex);
         this._currentJerkingMotor ++;
 
@@ -241,7 +250,7 @@ class MotorOutputReorderComponent
         } else {
             this._stopAnyMotorJerking();
             this._domActionHintBlock.text(i18n.getMessage("motorOutputReorderDialogRemapIsDone"));
-            this._getNewMotorOutputReorder();
+            this._calculateNewMotorOutputReorder();
             this.motorOutputReorderCanvas.remappingReady = true;
             this._showSaveStartOverButtons(true);
         }
