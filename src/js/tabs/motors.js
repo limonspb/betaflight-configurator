@@ -61,7 +61,7 @@ TABS.motors.initialize = function (callback) {
     }
 
     function load_motor_output_reordering() {
-        MSP.send_message(MSPCodes.MSP_MOTOR_OUTPUT_REORDERING, false, false, load_motor_data);
+        MSP.send_message(MSPCodes.MSP2_MOTOR_OUTPUT_REORDERING, false, false, load_motor_data);
     }
 
     function load_motor_data() {

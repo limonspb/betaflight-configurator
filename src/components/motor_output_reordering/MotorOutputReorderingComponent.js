@@ -102,7 +102,7 @@ class MotorOutputReorderComponent
 
         FC.MOTOR_OUTPUT_ORDER = Array.from(this._newMotorOutputReorder);
 
-        MSP.send_message(MSPCodes.MSP_SET_MOTOR_OUTPUT_REORDERING, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_OUTPUT_REORDERING));
+        MSP.send_message(MSPCodes.MSP2_SET_MOTOR_OUTPUT_REORDERING, mspHelper.crunch(MSPCodes.MSP2_SET_MOTOR_OUTPUT_REORDERING));
 
         save_to_eeprom();
     }

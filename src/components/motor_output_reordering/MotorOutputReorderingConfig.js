@@ -2,7 +2,7 @@
 
 function MotorOutputReorderConfig(screenSize)
 {
-    this.FrameColor    = 'rgb(186, 186, 186)';
+    this.FrameColor = 'rgb(186, 186, 186)';
     this.PropEdgeColor = 'rgb(255, 187, 0)';
     this.PropEdgeLineWidth = 3;
     this.MotorNumberTextFont = `${screenSize * 0.1}px 'Open Sans', 'Segoe UI', Tahoma, sans-serif`;

@@ -147,7 +147,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     FC.MOTOR_DATA[i] = data.readU16();
                 }
                 break;
-            case MSPCodes.MSP_MOTOR_OUTPUT_REORDERING:
+            case MSPCodes.MSP2_MOTOR_OUTPUT_REORDERING:
                 FC.MOTOR_OUTPUT_ORDER = [];
                 const arraySize = data.read8();
                 for (let i = 0; i < arraySize; i++) {
@@ -1554,7 +1554,7 @@ MspHelper.prototype.process_data = function(dataHandler) {
             case MSPCodes.MSP_SET_RTC:
                 console.log('Real time clock set');
                 break;
-            case MSPCodes.MSP_SET_MOTOR_OUTPUT_REORDERING:
+            case MSPCodes.MSP2_SET_MOTOR_OUTPUT_REORDERING:
                 console.log('Motor output reordering set');
                 break;
 
@@ -2264,7 +2264,7 @@ MspHelper.prototype.crunch = function(code) {
 
             break;
 
-        case MSPCodes.MSP_SET_MOTOR_OUTPUT_REORDERING:
+        case MSPCodes.MSP2_SET_MOTOR_OUTPUT_REORDERING:
 
             buffer.push8(FC.MOTOR_OUTPUT_ORDER.length);
             for (let i = 0; i < FC.MOTOR_OUTPUT_ORDER.length; i++) {
