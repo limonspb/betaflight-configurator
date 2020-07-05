@@ -39,6 +39,13 @@
     flex-grow: 1;
 }
 
+@media all and (max-width: 575px) {
+    .tab-motors #dialogMotorOutputReorder {
+        width: calc(100% - 2em);
+        border-radius: unset;
+    }
+}
+
 .tab-motors .mixerPreview img {
     width: 120px;
     height: 120px;
