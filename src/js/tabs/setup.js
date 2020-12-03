@@ -20,7 +20,11 @@ TABS.setup.initialize = function (callback) {
     }
 
     function load_html() {
-        $('#content').load("./tabs/setup.html", process_html);
+        $('#content').load("./tabs/setup.html", load_board_alignment_component);
+    }
+
+    function load_board_alignment_component() {
+        let boardAlignmentComponent = new BoardAlignmentComponent($('#boardAlignmentComponentContent'), process_html);
     }
 
     MSP.send_message(MSPCodes.MSP_ACC_TRIM, false, false, load_status);
