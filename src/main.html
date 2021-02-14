@@ -22,6 +22,7 @@
     <link type="text/css" rel="stylesheet" href="./css/tabs/led_strip.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/sensors.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/cli.css" media="all"/>
+    <link type="text/css" rel="stylesheet" href="./tabs/presets/presets.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/logging.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/onboard_logging.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/firmware_flasher.css" media="all"/>
@@ -130,6 +131,9 @@
     <script type="text/javascript" src="./js/tabs/cli.js"></script>
     <!-- TODO: might be removed when everythign is in modules -->
     <script type="module" src="./js/tabs/logging.js"></script>
+    <script type="text/javascript" src="./tabs/presets/presets.js"></script>
+    <script type="text/javascript" src="./tabs/presets/PresetsFcSettings.js"></script>
+    <script type="text/javascript" src="./js/tabs/logging.js"></script>
     <script type="text/javascript" src="./js/tabs/onboard_logging.js"></script>
     <script type="text/javascript" src="./js/FirmwareCache.js"></script>
     <script type="text/javascript" src="./js/tabs/firmware_flasher.js"></script>
@@ -358,6 +362,9 @@
                 <ul class="mode-connected mode-connected-cli">
                     <li class="tab_cli">
                         <a href="#" i18n="tabCLI" class="tabicon ic_cli" i18n_title="tabCLI"></a>
+                    </li>
+                    <li class="tab_presets">
+                        <a href="#" i18n="tabPresets" class="tabicon ic_wizzard" i18n_title="tabPresets"></a>
                     </li>
                 </ul>
             </div>
