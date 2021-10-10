@@ -6205,5 +6205,89 @@
     },
     "cordovaExitAppMessage": {
         "message": "Do you really want to close the configurator?"
+    },
+    "dropDownSelectAll": {
+        "message": "[Select all]",
+        "description": "Select all item in the drop down/multiple select"
+    },
+    "dropDownAll": {
+        "message": "All",
+        "description": "Text indicating everything is selected in the drop down/multiple select"
+    },
+    "tabPresets": {
+        "message": "Presets",
+        "description": "Presets tab title"
+    },
+    "tabPresetsSearch": {
+        "message": "Search",
+        "description": "Hint text in front of the search text input for presets search"
+    },
+    "presetsReload": {
+        "message": "Reload",
+        "description": "Text on the reload button that appears when there in an error loading presets index"
+    },
+    "presetsFilterIncludeOfficialOnly": {
+        "message": "Official only",
+        "description": "Hint text in front of the checkbox for presets search"
+    },
+    "presetsAuthor": {
+        "message": "Author:",
+        "description": "Hint text in the presets detailed dialog"
+    },
+    "presetsKeywords": {
+        "message": "Keywords:",
+        "description": "Hint text in the presets detailed dialog"
+    },
+    "presetsVersions": {
+        "message": "Firmware:",
+        "description": "Hint text in the presets detailed dialog"
+    },
+    "presetsOfficial": {
+        "message": "Official",
+        "description": "Hint text in the presets detailed dialog indication preset is official"
+    },
+    "presetsNotOfficial": {
+        "message": "Community",
+        "description": "Hint text in the presets detailed dialog indication preset is not official"
+    },
+    "presetsApply": {
+        "message": "Apply",
+        "description": "Button to apply a preset"
+    },
+    "presetsShowHideCli": {
+        "message": "CLI show/hide",
+        "description": "Button to show / hide CLI window on presets tab"
+    },
+    "presetsViewOnline": {
+        "message": "Open online",
+        "description": "Link text for opening preset file online"
+    },
+    "presetsRegions": {
+        "message": "Regions",
+        "description": "Text label for Regions drop down select"
+    },
+    "presetsFilterCategory": {
+        "message": "Categories",
+        "description": "UI filter name"
+    },
+    "presetsFilterKeyword": {
+        "message": "Keywords",
+        "description": "UI filter name"
+    },
+    "presetsFilterAuthor": {
+        "message": "Authors",
+        "description": "UI filter name"
+    },
+    "presetsFilterFirmware": {
+        "message": "Firmwares",
+        "description": "UI filter name"
+    },
+    "presetsFilterOfficial": {
+        "message": "Official",
+        "description": "UI filter name"
+    },
+    "presetsLoadError": {
+        "message": "Error loading presets from the internet",
+        "description": "Error report when failed to load presets index or a specific preset"
     }
 }
