@@ -23,27 +23,27 @@ class PresetsRepoIndexed
             });
     }
 
-    removeUncheckedRegions(text, checkedRegions)
+    removeUncheckedOptions(text, checkedOptions)
     {
         let strings = text.split("\n");
         let resultStrings = [];
-        let isCurrentRegionExcluded = false;
-        const lowerCasedCheckedRegions = checkedRegions.map(regionName => regionName.toLowerCase());
+        let isCurrentOptionExcluded = false;
+        const lowerCasedCheckedOptions = checkedOptions.map(optionName => optionName.toLowerCase());
 
         strings.forEach(str => {
             if (this._isLineCommented(str)) {
                 let line = this._removeCommentDirective(str);
 
-                if (this._isRegionBegin(line)) {
-                    const regionNameLowCase = this._getRegionName(line).toLowerCase();
+                if (this._isOptionBegin(line)) {
+                    const optionNameLowCase = this._getOptionName(line).toLowerCase();
 
-                    if (!lowerCasedCheckedRegions.includes(regionNameLowCase)) {
-                        isCurrentRegionExcluded = true;
+                    if (!lowerCasedCheckedOptions.includes(optionNameLowCase)) {
+                        isCurrentOptionExcluded = true;
                     }
-                } else if (this._isRegionEnd(line)) {
-                    isCurrentRegionExcluded = false;
+                } else if (this._isOptionEnd(line)) {
+                    isCurrentOptionExcluded = false;
                 }
-            } else if (!isCurrentRegionExcluded) {
+            } else if (!isCurrentOptionExcluded) {
                 resultStrings.push(str);
             }
         });
@@ -56,26 +56,26 @@ class PresetsRepoIndexed
         return line.trim().startsWith(PresetsRepoIndexed._sCliCommentDirective);
     }
 
-    _isRegionBegin(line)
+    _isOptionBegin(line)
     {
         const lowCaseLine = line.toLowerCase();
-        return lowCaseLine.startsWith(this._index.settings.RegionDirectives.BEGIN_REGION_DIRECTIVE);
+        return lowCaseLine.startsWith(this._index.settings.OptionDirectives.BEGIN_OPTION_DIRECTIVE);
     }
 
-    _isRegionEnd(line)
+    _isOptionEnd(line)
     {
         const lowCaseLine = line.toLowerCase();
-        return lowCaseLine.startsWith(this._index.settings.RegionDirectives.END_REGION_DIRECTIVE);
+        return lowCaseLine.startsWith(this._index.settings.OptionDirectives.END_OPTION_DIRECTIVE);
     }
 
-    _getRegionName(line)
+    _getOptionName(line)
     {
-        const directiveRemoved = line.slice(this._index.settings.RegionDirectives.BEGIN_REGION_DIRECTIVE.length).trim();
-        const regExpRemoveChecked = new RegExp(this._escapeRegex(this._index.settings.RegionDirectives.REGION_CHECKED), 'gi');
-        const regExpRemoveUnchecked = new RegExp(this._escapeRegex(this._index.settings.RegionDirectives.REGION_UNCHECKED), 'gi');
-        let regionName = directiveRemoved.replace(regExpRemoveChecked, "");
-        regionName = regionName.replace(regExpRemoveUnchecked, "").trim();
-        return regionName;
+        const directiveRemoved = line.slice(this._index.settings.OptionDirectives.BEGIN_OPTION_DIRECTIVE.length).trim();
+        const regExpRemoveChecked = new RegExp(this._escapeRegex(this._index.settings.OptionDirectives.OPTION_CHECKED), 'gi');
+        const regExpRemoveUnchecked = new RegExp(this._escapeRegex(this._index.settings.OptionDirectives.OPTION_UNCHECKED), 'gi');
+        let optionName = directiveRemoved.replace(regExpRemoveChecked, "");
+        optionName = optionName.replace(regExpRemoveUnchecked, "").trim();
+        return optionName;
     }
 
     _escapeRegex(string)

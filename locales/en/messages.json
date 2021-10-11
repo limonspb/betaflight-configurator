@@ -6262,9 +6262,9 @@
         "message": "Open online",
         "description": "Link text for opening preset file online"
     },
-    "presetsRegions": {
-        "message": "Regions",
-        "description": "Text label for Regions drop down select"
+    "presetsOptions": {
+        "message": "Options",
+        "description": "Text label for Options drop down select"
     },
     "presetsFilterCategory": {
         "message": "Categories",

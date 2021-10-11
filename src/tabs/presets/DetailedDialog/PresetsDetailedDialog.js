@@ -32,7 +32,7 @@ class PresetsDetailedDialog
         this._domGitHubLink.attr("href", this._presetsRepo.getPresetGitHubLink(this._preset));
         this._titlePanel.empty();
         const presetPanel = new PresetTitlePanel(this._titlePanel, this._preset, false, ()=>{ this._setLoadingState(false); });
-        this._loadRegionsSelect();
+        this._loadOptionsSelect();
         this._setLoadingState(false);
     }
 
@@ -63,45 +63,45 @@ class PresetsDetailedDialog
         this._titlePanel = $('.preset_detailed_dialog_title_panel');
         this._domDescription = this._domDialog.find('.preset_detailed_dialog_description');
         this._domGitHubLink = this._domDialog.find('#presets_github_link');
-        this._domRegionsSelect = $('#presets_regions_select');
-        this._domRegionsSelectPanel = $('#presets_regions_panel');
+        this._domOptionsSelect = $('#presets_options_select');
+        this._domOptionsSelectPanel = $('#presets_options_panel');
     }
 
-    _createRegionsSelect(regions)
+    _createOptionsSelect(options)
     {
-        regions.forEach(region => {
+        options.forEach(option => {
             let selectedString = "selected=\"selected\"";
-            if (!region.checked) {
+            if (!option.checked) {
                 selectedString = "";
             }
 
-            this._domRegionsSelect.append(`<option value= ${region.name} ${selectedString}>${region.name}</option>`);
+            this._domOptionsSelect.append(`<option value= ${option.name} ${selectedString}>${option.name}</option>`);
         });
 
-        this._domRegionsSelect.multipleSelect({
+        this._domOptionsSelect.multipleSelect({
             placeholder: i18n.getMessage("dropDownAll"),
             formatSelectAll () { return i18n.getMessage("dropDownSelectAll"); },
             formatAllSelected() { return i18n.getMessage("dropDownAll"); },
         });
     }
 
-    _destroyRegionsSelect()
+    _destroyOptionsSelect()
     {
-        this._domRegionsSelect.multipleSelect('destroy');
+        this._domOptionsSelect.multipleSelect('destroy');
     }
 
-    _loadRegionsSelect()
+    _loadOptionsSelect()
     {
 
-        const regionsVisible = 0 !== this._preset.regions.length;
-        this._domRegionsSelect.empty();
-        this._domRegionsSelectPanel.toggle(regionsVisible);
+        const optionsVisible = 0 !== this._preset.options.length;
+        this._domOptionsSelect.empty();
+        this._domOptionsSelectPanel.toggle(optionsVisible);
 
-        if (regionsVisible) {
-            this._createRegionsSelect(this._preset.regions);
+        if (optionsVisible) {
+            this._createOptionsSelect(this._preset.options);
         }
 
-        this._domRegionsSelect.multipleSelect('refresh');
+        this._domOptionsSelect.multipleSelect('refresh');
     }
 
     _setupdialog()
@@ -124,11 +124,11 @@ class PresetsDetailedDialog
     _onApplyButtonClicked()
     {
         this._setLoadingState(true);
-        let regionsToInclude = this._domRegionsSelect.multipleSelect("getSelects", "text");
+        let optionsToInclude = this._domOptionsSelect.multipleSelect("getSelects", "text");
         this._presetsRepo.loadPreset(this._preset)
             .then(txt => {
-                const txtAfterRegions = this._presetsRepo.removeUncheckedRegions(txt, regionsToInclude);
-                this._cliEngine.send(txtAfterRegions, () => { this._onPresetApplied(); });
+                const txtAfterOptions = this._presetsRepo.removeUncheckedOptions(txt, optionsToInclude);
+                this._cliEngine.send(txtAfterOptions, () => { this._onPresetApplied(); });
             })
             .catch(err => {
                 console.log(err);
@@ -144,7 +144,7 @@ class PresetsDetailedDialog
 
     _onCancelButtonClicked()
     {
-        this._destroyRegionsSelect();
+        this._destroyOptionsSelect();
         this._domDialog[0].close();
     }
 }

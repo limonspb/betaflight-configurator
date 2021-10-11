@@ -56,14 +56,14 @@
     height: 300px;
 }
 
-#presets_regions_select {
+#presets_options_select {
     width: 296px;
 }
 
-#presets_regions_panel {
+#presets_options_panel {
     height: 26px;
 }
 
-#presets_regions_panel > span{
+#presets_options_panel > span{
     line-height: 26px;
 }
