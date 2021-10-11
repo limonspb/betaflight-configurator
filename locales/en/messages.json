@@ -6289,5 +6289,13 @@
     "presetsLoadError": {
         "message": "Error loading presets from the internet",
         "description": "Error report when failed to load presets index or a specific preset"
+    },
+    "presetsButtonSave": {
+        "message": "Save and Reboot",
+        "description": "A button that saves all appied presets - analog to 'save' command in CLI"
+    },
+    "presetsButtonCancel": {
+        "message": "Cancel and Reboot",
+        "description": "A button that restarts FC without saving appied presets - analog to 'exit' command in CLI"
     }
 }

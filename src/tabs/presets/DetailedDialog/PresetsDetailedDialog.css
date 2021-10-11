@@ -62,8 +62,14 @@
 
 #presets_options_panel {
     height: 26px;
+    margin-top: 6px;
 }
 
 #presets_options_panel > span{
     line-height: 26px;
+}
+
+#preset_options_label {
+    width : 100px;
+    display: inline-block;
 }

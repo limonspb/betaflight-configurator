@@ -36,6 +36,7 @@ TABS.presets.readDom = function()
     this._domButtonCancel = $("#presets_cancel_button");
     this._domShowHideCli = $("#presets_show_hide_cli");
     this._domReloadButton = $("#presets_reload");
+    this._domContentWrapper = $("#presets_content_wrapper");
 };
 
 TABS.presets.setupMenuButtons = function()
@@ -51,6 +52,9 @@ TABS.presets.setupMenuButtons = function()
 
     this._domShowHideCli.on("click", () => {
         this._divCli.toggle();
+        if (this._divCli.is(":visible")) {
+            this._domContentWrapper.animate({scrollTop: this._domContentWrapper.prop('scrollHeight')}, 'slow');
+        }
     });
 };
 
@@ -79,8 +83,11 @@ TABS.presets.reload = function()
 
 TABS.presets.tryLoadPresets = function()
 {
-    this.presetsRepo = new PresetsRepoIndexed("https://raw.githubusercontent.com/betaflight/firmware-presets/master/",
-                                              "https://github.com/betaflight/firmware-presets/blob/master/");
+    this.presetsRepo = new PresetsRepoIndexed("https://raw.githubusercontent.com/limonspb/firmware-presets/fake/",
+                                              "https://github.com/limonspb/firmware-presets/blob/fake/");
+    //this.presetsRepo = new PresetsRepoIndexed("https://api.betaflight.com/firmware-presets/",
+    //                                          "https://api.betaflight.com/firmware-presets/");
+
 
     this._divMainContent.toggle(false);
     this._divGlobalLoadingError.toggle(false);

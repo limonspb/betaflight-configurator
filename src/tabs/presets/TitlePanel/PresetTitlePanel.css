@@ -5,11 +5,6 @@
     padding: 12px;
 }
 
-.preset_title_panel_firts_col {
-    width: 100px;
-    display: inline-block;
-}
-
 .preset_title_panel_border:hover {
     background-color: var(--subtleAccent);
 }
@@ -59,13 +54,25 @@
 
 .preset_title_panel_keywords_text {
     font-size: 1.2em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.preset_title_panel_row {
-    height: 26px;
+.presets_title_panel_table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.preset_title_panel_row span {
-    line-height: 26px;
+.presets_title_panel_table td{
+    overflow: hidden;
+    height: 24px;
+    width: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
+.presets_title_panel_table td:nth-child(1){
+    width: 100px;
+}

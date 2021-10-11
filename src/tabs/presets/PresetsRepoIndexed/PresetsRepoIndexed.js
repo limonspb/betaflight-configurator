@@ -59,20 +59,20 @@ class PresetsRepoIndexed
     _isOptionBegin(line)
     {
         const lowCaseLine = line.toLowerCase();
-        return lowCaseLine.startsWith(this._index.settings.OptionDirectives.BEGIN_OPTION_DIRECTIVE);
+        return lowCaseLine.startsWith(this._index.settings.OptionsDirectives.BEGIN_OPTION_DIRECTIVE);
     }
 
     _isOptionEnd(line)
     {
         const lowCaseLine = line.toLowerCase();
-        return lowCaseLine.startsWith(this._index.settings.OptionDirectives.END_OPTION_DIRECTIVE);
+        return lowCaseLine.startsWith(this._index.settings.OptionsDirectives.END_OPTION_DIRECTIVE);
     }
 
     _getOptionName(line)
     {
-        const directiveRemoved = line.slice(this._index.settings.OptionDirectives.BEGIN_OPTION_DIRECTIVE.length).trim();
-        const regExpRemoveChecked = new RegExp(this._escapeRegex(this._index.settings.OptionDirectives.OPTION_CHECKED), 'gi');
-        const regExpRemoveUnchecked = new RegExp(this._escapeRegex(this._index.settings.OptionDirectives.OPTION_UNCHECKED), 'gi');
+        const directiveRemoved = line.slice(this._index.settings.OptionsDirectives.BEGIN_OPTION_DIRECTIVE.length).trim();
+        const regExpRemoveChecked = new RegExp(this._escapeRegex(this._index.settings.OptionsDirectives.OPTION_CHECKED), 'gi');
+        const regExpRemoveUnchecked = new RegExp(this._escapeRegex(this._index.settings.OptionsDirectives.OPTION_UNCHECKED), 'gi');
         let optionName = directiveRemoved.replace(regExpRemoveChecked, "");
         optionName = optionName.replace(regExpRemoveUnchecked, "").trim();
         return optionName;
