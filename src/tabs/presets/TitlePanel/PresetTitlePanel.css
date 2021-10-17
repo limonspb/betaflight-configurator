@@ -3,12 +3,13 @@
 }
 
 .preset_title_panel_border {
-    background-color: var(--gimbalBackground);
+    background-color: var(--boxBackground);
     border: 1px solid var(--subtleAccent);
     margin-bottom: 1.5ex;
     cursor: pointer;
     padding: 1.5ex;
     box-shadow: 2px 2px 5px rgba(92, 92, 92, 0.25);
+    border-radius: 4px;
 }
     
 .preset_title_panel_border:hover {
@@ -55,6 +56,7 @@
     display: inline-block;
     color: white;
     font-weight: 700;
+    border-radius: 4px;
 }
 
 .preset_title_panel_official_true {
