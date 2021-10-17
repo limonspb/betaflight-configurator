@@ -1,28 +1,50 @@
-.preset_title_panel_border {
-    border: 1px solid var(--subtleAccent);
-    margin-top: 8px;
-    cursor: pointer;
-    padding: 12px;
-}
-
-.preset_title_panel_border:hover {
-    background-color: var(--subtleAccent);
-}
-
 .preset_title_panel {
     color: var(--defaultText);
 }
 
-.preset_title_panel_category {
-    color: var(--mutedText);
-    font-size: 1.5em;
+.preset_title_panel_border {
+    background-color: var(--gimbalBackground);
+    border: 1px solid var(--subtleAccent);
+    margin-bottom: 1.5ex;
+    cursor: pointer;
+    padding: 1.5ex;
+    box-shadow: 2px 2px 5px rgba(92, 92, 92, 0.25);
+}
+    
+.preset_title_panel_border:hover {
+    background-color: var(--subtleAccent);
+    box-shadow: 2px 2px 5px rgba(92, 92, 92, 0.5);
 }
 
 .preset_title_panel_title {
     font-size: 1.5em;
-    font-weight: 600;
+    font-weight: bold;
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 1ex;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}        
+
+@media only screen and (min-width: 1140px) {
+    .preset_title_panel_border {
+        float: left;
+        width: 30%;
+        margin: 0 1.5ex 1.5ex 0;
+    }
+}
+
+@media only screen and (min-width: 1300px) {
+    .preset_title_panel_border {
+        float: left;
+        width: 20%;
+        margin: 0 1.5ex 1.5ex 0;
+    }
+}
+
+.preset_title_panel_category {
+    color: var(--mutedText);
+    font-weight: bold;
 }
 
 .preset_title_panel_official {
@@ -44,16 +66,13 @@
 }
 
 .preset_title_panel_author_text {
-    font-size: 1.3em;
 }
 
 .preset_title_panel_versions_text {
-    font-size: 1.3em;
     font-weight: bold;
 }
 
 .preset_title_panel_keywords_text {
-    font-size: 1.2em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -75,4 +94,8 @@
 
 .presets_title_panel_table td:nth-child(1){
     width: 100px;
+}
+
+.preset_title_panel_label {
+    color: var(--quietHeader);
 }

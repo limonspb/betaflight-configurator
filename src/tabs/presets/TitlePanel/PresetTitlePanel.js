@@ -37,9 +37,11 @@ class PresetTitlePanel
 
         this._domCategory.text(this._preset.category);
         this._domTitle.text(this._preset.title);
+        this._domTitle.prop("title", this._preset.title);
         this._domAuthor.text(this._preset.author);
         this._domVersions.text(this._preset.firmwareVersion?.join("; "));
         this._domKeywords.text(this._preset.keywords?.join("; "));
+        this._domKeywords.prop("title", this._preset.keywords?.join("; "));
         this._domOfficialTrue.toggle(this._preset.official);
         this._domOfficialFalse.toggle(!this._preset.official);
 
