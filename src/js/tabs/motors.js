@@ -70,6 +70,8 @@ const motors = {
     DSHOT_3D_NEUTRAL: 1500,
 };
 
+const previousRpmValues = [0,0,0,0,0,0,0,0];
+
 motors.initialize = async function (callback) {
     const self = this;
 
@@ -1082,6 +1084,14 @@ motors.initialize = async function (callback) {
                     const MAX_INVALID_PERCENT = 100;
 
                     let rpmMotorValue = FC.MOTOR_TELEMETRY_DATA.rpm[i];
+
+                    if (Math.abs(rpmMotorValue - previousRpmValues[i]) < 300) {
+                        rpmMotorValue = previousRpmValues[i] * 0.99 + rpmMotorValue * 0.01;
+                    }
+
+                    previousRpmValues[i] = rpmMotorValue;
+
+                    rpmMotorValue = Math.round(rpmMotorValue);
 
                     // Reduce the size of the value if too big
                     if (rpmMotorValue > 999999) {
